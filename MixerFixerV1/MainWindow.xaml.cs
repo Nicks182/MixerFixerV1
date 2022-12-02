@@ -89,7 +89,7 @@ namespace MixerFixerV1
 
         private void WV2_Viewer_CoreWebView2InitializationCompleted(object? sender, Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs e)
         {
-            WV2_Viewer.CoreWebView2.OpenDevToolsWindow();
+            //WV2_Viewer.CoreWebView2.OpenDevToolsWindow();
         }
     }
 }
