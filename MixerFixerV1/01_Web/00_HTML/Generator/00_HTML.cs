@@ -11,6 +11,13 @@ namespace HtmlGenerator
         StringBuilder G_HtmlString = new StringBuilder();
         public StringBuilder _BuildHtml(HTML_Object P_HTML_Object)
         {
+            G_HtmlString.Clear();
+            _GenerateHtml(P_HTML_Object);
+            return G_HtmlString;
+        }
+
+        private void _GenerateHtml(HTML_Object P_HTML_Object)
+        {
             // Build object
             // Get open tag?
             _GetTag_Open(P_HTML_Object);
@@ -18,12 +25,12 @@ namespace HtmlGenerator
             // Build Children
             for (int i = 0; i < P_HTML_Object.Children.Count; i++)
             {
-                _BuildHtml(P_HTML_Object.Children[i]);
+                _GenerateHtml(P_HTML_Object.Children[i]);
             }
 
-            // Get closing tag?
+            // Get closing tag
             _GetTag_Close(P_HTML_Object);
-            return G_HtmlString;
+            
         }
 
 
@@ -41,10 +48,6 @@ namespace HtmlGenerator
         {
             switch(P_HTML_Object.Type)
             {
-                case HTML_Object_Type.IsRaw:
-                    _GetTag_IsRaw(P_HTML_Object, P_IsClosing);
-                    break;
-
                 case HTML_Object_Type.IsDiv:
                     _GetTag_IsDiv(P_HTML_Object, P_IsClosing);
                     break;
@@ -65,9 +68,15 @@ namespace HtmlGenerator
                 case HTML_Object_Type.IsLabel:
                     _GetTag_IsLabel(P_HTML_Object, P_IsClosing);
                     break;
+
+                case HTML_Object_Type.IsRaw:
+                    _GetTag_IsRaw(P_HTML_Object, P_IsClosing);
+                    break;
+
+
             }
 
-            
+
         }
 
 

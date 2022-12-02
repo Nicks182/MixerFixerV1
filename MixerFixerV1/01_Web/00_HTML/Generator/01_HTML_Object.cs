@@ -23,8 +23,6 @@ namespace HtmlGenerator
         /// <para>Add HTML attributes like 'class', 'onclick', 'value', ect along with it's value.</para>
         /// <para>If internal List already contains an item with same name, vallue will be appended to internal StringBuilder along with a space to separate values.</para>
         /// </summary>
-        /// <param name="P_Name"></param>
-        /// <param name="P_Value"></param>
         public void Add_Attribute(string P_Name, string P_Value)
         {
             HTML_Object_Attribute L_HTML_Object_Attribute = Attributes.Where(a => a.Name.Equals(P_Name, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
@@ -35,7 +33,6 @@ namespace HtmlGenerator
             }
             else
             {
-
                 Attributes.Add(new HTML_Object_Attribute
                 {
                     Name = P_Name,
