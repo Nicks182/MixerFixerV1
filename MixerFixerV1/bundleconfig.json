@@ -1,0 +1,17 @@
+[
+  {
+    "outputFileName": "wwwroot/Script.min.js",
+    "inputFiles": [
+      "01_Web/01_Assets/_Libs/jquery.min.js",
+      "01_Web/01_Assets/_Libs/signalr.js",
+      "01_Web/01_Assets/JS/**/*.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Style.min.css",
+    "inputFiles": [
+      "01_Web/01_Assets/CSS/**/*.css"
+    ]
+  }
+]
+

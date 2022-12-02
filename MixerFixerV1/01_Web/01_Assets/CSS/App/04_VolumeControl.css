@@ -1,0 +1,72 @@
+
+
+.MF_AppControl
+{
+    display: grid;
+    grid-template-columns: min-content auto 45px min-content;
+    grid-template-rows: min-content min-content;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    grid-template-areas:
+        "image label label managed"
+        "image volume text mute";
+    box-shadow: 0px 0px 10px 6px rgba(31,34,39,1) inset;
+    -webkit-box-shadow: 0px 0px 10px 6px rgba(31,34,39,1) inset;
+    -moz-box-shadow: 0px 0px 10px 6px rgba(31,34,39,1) inset;
+    background-color: rgb(40, 44, 50);
+}
+
+
+.MF_AppControl_Image
+{
+    grid-area: image;
+    height: 42px;
+    width: 42px;
+}
+
+.MF_AppControl_Label
+{
+    grid-area: label;
+}
+
+.MF_AppControl_IsManaged
+{
+    grid-area: managed;
+}
+
+.MF_AppControl_IsMute
+{
+    grid-area: mute;
+}
+
+.MF_AppControl_Text
+{
+    grid-area: text;
+    width: 30px;
+    justify-content: right;
+}
+
+.MF_AppControl_Volume
+{
+    grid-area: volume;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+
+.MF_AppControl_Slider
+{
+    position: absolute;
+}
+
+.MF_AppControl_VolumeMeter
+{
+    position: absolute;
+}
+
+.MF_AppControl_VolumeMeter > div
+{
+    width: 45%;
+}
