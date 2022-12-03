@@ -19,14 +19,46 @@
         AllowsTransparency="True"
         Loaded="Window_Loaded"
         Closing="Window_Closing">
-    <Grid>
+    <Grid x:Name="Grid_Main">
 
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <wv2:WebView2 Grid.Row="0" Name="WV2_Viewer"></wv2:WebView2>
+        <!--<wv2:WebView2 Grid.Row="0" Name="WV2_Viewer">
+        </wv2:WebView2>-->
+        <Grid
+            Grid.Row="0"
+            x:Name="Grid_NoRuntime"
+            Margin="50,00"
+            Visibility="Collapsed"
+        >
+            <StackPanel
+                Orientation="Vertical"
+                VerticalAlignment="Center"
+            >
+                
+                <TextBlock TextWrapping="Wrap"
+                    Text="An update is needed to run this app. The WebView2 runtime is required. Follow the link below and Download the Evergreen Bootstrapper and install."
+                >
+                </TextBlock>
+                <TextBlock Margin="20">
+                    <Hyperlink 
+                        NavigateUri="https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download-section"
+                        RequestNavigate="Hyperlink_RequestNavigate"
+                        >
+                        https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download-section
+                    </Hyperlink>
+                </TextBlock>
+
+                <TextBlock
+                    Text="MixerFixer will resume once update is installed..."
+                >
+                </TextBlock>
+
+            </StackPanel>
+        </Grid>
 
         <TextBlock 
             Grid.Row="1"
