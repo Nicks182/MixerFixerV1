@@ -14,3 +14,9 @@ function _ToggleClick(e, P_Control)
 
     e.preventDefault();
 }
+
+function _Toggle_Set_State(P_Id, P_Value)
+{
+    $("#" + P_Id + "").attr("IsChecked", P_Value);
+    
+}

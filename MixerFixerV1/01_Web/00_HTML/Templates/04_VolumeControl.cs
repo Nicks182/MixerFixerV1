@@ -65,31 +65,49 @@ namespace Web
             return L_HTML_Object;
         }
 
+        #region IsMute
         private HTML_Object _Template_VolumeControl_IsMute(Arc_AudioObject P_AudioCore_Object)
         {
             HTML_Object L_HTML_Object = _Template_Toggle(
-                                            P_Id:           "IsMute_" + _GetHtmlId(P_AudioCore_Object.UniqueId),
+                                            P_Id:           _Template_VolumeControl_IsMute_Id(P_AudioCore_Object),
                                             P_Title:        "Set Mute",
                                             P_IsChecked:    P_AudioCore_Object._Get_Mute()
                                         );
 
             L_HTML_Object.Add_Attribute("class", "MF_AppControl_IsMute");
+            L_HTML_Object.Add_Attribute("onclick", "_App_MuteChange('" + P_AudioCore_Object.UniqueId.ToString() + "');");
 
             return L_HTML_Object;
         }
 
+        public string _Template_VolumeControl_IsMute_Id(Arc_AudioObject P_AudioCore_Object)
+        {
+            return "IsMute_" + _GetHtmlId(P_AudioCore_Object.UniqueId);
+        }
+
+        #endregion IsMute
+
+        #region IsManaged
         private HTML_Object _Template_VolumeControl_IsMananged(Arc_AudioObject P_AudioCore_Object)
         {
             HTML_Object L_HTML_Object = _Template_Toggle(
-                                            P_Id:           "IsManaged_" + _GetHtmlId(P_AudioCore_Object.UniqueId),
+                                            P_Id:           _Template_VolumeControl_IsMananged_Id(P_AudioCore_Object),
                                             P_Title:        "Is Managed",
                                             P_IsChecked:    P_AudioCore_Object.IsManaged
                                         );
 
             L_HTML_Object.Add_Attribute("class", "MF_AppControl_IsManaged");
+            L_HTML_Object.Add_Attribute("onclick", "_App_ManagedChange('" + P_AudioCore_Object.UniqueId.ToString() + "');");
 
             return L_HTML_Object;
         }
+
+        public string _Template_VolumeControl_IsMananged_Id(Arc_AudioObject P_AudioCore_Object)
+        {
+            return "IsManaged_" + _GetHtmlId(P_AudioCore_Object.UniqueId);
+        }
+
+        #endregion IsManaged
 
 
         #region VolumeText
@@ -143,7 +161,7 @@ namespace Web
             L_HTML_Object.Add_Attribute("class", "slider MF_AppControl_Slider");
             L_HTML_Object.Add_Attribute("min", "0");
             L_HTML_Object.Add_Attribute("max", "100");
-            L_HTML_Object.Add_Attribute("value", "60");
+            L_HTML_Object.Add_Attribute("value", P_AudioCore_Object._Get_Volume().ToString());
             L_HTML_Object.Add_Attribute("oninput", "_App_VolumeChange('" + P_AudioCore_Object.UniqueId.ToString() + "', this.value);");
 
 

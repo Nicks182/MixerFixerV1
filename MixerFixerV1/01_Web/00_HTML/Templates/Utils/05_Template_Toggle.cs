@@ -30,7 +30,7 @@ namespace Web
             L_HTML_Object.Add_Attribute("title", P_Title);
             L_HTML_Object.Add_Attribute("class", "toggle");
             L_HTML_Object.Add_Attribute("IsChecked", Convert.ToInt32(P_IsChecked).ToString());
-            L_HTML_Object.Add_Attribute("onclick", "_ToggleClick(event, this);");
+            //L_HTML_Object.Add_Attribute("onclick", "_ToggleClick(event, this);");
 
             L_HTML_Object.Add_Child(_Template_Toggle_Fill());
 

@@ -3,11 +3,6 @@ function _Message_Receive(P_CommObject)
 {
     try
     {
-        if (P_CommObject.CommType != "DataUpdate")
-        {
-            console.log(P_CommObject);
-        }
-
         _SetAllHTMLs(P_CommObject.HTMLs);
 
         switch (P_CommObject.CommType)
@@ -28,6 +23,6 @@ function _Message_Receive(P_CommObject)
     }
     catch (ex)
     {
-        console.log(ex);
+        _Log(ex);
     }
 }

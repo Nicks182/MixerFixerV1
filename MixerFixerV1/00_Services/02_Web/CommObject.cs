@@ -37,6 +37,7 @@ namespace Services
         Text = 1,
         Slider = 2,
         ButtonText = 3,
+        Toggle = 4,
     }
 
     public class Web_InterCommMessage_HTML
@@ -52,11 +53,12 @@ namespace Services
         DataUpdate = 2,
         Volume_Change = 3,
         Mute_Change = 4,
-        Device_On = 5,
-        Device_Off = 6,
-        Device_Change = 7,
-        ShowMessage = 8,
-        SwitchPanel = 9,
+        Managed_Change = 5,
+        Device_On = 6,
+        Device_Off = 7,
+        Device_Change = 8,
+        ShowMessage = 9,
+        SwitchPanel = 10,
 
     }
 }

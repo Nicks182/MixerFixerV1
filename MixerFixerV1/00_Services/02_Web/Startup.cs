@@ -53,7 +53,7 @@ namespace Services
             //});
             .AddJsonProtocol(options =>
             {
-                options.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                options.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter(null, true));
                 options.PayloadSerializerOptions.PropertyNamingPolicy = null;
                 options.PayloadSerializerOptions.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
             });

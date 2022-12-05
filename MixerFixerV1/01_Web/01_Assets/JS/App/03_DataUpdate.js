@@ -32,6 +32,10 @@ function _App_DataUpdate_Receive(P_CommObject)
             case "ButtonText":
                 _App_DataUpdate_ButtonText(P_CommObject.Data[i]);
                 break;
+
+            case "Toggle":
+                _App_DataUpdate_Toggle(P_CommObject.Data[i]);
+                break;
         }
 
     }
@@ -57,4 +61,9 @@ function _App_DataUpdate_Slider(P_Data)
 function _App_DataUpdate_ButtonText(P_Data)
 {
     $("#" + P_Data.Id + "").text(P_Data.Value);
+}
+
+function _App_DataUpdate_Toggle(P_Data)
+{
+    _Toggle_Set_State(P_Data.Id, P_Data.Value);
 }

@@ -16,7 +16,7 @@ namespace Web
         {
             HTML_Object L_HTML_Object = _Template_Button("", P_Arc_Device.Name);
             
-            L_HTML_Object.Add_Attribute("onclick", "_MenuBtn_Click('" + P_Arc_Device.Id + "', " + (int)Web_InterCommMessage_Type.SwitchPanel + ");");
+            L_HTML_Object.Add_Attribute("onclick", "_MenuBtn_Click('" + P_Arc_Device.Id + "', '" + Web_InterCommMessage_Type.SwitchPanel.ToString() + "');");
 
             return L_HTML_Object;
         }

@@ -29,7 +29,6 @@
 	  <Folder Include="00_Services\00_DB\" />
 	  <Folder Include="00_Services\02_Web\" />
 	  <Folder Include="01_Web\00_HTML\Generator\" />
-	  <Folder Include="01_Web\01_Assets\JS\" />
 	  <Folder Include="01_Web\01_Assets\_Libs\" />
 	</ItemGroup>
 

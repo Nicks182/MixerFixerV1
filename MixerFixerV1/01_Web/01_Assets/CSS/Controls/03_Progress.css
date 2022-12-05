@@ -11,4 +11,5 @@
         min-height: 24px;
         background-color: var(--progress-color);
         transition: width 0.02s;
+        width: 0%;
     }

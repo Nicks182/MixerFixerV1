@@ -38,7 +38,8 @@ namespace Services
 
         public async Task SendMessage(string P_CommObject)
         {
-            Web_InterCommMessage L_Web_InterCommMessage = JsonSerializer.Deserialize<Web_InterCommMessage>(P_CommObject);
+            //Web_InterCommMessage L_Web_InterCommMessage = JsonSerializer.Deserialize<Web_InterCommMessage>(P_CommObject);
+            Web_InterCommMessage L_Web_InterCommMessage = Newtonsoft.Json.JsonConvert.DeserializeObject<Web_InterCommMessage>(P_CommObject);
             //Console.WriteLine("MessageType: " + L_CommObject.CommType.ToString());
             Console.WriteLine("Message Recieved on: " + Context.ConnectionId);
 

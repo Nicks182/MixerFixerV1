@@ -144,6 +144,43 @@ namespace Services
             return false;
         }
 
+        public bool _Set_Mute()
+        {
+            switch (G_ObjectType)
+            {
+                case Arc_AudioObject_Type.IsDevice:
+                case Arc_AudioObject_Type.IsMicrophone:
+                    {
+                        if (G_MMDevice.State == DeviceState.Active)
+                        {
+                            G_MMDevice.AudioEndpointVolume.Mute = !G_MMDevice.AudioEndpointVolume.Mute;
+                            return G_MMDevice.AudioEndpointVolume.Mute;
+                        }
+                        break;
+                    }
+
+                case Arc_AudioObject_Type.IsSession:
+                    {
+                        G_AudioSessionControl.SimpleAudioVolume.Mute = !G_AudioSessionControl.SimpleAudioVolume.Mute;
+                        return G_AudioSessionControl.SimpleAudioVolume.Mute;
+                    }
+
+            }
+
+            return false;
+        }
+
+        public bool _Get_Managed()
+        {
+            return G_IsManaged;
+        }
+
+        public bool _Set_Managed()
+        {
+            G_IsManaged = !G_IsManaged;
+            return G_IsManaged;
+        }
+
         public double _Get_Volume()
         {
             switch (G_ObjectType)

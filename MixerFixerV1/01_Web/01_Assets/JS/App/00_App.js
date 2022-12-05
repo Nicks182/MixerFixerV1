@@ -20,7 +20,7 @@ function _Init()
 {
     var L_Comm =
     {
-        CommType: 1
+        CommType: "Init"
     }
     
     _Comm_Send(L_Comm);
