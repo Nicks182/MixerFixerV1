@@ -15,6 +15,7 @@ namespace Services
             G_Devices.Clear();
             
             MMDevice L_DefaultDevice = G_MMDeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+            
             G_Devices.Add(_LoadDevice(L_DefaultDevice, true));
             //Arc_Device L_Arc_Device = null;
             //Arc_AudioObject L_Arc_AudioObject = null;
@@ -75,9 +76,9 @@ namespace Services
         }
 
 
-        private void L_Arc_AudioObject_OnVolumeChange(Arc_AudioObject sender)
+        private void L_Arc_AudioObject_OnVolumeChange(Arc_AudioObject P_Arc_AudioObject)
         {
-            
+            OnVolumeChanged?.Invoke(P_Arc_AudioObject);
         }
 
         private void L_Arc_AudioObject_OnNewSession(Arc_AudioObject_SessionInfo P_AudioCore_Object_SessionInfo)

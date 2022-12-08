@@ -30,11 +30,16 @@ namespace Services
             }
         }
 
-        public static float _VolumeFromUI(string P_Value)
+        public static float _Volume_FromDouble(double P_Value)
         {
-            float L_New = (float)(Convert.ToDouble(P_Value) / 100);
+            float L_New = (float)(P_Value / 100);
 
             return L_New;
+        }
+
+        public static float _Volume_FromString(string P_Value)
+        {
+            return _Volume_FromDouble(Convert.ToDouble(P_Value));
         }
 
         public static string _GetIp()

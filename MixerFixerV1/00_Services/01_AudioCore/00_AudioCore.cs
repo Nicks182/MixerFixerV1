@@ -22,6 +22,9 @@ namespace Services
         public delegate void DoUpdateDelegate();
         public event DoUpdateDelegate DoUpdate;
 
+        public delegate void OnVolumeChangedDelegate(Arc_AudioObject P_Arc_AudioObject);
+        public event OnVolumeChangedDelegate OnVolumeChanged;
+
         public Srv_AudioCore()
         {
 

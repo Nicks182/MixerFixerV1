@@ -20,6 +20,7 @@ namespace Web
 
             L_HTML_Object.Add_Attribute("id", _Template_VolumeControl_Id(P_AudioCore_Object));
             L_HTML_Object.Add_Attribute("class", "MF_AppControl");
+            L_HTML_Object.Add_Attribute("oncontextmenu", _Template_VolumeControl_IsMute_Event(P_AudioCore_Object));
 
 
             L_HTML_Object.Add_Child(_Template_VolumeControl_Image(P_AudioCore_Object));
@@ -75,7 +76,7 @@ namespace Web
                                         );
 
             L_HTML_Object.Add_Attribute("class", "MF_AppControl_IsMute");
-            L_HTML_Object.Add_Attribute("onclick", "_App_MuteChange('" + P_AudioCore_Object.UniqueId.ToString() + "');");
+            L_HTML_Object.Add_Attribute("onclick", _Template_VolumeControl_IsMute_Event(P_AudioCore_Object));
 
             return L_HTML_Object;
         }
@@ -83,6 +84,11 @@ namespace Web
         public string _Template_VolumeControl_IsMute_Id(Arc_AudioObject P_AudioCore_Object)
         {
             return "IsMute_" + _GetHtmlId(P_AudioCore_Object.UniqueId);
+        }
+
+        public string _Template_VolumeControl_IsMute_Event(Arc_AudioObject P_AudioCore_Object)
+        {
+            return "_App_MuteChange(event, '" + P_AudioCore_Object.UniqueId.ToString() + "');";
         }
 
         #endregion IsMute
@@ -93,7 +99,7 @@ namespace Web
             HTML_Object L_HTML_Object = _Template_Toggle(
                                             P_Id:           _Template_VolumeControl_IsMananged_Id(P_AudioCore_Object),
                                             P_Title:        "Is Managed",
-                                            P_IsChecked:    P_AudioCore_Object.IsManaged
+                                            P_IsChecked:    P_AudioCore_Object._Get_Managed()
                                         );
 
             L_HTML_Object.Add_Attribute("class", "MF_AppControl_IsManaged");
@@ -146,7 +152,6 @@ namespace Web
             L_HTML_Object.Add_Child(_Template_VolumeControl_VolumeMeter(P_AudioCore_Object));
             L_HTML_Object.Add_Child(_Template_VolumeControl_VolumeSlider(P_AudioCore_Object));
             
-
             return L_HTML_Object;
         }
 
@@ -162,8 +167,11 @@ namespace Web
             L_HTML_Object.Add_Attribute("min", "0");
             L_HTML_Object.Add_Attribute("max", "100");
             L_HTML_Object.Add_Attribute("value", P_AudioCore_Object._Get_Volume().ToString());
+            L_HTML_Object.Add_Attribute("list", "tickmarks_" + _GetHtmlId(P_AudioCore_Object.UniqueId) + "");
+            L_HTML_Object.Add_Attribute("onwheel", "_App_MouseVolumeChange(event, this, '" + P_AudioCore_Object.UniqueId.ToString() + "');");
             L_HTML_Object.Add_Attribute("oninput", "_App_VolumeChange('" + P_AudioCore_Object.UniqueId.ToString() + "', this.value);");
 
+            
 
             return L_HTML_Object;
         }
@@ -179,8 +187,15 @@ namespace Web
         #region VolumeMeter
         private HTML_Object _Template_VolumeControl_VolumeMeter(Arc_AudioObject P_AudioCore_Object)
         {
-            HTML_Object L_HTML_Object = _Template_Progress(_Template_VolumeControl_VolumeMeter_Id(P_AudioCore_Object));
+            //HTML_Object L_HTML_Object = _Template_Progress(_Template_VolumeControl_VolumeMeter_Id(P_AudioCore_Object));
+            HTML_Object L_HTML_Object = new HTML_Object();
+            L_HTML_Object.Type = HTML_Object_Type.IsDiv;
             L_HTML_Object.Add_Attribute("class", "MF_AppControl_VolumeMeter");
+
+            L_HTML_Object.Add_Child(_Template_VolumeControl_VolumeMeter_Left_Text(P_AudioCore_Object));
+            L_HTML_Object.Add_Child(_Template_VolumeControl_VolumeMeter_Right_Text(P_AudioCore_Object));
+            L_HTML_Object.Add_Child(_Template_VolumeControl_VolumeMeter_Left(P_AudioCore_Object));
+            L_HTML_Object.Add_Child(_Template_VolumeControl_VolumeMeter_Right(P_AudioCore_Object));
 
             return L_HTML_Object;
         }
@@ -190,10 +205,76 @@ namespace Web
             return "VolumeMeter_" + _GetHtmlId(P_AudioCore_Object.UniqueId);
         }
 
-        public string _Template_VolumeControl_VolumeMeter_Data_Id(Arc_AudioObject P_AudioCore_Object)
+        //public string _Template_VolumeControl_VolumeMeter_Data_Id(Arc_AudioObject P_AudioCore_Object)
+        //{
+        //    return _Template_VolumeControl_VolumeMeter_Id(P_AudioCore_Object) + "_Fill";
+        //}
+
+
+        #region Left
+
+        private HTML_Object _Template_VolumeControl_VolumeMeter_Left_Text(Arc_AudioObject P_AudioCore_Object)
         {
-            return _Template_VolumeControl_VolumeMeter_Id(P_AudioCore_Object) + "_Fill";
+            HTML_Object L_HTML_Object = new HTML_Object();
+            L_HTML_Object.Type = HTML_Object_Type.IsLabel;
+            L_HTML_Object.Add_Attribute("class", "MF_AppControl_VolumeMeterText_Left");
+
+            L_HTML_Object.Add_Child(new HTML_Object
+            {
+                Type = HTML_Object_Type.IsRaw,
+                RawValue = new StringBuilder("L")
+            });
+
+            return L_HTML_Object;
         }
+
+        private HTML_Object _Template_VolumeControl_VolumeMeter_Left(Arc_AudioObject P_AudioCore_Object)
+        {
+            HTML_Object L_HTML_Object = _Template_Progress(_Template_VolumeControl_VolumeMeter_Left_Id(P_AudioCore_Object));
+            L_HTML_Object.Add_Attribute("class", "MF_AppControl_VolumeMeter_Left");
+
+            return L_HTML_Object;
+        }
+
+        public string _Template_VolumeControl_VolumeMeter_Left_Id(Arc_AudioObject P_AudioCore_Object)
+        {
+            return "VolumeMeter_Left_" + _GetHtmlId(P_AudioCore_Object.UniqueId);
+        }
+
+        #endregion Left
+
+        #region Right
+
+        private HTML_Object _Template_VolumeControl_VolumeMeter_Right_Text(Arc_AudioObject P_AudioCore_Object)
+        {
+            HTML_Object L_HTML_Object = new HTML_Object();
+            L_HTML_Object.Type = HTML_Object_Type.IsLabel;
+            L_HTML_Object.Add_Attribute("class", "MF_AppControl_VolumeMeterText_Right");
+
+            L_HTML_Object.Add_Child(new HTML_Object
+            {
+                Type = HTML_Object_Type.IsRaw,
+                RawValue = new StringBuilder("R")
+            });
+
+            return L_HTML_Object;
+        }
+
+        private HTML_Object _Template_VolumeControl_VolumeMeter_Right(Arc_AudioObject P_AudioCore_Object)
+        {
+            HTML_Object L_HTML_Object = _Template_Progress(_Template_VolumeControl_VolumeMeter_Right_Id(P_AudioCore_Object));
+            L_HTML_Object.Add_Attribute("class", "MF_AppControl_VolumeMeter_Right");
+
+            return L_HTML_Object;
+        }
+
+        public string _Template_VolumeControl_VolumeMeter_Right_Id(Arc_AudioObject P_AudioCore_Object)
+        {
+            return "VolumeMeter_Right_" + _GetHtmlId(P_AudioCore_Object.UniqueId);
+        }
+
+        #endregion Right
+
 
         #endregion VolumeMeter
 

@@ -19,7 +19,7 @@ namespace Services
             {
                 G_Action = action;
                 G_AutoResetEvent = new AutoResetEvent(false);
-                G_Timer = new Timer(Execute, G_AutoResetEvent, 1000, 25);
+                G_Timer = new Timer(Execute, G_AutoResetEvent, 1000, 30);
                 IsTimerStarted = true;
             }
         }

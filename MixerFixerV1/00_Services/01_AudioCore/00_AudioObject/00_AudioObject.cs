@@ -29,8 +29,8 @@ namespace Services
         private Bitmap G_Image { get; set; }
         public Bitmap Image{get { return G_Image; }}
 
-        private bool G_IsManaged { get; set; }
-        public bool IsManaged { get { return G_IsManaged; } }
+        //private bool G_IsManaged { get; set; }
+        //public bool IsManaged { get { return G_IsManaged; } }
 
         private bool G_IsMute { get; set; }
         public bool IsMute { get { return G_IsMute; } }
@@ -61,5 +61,12 @@ namespace Services
         IsDevice,
         IsMicrophone,
         IsSession,
+    }
+
+    public class Arc_AudioObject_PeakVolum
+    {
+        public double Master { get; set; }
+        public double Left { get; set; }
+        public double Right { get; set; }
     }
 }

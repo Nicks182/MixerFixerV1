@@ -11,6 +11,7 @@ namespace Services
 {
     public partial class Srv_UI
     {
+        // Update mute from client input
         private void _MuteChange(Web_InterCommMessage P_CommObject)
         {
             Arc_Device L_Arc_Device = G_Srv_AudioCore._Get_VisibleDevice();
@@ -18,16 +19,12 @@ namespace Services
 
             if (L_AudioCore_Object != null)
             {
-                bool L_IsMute = L_AudioCore_Object._Set_Mute();
+                //_Change_Mute will set to True if False or set to False if True
+                L_AudioCore_Object._Change_Mute();
 
                 P_CommObject.Data.Clear();
-                P_CommObject.Data.Add(new Web_InterCommMessage_Data
-                {
-                    Id = G_HTML_Templates._Template_VolumeControl_IsMute_Id(L_AudioCore_Object),
-                    Value = Convert.ToInt32(L_IsMute).ToString(),
-                    DataType = Web_InterCommMessage_DataType.Toggle
-                });
-
+                P_CommObject.Data.Add(_MuteChange_Data(L_AudioCore_Object));
+                
                 P_CommObject.CommType = Web_InterCommMessage_Type.DataUpdate;
             }
             else
@@ -35,5 +32,17 @@ namespace Services
                 P_CommObject.CommType = Web_InterCommMessage_Type._DoNothing;
             }
         }
+
+        private Web_InterCommMessage_Data _MuteChange_Data(Arc_AudioObject P_Arc_AudioObject)
+        {
+            return new Web_InterCommMessage_Data
+            {
+                Id = G_HTML_Templates._Template_VolumeControl_IsMute_Id(P_Arc_AudioObject),
+                Value = Convert.ToInt32(P_Arc_AudioObject._Get_Mute()).ToString(),
+                DataType = Web_InterCommMessage_DataType.Toggle
+            };
+
+        }
+
     }
 }

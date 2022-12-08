@@ -9,3 +9,25 @@ function _App_VolumeChange(P_UniqueId, P_Value)
     }
     _Comm_Send(L_Comm);
 }
+
+function _App_MouseVolumeChange(P_Event, P_Control, P_UniqueId)
+{
+    console.log("IsCTRL: " + P_Event.ctrlKey);
+    if (P_Event.ctrlKey == true)
+    {
+        
+        if (P_Event.deltaY < 0)
+        {
+            P_Control.valueAsNumber += 1;
+        }
+        else
+        {
+            P_Control.valueAsNumber -= 1;
+        }
+
+        _App_VolumeChange(P_UniqueId, P_Control.value)
+        P_Event.preventDefault();
+        P_Event.stopPropagation();
+        return false;
+    }
+}

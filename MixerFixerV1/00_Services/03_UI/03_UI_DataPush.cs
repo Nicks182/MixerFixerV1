@@ -26,28 +26,44 @@ namespace Services
             Arc_Device L_Arc_Device = G_Srv_AudioCore._Get_VisibleDevice();
             if (L_Arc_Device != null)
             {
+                Arc_AudioObject_PeakVolum L_PeakVolum = null;
                 foreach (var L_AudioObj in L_Arc_Device.AudioObjects)
                 {
+                    L_PeakVolum = L_AudioObj._Get_PeakVolume();
+                    //P_CommObject.Data.Add(new Web_InterCommMessage_Data
+                    //{
+                    //    Id = G_HTML_Templates._Template_VolumeControl_VolumeMeter_Data_Id(L_AudioObj),
+                    //    Value = L_PeakVolum.Master.ToString() + "%",
+                    //    DataType = Web_InterCommMessage_DataType.Progress
+                    //});
+
                     P_CommObject.Data.Add(new Web_InterCommMessage_Data
                     {
-                        Id = G_HTML_Templates._Template_VolumeControl_VolumeMeter_Data_Id(L_AudioObj),
-                        Value = L_AudioObj._Get_PeakVolume().ToString() + "%",
+                        Id = G_HTML_Templates._Template_VolumeControl_VolumeMeter_Left_Id(L_AudioObj),
+                        Value = L_PeakVolum.Left.ToString() + "%",
                         DataType = Web_InterCommMessage_DataType.Progress
                     });
 
                     P_CommObject.Data.Add(new Web_InterCommMessage_Data
                     {
-                        Id = G_HTML_Templates._Template_VolumeControl_VolumeSlider_Id(L_AudioObj),
-                        Value = L_AudioObj._Get_Volume().ToString(),
-                        DataType = Web_InterCommMessage_DataType.Slider
+                        Id = G_HTML_Templates._Template_VolumeControl_VolumeMeter_Right_Id(L_AudioObj),
+                        Value = L_PeakVolum.Right.ToString() + "%",
+                        DataType = Web_InterCommMessage_DataType.Progress
                     });
 
-                    P_CommObject.Data.Add(new Web_InterCommMessage_Data
-                    {
-                        Id = G_HTML_Templates._Template_VolumeControl_VolumeText_Id_Data(L_AudioObj),
-                        Value = L_AudioObj._Get_Volume().ToString(),
-                        DataType = Web_InterCommMessage_DataType.ButtonText
-                    });
+                    //P_CommObject.Data.Add(new Web_InterCommMessage_Data
+                    //{
+                    //    Id = G_HTML_Templates._Template_VolumeControl_VolumeSlider_Id(L_AudioObj),
+                    //    Value = L_AudioObj._Get_Volume().ToString(),
+                    //    DataType = Web_InterCommMessage_DataType.Slider
+                    //});
+
+                    //P_CommObject.Data.Add(new Web_InterCommMessage_Data
+                    //{
+                    //    Id = G_HTML_Templates._Template_VolumeControl_VolumeText_Id_Data(L_AudioObj),
+                    //    Value = L_AudioObj._Get_Volume().ToString(),
+                    //    DataType = Web_InterCommMessage_DataType.ButtonText
+                    //});
                 }
             }
 

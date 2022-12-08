@@ -29,7 +29,10 @@ namespace Services
             G_HTML_Templates = new HTML_Templates(G_Srv_AudioCore);
 
             G_Srv_AudioCore.DoUpdate += G_Srv_AudioCore_DoUpdate;
+            G_Srv_AudioCore.OnVolumeChanged += G_Srv_AudioCore_OnVolumeChanged;
         }
+
+        
 
         private void G_Srv_AudioCore_DoUpdate()
         {

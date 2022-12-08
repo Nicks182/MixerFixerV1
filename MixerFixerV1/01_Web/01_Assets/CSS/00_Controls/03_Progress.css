@@ -1,0 +1,15 @@
+
+
+.progress
+{
+    min-height: 24px;
+    width: 100%;
+}
+
+    .progress > div
+    {
+        min-height: 100%;
+        background-color: var(--progress-color);
+        transition: width 0.1s;
+        width: 0%;
+    }

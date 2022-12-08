@@ -44,7 +44,8 @@ function _App_DataUpdate_Receive(P_CommObject)
 
 function _App_DataUpdate_Progress(P_Data)
 {
-    $("#" + P_Data.Id + "").width(P_Data.Value);
+    //$("#" + P_Data.Id + "").width(P_Data.Value);
+    _ProgressBar_SetValue(P_Data.Id, P_Data.Value);
 }
 
 function _App_DataUpdate_Text(P_Data)
