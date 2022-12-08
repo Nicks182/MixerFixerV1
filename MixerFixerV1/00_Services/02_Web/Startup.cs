@@ -76,7 +76,7 @@ namespace Services
         public void Configure(IApplicationBuilder app)
         {
             app.UseCors(builder => builder
-                .WithOrigins("http://" + Srv_Utils._GetIp() + ":5000")
+                //.WithOrigins("http://" + Srv_Utils._GetIp() + ":5000")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials());
