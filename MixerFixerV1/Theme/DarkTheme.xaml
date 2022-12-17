@@ -87,7 +87,7 @@
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="{StaticResource ControlDefaultBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlDefaultBorderBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -139,7 +139,7 @@
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="{StaticResource ControlDefaultBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlDefaultBorderBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -379,7 +379,7 @@
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="{StaticResource ControlDefaultBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlDefaultBorderBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -398,9 +398,9 @@
                             <Grid x:Name="markGrid">
                                 <Path x:Name="optionMark" 
                                               Data="F1 M 9.97498,1.22334L 4.6983,9.09834L 4.52164,9.09834L 0,5.19331L 1.27664,3.52165L 4.255,6.08833L 8.33331,1.52588e-005L 9.97498,1.22334 Z " 
-                                              Fill="{StaticResource ControlGlythColour}" Margin="1" Opacity="0" Stretch="None"
+                                              Fill="{DynamicResource ControlGlythColour}" Margin="1" Opacity="0" Stretch="None"
                                               VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                <Rectangle x:Name="indeterminateMark" Fill="{StaticResource ControlGlythColour}" Margin="0" Opacity="0"/>
+                                <Rectangle x:Name="indeterminateMark" Fill="{DynamicResource ControlGlythColour}" Margin="0" Opacity="0"/>
                             </Grid>
                         </Border>
                         <ContentPresenter x:Name="contentPresenter" 
@@ -451,7 +451,7 @@
             <Setter.Value>
                 <ControlTemplate>
                     <Rectangle Margin="14,0,0,0" SnapsToDevicePixels="true" 
-                               Stroke="{StaticResource ControlDefaultForeground}" 
+                               Stroke="{DynamicResource ControlDefaultForeground}" 
                                StrokeThickness="1" StrokeDashArray="1 2"/>
                 </ControlTemplate>
             </Setter.Value>
@@ -464,7 +464,7 @@
     <Style x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{StaticResource ControlDefaultBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlDefaultBorderBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="IsTabStop" Value="false"/>
         <Setter Property="Focusable" Value="false"/>
@@ -482,7 +482,7 @@
                                 HorizontalAlignment="Right" Margin="0" 
                                 SnapsToDevicePixels="true" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}">
                             <Path x:Name="arrow" Data="F1 M 0,0 L 2.667,2.66665 L 5.3334,0 L 5.3334,-1.78168 L 2.6667,0.88501 L0,-1.78168 L0,0 Z" 
-                                  Fill="{StaticResource ControlGlythColour}" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
+                                  Fill="{DynamicResource ControlGlythColour}" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
                         </Border>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -635,9 +635,9 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <Style x:Key="ComboBoxEditableTextBox" TargetType="{x:Type TextBox}">
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="SelectionBrush" Value="{StaticResource ControlBrightPrimaryColourBackground}"/>
-        <Setter Property="CaretBrush" Value="{StaticResource ControlGlythColour}"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource ControlGlythColour}"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="AllowDrop" Value="true"/>
         <Setter Property="MinWidth" Value="0"/>
@@ -739,7 +739,7 @@
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="{StaticResource ControlDefaultBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlDefaultBorderBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
@@ -764,7 +764,7 @@
         <Setter Property="Padding" Value="4,1"/>
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
         <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -869,7 +869,7 @@
                                     </TransformGroup>
                                 </Grid.LayoutTransform>
                                 <Ellipse x:Name="circle" Fill="{StaticResource ControlDefaultBackground}" HorizontalAlignment="Center" Height="19" Stroke="{StaticResource ControlDefaultBorderBrush}" VerticalAlignment="Center" Width="19"/>
-                                <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" Stroke="{StaticResource ControlGlythColour}" StrokeThickness="2" VerticalAlignment="Center"/> <!-- the r xd -->  
+                                <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" Stroke="{DynamicResource ControlGlythColour}" StrokeThickness="2" VerticalAlignment="Center"/> <!-- the r xd -->  
                             </Grid>
                             <ContentPresenter HorizontalAlignment="Center" Margin="0,4,0,0" Grid.Row="1" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Top"/>
                         </Grid>
@@ -881,13 +881,13 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Stroke" TargetName="circle" Value="{StaticResource ControlMouseOverBorderBrush}"/>
                             <Setter Property="Fill" TargetName="circle" Value="{StaticResource ControlMouseOverBackground}"/>
-                            <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource ControlDefaultForeground}"/>
+                            <Setter Property="Stroke" TargetName="arrow" Value="{DynamicResource ControlDefaultForeground}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Stroke" TargetName="circle" Value="{StaticResource ControlSelectedBorderBrush}"/>
                             <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
                             <Setter Property="Fill" TargetName="circle" Value="{StaticResource ControlSelectedBackground}"/>
-                            <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource ControlDefaultForeground}"/>
+                            <Setter Property="Stroke" TargetName="arrow" Value="{DynamicResource ControlDefaultForeground}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Stroke" TargetName="circle" Value="{StaticResource ControlDisabledBorderBrush}"/>
@@ -922,7 +922,7 @@
                                 <Ellipse x:Name="circle" Fill="{StaticResource ControlDefaultBackground}" HorizontalAlignment="Center" Height="19" 
                                          Stroke="{StaticResource ControlDefaultBorderBrush}" VerticalAlignment="Center" Width="19"/>
                                 <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false"
-                                      Stroke="{StaticResource ControlGlythColour}" StrokeThickness="2" VerticalAlignment="Center"/>
+                                      Stroke="{DynamicResource ControlGlythColour}" StrokeThickness="2" VerticalAlignment="Center"/>
                             </Grid>
                             <ContentPresenter Grid.Column="1" HorizontalAlignment="Left" Margin="4,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Center"/>
                         </Grid>
@@ -934,13 +934,13 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Stroke" TargetName="circle" Value="{StaticResource ControlMouseOverBorderBrush}"/>
                             <Setter Property="Fill" TargetName="circle" Value="{StaticResource ControlMouseOverBackground}"/>
-                            <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource ControlDefaultForeground}"/>
+                            <Setter Property="Stroke" TargetName="arrow" Value="{DynamicResource ControlDefaultForeground}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Stroke" TargetName="circle" Value="{StaticResource ControlSelectedBorderBrush}"/>
                             <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
                             <Setter Property="Fill" TargetName="circle" Value="{StaticResource ControlSelectedBackground}"/>
-                            <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource ControlDefaultForeground}"/>
+                            <Setter Property="Stroke" TargetName="arrow" Value="{DynamicResource ControlDefaultForeground}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Stroke" TargetName="circle" Value="{StaticResource ControlDisabledBorderBrush}"/>
@@ -975,7 +975,7 @@
                                 <Ellipse x:Name="circle" Fill="{StaticResource ControlDefaultBackground}" HorizontalAlignment="Center" Height="19" 
                                          Stroke="{StaticResource ControlDefaultBorderBrush}" VerticalAlignment="Center" Width="19"/>
                                 <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" 
-                                      Stroke="{StaticResource ControlGlythColour}" StrokeThickness="2" VerticalAlignment="Center"/>
+                                      Stroke="{DynamicResource ControlGlythColour}" StrokeThickness="2" VerticalAlignment="Center"/>
                             </Grid>
                             <ContentPresenter HorizontalAlignment="Center" Margin="0,4,0,0" Grid.Row="1" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Top"/>
                         </Grid>
@@ -987,13 +987,13 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Stroke" TargetName="circle" Value="{StaticResource ControlMouseOverBorderBrush}"/>
                             <Setter Property="Fill" TargetName="circle" Value="{StaticResource ControlMouseOverBackground}"/>
-                            <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource ControlDefaultForeground}"/>
+                            <Setter Property="Stroke" TargetName="arrow" Value="{DynamicResource ControlDefaultForeground}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Stroke" TargetName="circle" Value="{StaticResource ControlSelectedBorderBrush}"/>
                             <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
                             <Setter Property="Fill" TargetName="circle" Value="{StaticResource ControlSelectedBackground}"/>
-                            <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource ControlDefaultForeground}"/>
+                            <Setter Property="Stroke" TargetName="arrow" Value="{DynamicResource ControlDefaultForeground}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Stroke" TargetName="circle" Value="{StaticResource ControlDisabledBorderBrush}"/>
@@ -1041,13 +1041,13 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Stroke" TargetName="circle" Value="{StaticResource ControlMouseOverBorderBrush}"/>
                             <Setter Property="Fill" TargetName="circle" Value="{StaticResource ControlMouseOverBackground}"/>
-                            <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource ControlDefaultForeground}"/>
+                            <Setter Property="Stroke" TargetName="arrow" Value="{DynamicResource ControlDefaultForeground}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Stroke" TargetName="circle" Value="{StaticResource ControlSelectedBorderBrush}"/>
                             <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
                             <Setter Property="Fill" TargetName="circle" Value="{StaticResource ControlSelectedBackground}"/>
-                            <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource ControlDefaultForeground}"/>
+                            <Setter Property="Stroke" TargetName="arrow" Value="{DynamicResource ControlDefaultForeground}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Stroke" TargetName="circle" Value="{StaticResource ControlDisabledBorderBrush}"/>
@@ -1140,7 +1140,7 @@
     <Style TargetType="{x:Type GroupBox}">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlDefaultBackground}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="BorderThickness" Value="3"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -1186,7 +1186,7 @@
     <!-- Original one -->
     <Style x:Key="OriginalGroupBox" TargetType="{x:Type GroupBox}">
         <Setter Property="BorderBrush" Value="{StaticResource ControlDefaultBackground}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -1232,7 +1232,7 @@
     <!-- Label -->
 
     <Style TargetType="{x:Type Label}">
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Padding" Value="5"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -1260,7 +1260,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlBrightDefaultBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
@@ -1302,7 +1302,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlBrightDefaultBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
@@ -1393,7 +1393,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlBrightDefaultBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
@@ -1519,7 +1519,7 @@
     <Style x:Key="{x:Type GridViewColumnHeader}" TargetType="GridViewColumnHeader">
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="GridViewColumnHeader">
@@ -1657,7 +1657,7 @@
     <!-- Menus -->
     <Style TargetType="{x:Type ContextMenu}">
         <Setter Property="Background" Value="{StaticResource ControlDefaultBackground}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlDefaultBorderBrush}"/>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -1696,7 +1696,7 @@
         <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}"/>
         <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MenuFontStyleKey}}"/>
         <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -1805,7 +1805,7 @@
                 </Border>
                 <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="2" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" HorizontalAlignment="Left" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
                 <TextBlock Grid.Column="4" Margin="{TemplateBinding Padding}" Opacity="0.7" Text="{TemplateBinding InputGestureText}" VerticalAlignment="Center"/>
-                <Path x:Name="RightArrow" Grid.Column="5" Data="M0,0L4,3.5 0,7z" Fill="{StaticResource ControlGlythColour}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                <Path x:Name="RightArrow" Grid.Column="5" Data="M0,0L4,3.5 0,7z" Fill="{DynamicResource ControlGlythColour}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
                 <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" HorizontalOffset="-2" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" 
                        PopupAnimation="Fade" 
                        Placement="Right" VerticalOffset="-3">
@@ -1877,7 +1877,7 @@
                 </Border>
                 <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="2" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" HorizontalAlignment="Left" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
                 <TextBlock Grid.Column="4" Margin="{TemplateBinding Padding}" Opacity="0.7" Text="{TemplateBinding InputGestureText}" VerticalAlignment="Center"/>
-                <Path x:Name="RightArrow" Grid.Column="5" Data="M0,0L4,3.5 0,7z" Visibility="Hidden" Fill="{StaticResource ControlGlythColour}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                <Path x:Name="RightArrow" Grid.Column="5" Data="M0,0L4,3.5 0,7z" Visibility="Hidden" Fill="{DynamicResource ControlGlythColour}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
                 <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" 
                        HorizontalOffset="-2" 
                        IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" 
@@ -1935,8 +1935,8 @@
         <Setter Property="PasswordChar" Value="●"/>
         <Setter Property="Background" Value="{StaticResource ControlDefaultBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlDefaultBorderBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
-        <Setter Property="CaretBrush" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="SelectionBrush" Value="{StaticResource ControlPrimaryColourBackground}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
@@ -2047,7 +2047,7 @@
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="{StaticResource ControlDefaultBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlDefaultBorderBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="MinHeight" Value="16"/>
         <Setter Property="Height" Value="20"/>
@@ -2066,7 +2066,7 @@
                                         HorizontalAlignment="Center" VerticalAlignment="Center" 
                                         Height="16" Width="16">
                             <Grid x:Name="markGrid" Margin="2">
-                                <Ellipse x:Name="optionMark" Fill="{StaticResource ControlGlythColour}" MinWidth="6" MinHeight="6" Opacity="0"/>
+                                <Ellipse x:Name="optionMark" Fill="{DynamicResource ControlGlythColour}" MinWidth="6" MinHeight="6" Opacity="0"/>
                             </Grid>
                         </Border>
                         <ContentPresenter x:Name="contentPresenter" 
@@ -2135,8 +2135,8 @@
     <Style x:Key="{x:Type TextBoxBase}" TargetType="{x:Type TextBoxBase}">
         <Setter Property="Background" Value="{StaticResource ContainerBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlDefaultBorderBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
-        <Setter Property="CaretBrush" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="SelectionBrush" Value="{StaticResource ControlBrightPrimaryColourBackground}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
@@ -2177,7 +2177,7 @@
     </Style>
 
     <Style x:Key="{x:Type Hyperlink}" TargetType="{x:Type Hyperlink}">
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="TextDecorations" Value="Underline"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
@@ -2219,7 +2219,7 @@
                                         Command="{x:Static ScrollBar.LineUpCommand}" 
                                         BorderThickness="1 1 1 0">
                             <Path x:Name="ArrowTop" Data="M 0,4 C0,4 0,6 0,6 0,6 3.5,2.5 3.5,2.5 3.5,2.5 7,6 7,6 7,6 7,4 7,4 7,4 3.5,0.5 3.5,0.5 3.5,0.5 0,4 0,4 z"
-                                  Fill="{StaticResource ControlGlythColour}" Margin="3,4,3,3" Stretch="Uniform"/>
+                                  Fill="{DynamicResource ControlGlythColour}" Margin="3,4,3,3" Stretch="Uniform"/>
                         </Button>
                         <Border BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="1 0 1 0" 
@@ -2244,7 +2244,7 @@
                                         Grid.Row="2">
                             <Path x:Name="ArrowBottom"
                                   Data="M 0,2.5 C0,2.5 0,0.5 0,0.5 0,0.5 3.5,4 3.5,4 3.5,4 7,0.5 7,0.5 7,0.5 7,2.5 7,2.5 7,2.5 3.5,6 3.5,6 3.5,6 0,2.5 0,2.5 z" 
-                                  Fill="{StaticResource ControlGlythColour}" Margin="3,4,3,3" Stretch="Uniform"/>
+                                  Fill="{DynamicResource ControlGlythColour}" Margin="3,4,3,3" Stretch="Uniform"/>
                         </Button>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -2307,7 +2307,7 @@
                                         BorderThickness="1 1 0 1"
                                         Command="{x:Static ScrollBar.LineLeftCommand}" >
                                     <Path x:Name="ArrowLeft" Data="M 3.18,7 C3.18,7 5,7 5,7 5,7 1.81,3.5 1.81,3.5 1.81,3.5 5,0 5,0 5,0 3.18,0 3.18,0 3.18,0 0,3.5 0,3.5 0,3.5 3.18,7 3.18,7 z" 
-                                          Fill="{StaticResource ControlGlythColour}" Margin="3" Stretch="Uniform"/>
+                                          Fill="{DynamicResource ControlGlythColour}" Margin="3" Stretch="Uniform"/>
                                 </Button>
                                 <Border BorderBrush="{TemplateBinding BorderBrush}" 
                                         BorderThickness="0 1 0 1" 
@@ -2328,7 +2328,7 @@
 
                                 <Button x:Name="PART_LineRightButton" Grid.Column="2" Command="{x:Static ScrollBar.LineRightCommand}" 
                                         BorderThickness="0 1 1 1">
-                                    <Path x:Name="ArrowRight" Data="M 1.81,7 C1.81,7 0,7 0,7 0,7 3.18,3.5 3.18,3.5 3.18,3.5 0,0 0,0 0,0 1.81,0 1.81,0 1.81,0 5,3.5 5,3.5 5,3.5 1.81,7 1.81,7 z" Fill="{StaticResource ControlGlythColour}" Margin="3" Stretch="Uniform"/>
+                                    <Path x:Name="ArrowRight" Data="M 1.81,7 C1.81,7 0,7 0,7 0,7 3.18,3.5 3.18,3.5 3.18,3.5 0,0 0,0 0,0 1.81,0 1.81,0 1.81,0 5,3.5 5,3.5 5,3.5 1.81,7 1.81,7 z" Fill="{DynamicResource ControlGlythColour}" Margin="3" Stretch="Uniform"/>
                                 </Button>
                             </Grid>
                             <ControlTemplate.Triggers>
@@ -2394,7 +2394,7 @@
                                         Command="{x:Static ScrollBar.LineUpCommand}" 
                                         BorderThickness="1 1 1 0">
                             <Path x:Name="ArrowTop" Data="M 0,4 C0,4 0,6 0,6 0,6 3.5,2.5 3.5,2.5 3.5,2.5 7,6 7,6 7,6 7,4 7,4 7,4 3.5,0.5 3.5,0.5 3.5,0.5 0,4 0,4 z"
-                                  Fill="{StaticResource ControlGlythColour}" Margin="3,4,3,3" Stretch="Uniform"/>
+                                  Fill="{DynamicResource ControlGlythColour}" Margin="3,4,3,3" Stretch="Uniform"/>
                         </Button>
                         <Border BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="1 0 1 0" 
@@ -2419,7 +2419,7 @@
                                         Grid.Row="2">
                             <Path x:Name="ArrowBottom"
                                   Data="M 0,2.5 C0,2.5 0,0.5 0,0.5 0,0.5 3.5,4 3.5,4 3.5,4 7,0.5 7,0.5 7,0.5 7,2.5 7,2.5 7,2.5 3.5,6 3.5,6 3.5,6 0,2.5 0,2.5 z" 
-                                  Fill="{StaticResource ControlGlythColour}" Margin="3,4,3,3" Stretch="Uniform"/>
+                                  Fill="{DynamicResource ControlGlythColour}" Margin="3,4,3,3" Stretch="Uniform"/>
                         </Button>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -2482,12 +2482,12 @@
                                         BorderThickness="1"
                                         Command="{x:Static ScrollBar.LineLeftCommand}" >
                                     <Path x:Name="ArrowLeft" Data="M 3.18,7 C3.18,7 5,7 5,7 5,7 1.81,3.5 1.81,3.5 1.81,3.5 5,0 5,0 5,0 3.18,0 3.18,0 3.18,0 0,3.5 0,3.5 0,3.5 3.18,7 3.18,7 z" 
-                                          Fill="{StaticResource ControlGlythColour}" Margin="3" Stretch="Uniform"/>
+                                          Fill="{DynamicResource ControlGlythColour}" Margin="3" Stretch="Uniform"/>
                                 </Button>
 
                                 <Button x:Name="PART_LineRightButton" Grid.Column="2" Command="{x:Static ScrollBar.LineRightCommand}" 
                                         BorderThickness="1">
-                                    <Path x:Name="ArrowRight" Data="M 1.81,7 C1.81,7 0,7 0,7 0,7 3.18,3.5 3.18,3.5 3.18,3.5 0,0 0,0 0,0 1.81,0 1.81,0 1.81,0 5,3.5 5,3.5 5,3.5 1.81,7 1.81,7 z" Fill="{StaticResource ControlGlythColour}" Margin="3" Stretch="Uniform"/>
+                                    <Path x:Name="ArrowRight" Data="M 1.81,7 C1.81,7 0,7 0,7 0,7 3.18,3.5 3.18,3.5 3.18,3.5 0,0 0,0 0,0 1.81,0 1.81,0 1.81,0 5,3.5 5,3.5 5,3.5 1.81,7 1.81,7 z" Fill="{DynamicResource ControlGlythColour}" Margin="3" Stretch="Uniform"/>
                                 </Button>
                             </Grid>
                             <ControlTemplate.Triggers>
@@ -3021,10 +3021,10 @@
         <Setter Property="Padding" Value="2"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Background" Value="{StaticResource BackgroundColour}"/>
+        <Setter Property="Background" Value="{DynamicResource BackgroundColour}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlDefaultBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -3083,7 +3083,7 @@
 
     <Style TargetType="{x:Type TabItem}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="Background" Value="{StaticResource ControlDarkerBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlDarkerBorderBrush}"/>
         <Setter Property="Margin" Value="0"/>
@@ -3097,7 +3097,7 @@
                         <Border x:Name="mainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,1,1,0" Background="{TemplateBinding Background}" Margin="0">
                             <Border x:Name="innerBorder" 
                                     BorderBrush="{StaticResource ControlDefaultBorderBrush}" BorderThickness="1,1,1,0" 
-                                    Background="{StaticResource BackgroundColour}" Margin="-1" Opacity="0"/>
+                                    Background="{DynamicResource BackgroundColour}" Margin="-1" Opacity="0"/>
                         </Border>
                         <ContentPresenter x:Name="contentPresenter" ContentSource="Header" Focusable="False" HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
                     </Grid>
@@ -3529,7 +3529,7 @@
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
         <Setter Property="TextAlignment" Value="Left"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
     </Style>
 
     <!-- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_- -->
@@ -3538,8 +3538,8 @@
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{StaticResource ContainerBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlDefaultBorderBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
-        <Setter Property="CaretBrush" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="SelectionBrush" Value="{StaticResource ControlPrimaryColourBackground}"/>
         <Setter Property="IsInactiveSelectionHighlightEnabled" Value="True"/>
         <Setter Property="SelectionOpacity" Value="0.7"/>
@@ -3595,7 +3595,7 @@
     <!-- ToolBar -->
     <Style x:Key="ToolBarVerticalOverflowButtonStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{StaticResource ControlDefaultBackground}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="MinHeight" Value="0"/>
         <Setter Property="MinWidth" Value="0"/>
         <Setter Property="Template">
@@ -3617,7 +3617,7 @@
                             <Setter Property="Background" TargetName="Bd" Value="{StaticResource ControlDefaultBackground}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{StaticResource ControlGlythColour}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ControlGlythColour}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -3627,7 +3627,7 @@
     <Style x:Key="ToolBarHorizontalOverflowButtonStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{StaticResource ControlDarkerBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlBrightDefaultBorderBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="MinHeight" Value="0"/>
         <Setter Property="MinWidth" Value="0"/>
         <Setter Property="Template">
@@ -3649,7 +3649,7 @@
                             <Setter Property="Background" TargetName="Bd" Value="{StaticResource ControlDefaultBackground}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{StaticResource ControlGlythColour}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ControlGlythColour}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -3659,7 +3659,7 @@
     <Style x:Key="NoCornersToolBarHorizontalOverflowButtonStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{StaticResource ControlDarkerBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlBrightDefaultBorderBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="MinHeight" Value="0"/>
         <Setter Property="MinWidth" Value="0"/>
         <Setter Property="Template">
@@ -3681,7 +3681,7 @@
                             <Setter Property="Background" TargetName="Bd" Value="{StaticResource ControlDefaultBackground}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{StaticResource ControlGlythColour}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ControlGlythColour}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -3691,7 +3691,7 @@
     <Style x:Key="ToolBarThumbStyle" TargetType="{x:Type Thumb}">
         <Setter Property="Background" Value="{StaticResource ControlDefaultBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlDefaultBorderBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
@@ -3738,7 +3738,7 @@
     <Style TargetType="{x:Type ToolBar}">
         <Setter Property="Background" Value="{StaticResource ControlDefaultBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlDefaultBorderBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToolBar}">
@@ -3918,7 +3918,7 @@
     <Style TargetType="{x:Type ToolTip}">
         <Setter Property="Background" Value="{StaticResource ControlDefaultBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlDefaultBorderBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="MaxWidth" Value="800"/>
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="HasDropShadow" Value="True"/>
@@ -3947,7 +3947,7 @@
                                         <Setter Property="TextWrapping" Value="Wrap"/>
                                         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
                                         <Setter Property="TextAlignment" Value="Left"/>
-                                        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+                                        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
                                     </Style>
                                 </ContentPresenter.Resources>
                             </ContentPresenter>
@@ -3991,8 +3991,8 @@
     </ControlTemplate>
     <!-- Simple Win32 Window style -->
     <Style x:Key="MainWindowStyle" TargetType="{x:Type Window}">
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
-        <Setter Property="Background" Value="{StaticResource BackgroundColour}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource BackgroundColour}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Window}">
@@ -4014,9 +4014,9 @@
     <!-- Custom Window style (unaffected by win32 style stuff) -->
 
     <Style x:Key="CustomWindowStyle" TargetType="{x:Type Window}">
-        <Setter Property="BorderBrush" Value="{StaticResource WindowBorderColour}" />
-        <Setter Property="Background" Value="{StaticResource BackgroundColour}" />
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource WindowBorderColour}" />
+        <Setter Property="Background" Value="{DynamicResource BackgroundColour}" />
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
         <Setter Property="WindowStyle" Value="SingleBorderWindow"/>
@@ -4052,7 +4052,7 @@
                                                    HorizontalAlignment="Stretch"
                                                    TextWrapping="NoWrap"
                                                    FontSize="14" Width="Auto"
-                                                   Foreground="{StaticResource ControlDefaultForeground}"
+                                                   Foreground="{DynamicResource ControlDefaultForeground}"
                                                    Text="{Binding Title, RelativeSource={RelativeSource TemplatedParent}}"   
                                                    Grid.Column="1" TextAlignment="Left"/>
                                     </DockPanel>
@@ -4068,7 +4068,7 @@
                                             <Rectangle Width="10" 
                                                        VerticalAlignment="Center" 
                                                        Margin="1 1 0 0" 
-                                                       Stroke="{StaticResource ControlGlythColour}" 
+                                                       Stroke="{DynamicResource ControlGlythColour}" 
                                                        StrokeThickness="2"/>
                                         </Button>
 
@@ -4080,11 +4080,11 @@
                                                 Click="AutoMinimize_Event">
                                             <Grid Width="12" Height="12">
                                                 <Rectangle StrokeThickness="2" 
-                                                           Stroke="{StaticResource ControlGlythColour}"
+                                                           Stroke="{DynamicResource ControlGlythColour}"
                                                            Margin="3,0,0,3"/>
                                                 <Rectangle StrokeThickness="2" 
                                                            Fill="{TemplateBinding BorderBrush}"
-                                                           Stroke="{StaticResource ControlGlythColour}"
+                                                           Stroke="{DynamicResource ControlGlythColour}"
                                                            Margin="0 3 3 0"/>
                                             </Grid>
                                         </Button>
@@ -4096,8 +4096,8 @@
                                                 WindowChrome.IsHitTestVisibleInChrome="True" 
                                                 Click="CloseWindow_Event">
                                             <Grid Margin="0 1 0 0">
-                                                <Line X1="0" Y1="0" X2="11" Y2="11" Stroke="{StaticResource ControlGlythColour}" StrokeThickness="2" />
-                                                <Line X1="0" Y2="0" Y1="11" X2="11" Stroke="{StaticResource ControlGlythColour}" StrokeThickness="2" />
+                                                <Line X1="0" Y1="0" X2="11" Y2="11" Stroke="{DynamicResource ControlGlythColour}" StrokeThickness="2" />
+                                                <Line X1="0" Y2="0" Y1="11" X2="11" Stroke="{DynamicResource ControlGlythColour}" StrokeThickness="2" />
                                             </Grid>
                                         </Button>
                                     </StackPanel>
@@ -4121,8 +4121,8 @@
     <!-- Same window but auto maximize/minimize button removed. Tool window -->
 
     <Style x:Key="CustomToolWindowStyle" TargetType="{x:Type Window}">
-        <Setter Property="BorderBrush" Value="{StaticResource WindowBorderColour}" />
-        <Setter Property="Background" Value="{StaticResource BackgroundColour}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource WindowBorderColour}" />
+        <Setter Property="Background" Value="{DynamicResource BackgroundColour}" />
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="ResizeMode" Value="NoResize"/>
         <Setter Property="WindowStyle" Value="SingleBorderWindow"/>
@@ -4156,7 +4156,7 @@
                                                    VerticalAlignment="Center"
                                                    HorizontalAlignment="Stretch"
                                                    FontSize="14" Width="Auto"
-                                                   Foreground="{StaticResource ControlDefaultForeground}"
+                                                   Foreground="{DynamicResource ControlDefaultForeground}"
                                                    Text="{Binding Title, RelativeSource={RelativeSource TemplatedParent}}"   
                                                    Grid.Column="1" TextAlignment="Left"/>
                                     </DockPanel>
@@ -4172,7 +4172,7 @@
                                             <Rectangle Width="10"
                                                        VerticalAlignment="Center"
                                                        Margin="1 1 0 0" 
-                                                       Stroke="{StaticResource ControlGlythColour}"
+                                                       Stroke="{DynamicResource ControlGlythColour}"
                                                        StrokeThickness="2"/>
                                         </Button>
                                         <Button x:Name="btnClose"
@@ -4183,8 +4183,8 @@
                                                 WindowChrome.IsHitTestVisibleInChrome="True" 
                                                 Click="CloseWindow_Event">
                                             <Grid Margin="0 1 0 0">
-                                                <Line X1="0" Y1="0" X2="11" Y2="11" Stroke="{StaticResource ControlGlythColour}" StrokeThickness="2" />
-                                                <Line X1="0" Y2="0" Y1="11" X2="11" Stroke="{StaticResource ControlGlythColour}" StrokeThickness="2" />
+                                                <Line X1="0" Y1="0" X2="11" Y2="11" Stroke="{DynamicResource ControlGlythColour}" StrokeThickness="2" />
+                                                <Line X1="0" Y2="0" Y1="11" X2="11" Stroke="{DynamicResource ControlGlythColour}" StrokeThickness="2" />
                                             </Grid>
                                         </Button>
                                     </StackPanel>
@@ -4248,7 +4248,7 @@
         <Setter Property="BorderBrush" Value="{StaticResource ContainerBorder}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="1"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
@@ -4358,7 +4358,7 @@
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
         <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
         <Setter Property="Padding" Value="1,0,0,0"/>
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource TreeViewItemFocusVisual}"/>
         <Setter Property="Template">
             <Setter.Value>

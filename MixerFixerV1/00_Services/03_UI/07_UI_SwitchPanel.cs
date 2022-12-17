@@ -16,8 +16,6 @@ namespace Services
             Web_InterCommMessage_Data L_Data = P_Web_InterCommMessage.Data.Where(d => d.Id == "deviceid").FirstOrDefault();
             if (L_Data != null)
             {
-                Arc_Device L_Arc_Device = G_Srv_AudioCore._Set_VisibleDevice(L_Data.Value);
-
                 P_Web_InterCommMessage.HTMLs = new List<Web_InterCommMessage_HTML>
                 {
                     new Web_InterCommMessage_HTML

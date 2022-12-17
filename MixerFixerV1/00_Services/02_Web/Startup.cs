@@ -45,30 +45,12 @@ namespace Services
             services.AddResponseCompression();
             services.AddSignalR()
             
-            //.AddNewtonsoftJsonProtocol(options =>
-            //{
-            //    options.PayloadSerializerSettings.Converters.Add(new StringEnumConverter(null, false));
-            //    options.PayloadSerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-            //    options.PayloadSerializerSettings.ContractResolver = new DefaultContractResolver();
-            //});
             .AddJsonProtocol(options =>
             {
                 options.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter(null, true));
                 options.PayloadSerializerOptions.PropertyNamingPolicy = null;
                 options.PayloadSerializerOptions.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
             });
-
-            
-
-            //services.AddLogging();
-            //services.AddResponseCompression();
-            //.AddControllers();
-            //.AddNewtonsoftJson(options =>
-            //{
-            //    options.SerializerSettings.Converters.Add(new StringEnumConverter(null, true));
-            //    options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-            //    options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-            //});
 
         }
 
@@ -95,18 +77,6 @@ namespace Services
 
             app.UseRouting();
 
-            //app.UseAuthorization();
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-            //});
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapGet("/", async http => { http.Response.Redirect("/index.html"); });
-            //});
-            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<CommandHub>("/CommandHub");

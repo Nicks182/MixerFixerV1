@@ -24,9 +24,10 @@ namespace Web
         private HTML_Object _Template_Button(string P_Id, string P_Text, HTML_Object_Icon_Type P_IconType, HTML_Object_Icon_Pos P_IconPos)
         {
             HTML_Object L_HTML_Object = new HTML_Object();
-            L_HTML_Object.Type = HTML_Object_Type.IsDiv;
+            L_HTML_Object.Type = HTML_Object_Type.IsButton;
 
             L_HTML_Object.Add_Attribute("id", P_Id);
+            L_HTML_Object.Add_Attribute("type", "button");
             L_HTML_Object.Add_Attribute("class", "button");
 
             L_HTML_Object.Add_Child(_Template_Button_Text(P_Id, P_Text));

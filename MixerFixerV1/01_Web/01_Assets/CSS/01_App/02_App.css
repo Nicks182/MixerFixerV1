@@ -4,12 +4,29 @@
 {
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
 .MF_MixerAppMenu
 {
-    display: flex;
-    flex-direction: row;
+    /*display: flex;
+    flex-direction: row;*/
+
+    display:grid;
+    grid-template-columns: auto min-content;
+    grid-template-rows: min-content;
+    grid-template-areas: 
+        "device settings";
+}
+
+.MF_MixerAppMenu_Settings
+{
+    grid-area: settings;
+}
+
+.MF_MixerAppMenu_Device
+{
+    grid-area: device;
 }
 
 

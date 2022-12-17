@@ -13,9 +13,15 @@ namespace Services
     {
         MMDeviceEnumerator G_MMDeviceEnumerator = new MMDeviceEnumerator();
         Srv_DB G_Srv_DB = new Srv_DB();
-        
-        List<Arc_Device> G_Devices = new List<Arc_Device>();
-        public List<Arc_Device> Devices { get { return G_Devices; } }
+
+        //Arc_AudioObject G_Device { get; set; }
+        //List<Arc_AudioObject> G_Sessions = new List<Arc_AudioObject>();
+
+        //List<Arc_Device> G_Devices = new List<Arc_Device>();
+        //public List<Arc_Device> Devices { get { return G_Devices; } }
+
+        Arc_Device G_Device { get; set; }
+        public Arc_Device Device { get { return G_Device; } }
 
         public bool G_ShowSettings = false;
 
@@ -32,33 +38,34 @@ namespace Services
 
         public void Init()
         {
-            _LoadDevices();
-        }
-
-        public Arc_Device _Get_VisibleDevice()
-        {
-            Arc_Device L_Arc_Device = G_Devices.Where(d => d.IsVisible == true).FirstOrDefault();
+            _LoadDevice();
             
-            return L_Arc_Device;
         }
 
-        public Arc_Device _Set_VisibleDevice(string P_DeviceId)
-        {
-            Guid L_DeviceId = Guid.Parse(P_DeviceId);
+        //public Arc_Device _Get_VisibleDevice()
+        //{
+        //    Arc_Device L_Arc_Device = G_Devices.Where(d => d.IsVisible == true).FirstOrDefault();
+            
+        //    return L_Arc_Device;
+        //}
 
-            Arc_Device L_Arc_Device = G_Devices.Where(d => d.Id == L_DeviceId).FirstOrDefault();
-            if (L_Arc_Device != null)
-            {
-                for (int i = 0; i < G_Devices.Count; i++)
-                {
-                    G_Devices[i].IsVisible = false;
-                }
+        //public Arc_Device _Set_VisibleDevice(string P_DeviceId)
+        //{
+        //    Guid L_DeviceId = Guid.Parse(P_DeviceId);
 
-                L_Arc_Device.IsVisible = true;
-            }
+        //    Arc_Device L_Arc_Device = G_Devices.Where(d => d.Id == L_DeviceId).FirstOrDefault();
+        //    if (L_Arc_Device != null)
+        //    {
+        //        for (int i = 0; i < G_Devices.Count; i++)
+        //        {
+        //            G_Devices[i].IsVisible = false;
+        //        }
 
-            return L_Arc_Device;
-        }
+        //        L_Arc_Device.IsVisible = true;
+        //    }
+
+        //    return L_Arc_Device;
+        //}
 
     }
 }

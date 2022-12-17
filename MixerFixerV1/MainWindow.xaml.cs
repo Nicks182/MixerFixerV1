@@ -74,10 +74,12 @@ namespace MixerFixerV1
             });
 
             
+
             InitializeComponent();
+
+
         }
 
-        
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Task.Run(() =>
@@ -142,6 +144,7 @@ namespace MixerFixerV1
         {
             Grid_NoRuntime.Visibility = Visibility.Collapsed;
             WV2_Viewer = new WebView2();
+            
             WV2_Viewer.CoreWebView2InitializationCompleted += WV2_Viewer_CoreWebView2InitializationCompleted;
             Grid.SetRow(WV2_Viewer, 0);
 
@@ -159,6 +162,8 @@ namespace MixerFixerV1
             {
                 G_WV_RunTime_Waiter.Stop();
             }
+
+            ClearBrowserCache();
         }
 
         private void _InitUI()
@@ -172,6 +177,11 @@ namespace MixerFixerV1
         private void WV2_Viewer_CoreWebView2InitializationCompleted(object? sender, Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs e)
         {
             //WV2_Viewer.CoreWebView2.OpenDevToolsWindow();
+        }
+
+        private void ClearBrowserCache()
+        {
+            WV2_Viewer.CoreWebView2.Profile.ClearBrowsingDataAsync();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

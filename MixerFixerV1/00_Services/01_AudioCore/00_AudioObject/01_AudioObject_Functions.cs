@@ -30,13 +30,14 @@ namespace Services
                             G_MMDevice.AudioSessionManager.OnSessionCreated += AudioSessionManager_OnSessionCreated;
                             //G_Image = Icon.ExtractAssociatedIcon(G_MMDevice.IconPath).ToBitmap();
                             G_Image = Srv_Utils_NativeMethods.GetIconFromFile(G_MMDevice.IconPath).ToBitmap();
-                            G_Name = G_MMDevice.DeviceFriendlyName;
+                            G_Name = G_MMDevice.FriendlyName;
                         }
                     }
                     break;
 
                 case Arc_AudioObject_Type.IsSession:
                     {
+                        
                         Process process = Process.GetProcessById((int)G_AudioSessionControl.GetProcessID);
 
                         Icon L_Icon = Srv_Utils_NativeMethods.GetIconFromFile(G_AudioSessionControl.IconPath);
@@ -59,7 +60,17 @@ namespace Services
                         }
                         else
                         {
-                            G_Name = G_AudioSessionControl.DisplayName != "" ? process.ProcessName : process.MainWindowTitle;
+                            //G_Name = G_AudioSessionControl.DisplayName == "" ? process.ProcessName : process.MainWindowTitle;
+                            G_Name = G_AudioSessionControl.DisplayName;
+                            if(string.IsNullOrEmpty(G_Name) == true)
+                            {
+                                G_Name = process.MainWindowTitle;
+                            }
+
+                            if (string.IsNullOrEmpty(G_Name) == true)
+                            {
+                                G_Name = process.ProcessName;
+                            }
                         }
 
                         
@@ -79,6 +90,8 @@ namespace Services
 
             if (G_DB_AudioObject == null)
             {
+                
+
                 G_DB_AudioObject = new DB_AudioObject
                 {
                     Id = Guid.Empty, // New object
@@ -99,6 +112,22 @@ namespace Services
                 {
                     _Set_Volume_FromDB();
                     _Set_Mute_FromDB();
+                }
+            }
+
+            _Init_DBObject_SetAppDefaultVolume(G_DB_AudioObject);
+        }
+
+        private void _Init_DBObject_SetAppDefaultVolume(DB_AudioObject G_DB_AudioObject)
+        {
+            if (G_ObjectType == Arc_AudioObject_Type.IsSession && G_DB_AudioObject.IsManaged == false) // Only run when Session/Application
+            {
+                DB_Settings L_DefaultVolumeEnable = G_Srv_DB.Settings_GetOne(G_Srv_DB.G_DefaultVolumeEnable);
+                if (L_DefaultVolumeEnable.Value == "1")
+                {
+                    DB_Settings L_DefaultVolume = G_Srv_DB.Settings_GetOne(G_Srv_DB.G_DefaultVolume);
+                    this._Set_Volume(L_DefaultVolume.Value);
+                    //G_AudioSessionControl.SimpleAudioVolume.Volume = Srv_Utils._Volume_FromString(L_DefaultVolume.Value);
                 }
             }
         }

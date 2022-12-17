@@ -43,13 +43,13 @@ namespace Services
             Settings_Save(new DB_Settings
             {
                 Name = G_DefaultVolumeEnable,
-                Value = "0"
+                Value = "1"
             });
 
             Settings_Save(new DB_Settings
             {
                 Name = G_DefaultVolume,
-                Value = "25"
+                Value = "10"
             });
         }
 

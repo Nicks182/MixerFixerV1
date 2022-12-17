@@ -54,7 +54,7 @@ namespace Web
             {
                 return _Template_SettingsPanel();
             }
-            return _Template_Device(G_Srv_AudioCore._Get_VisibleDevice());
+            return _Template_Device(G_Srv_AudioCore.Device);
             
         }
 

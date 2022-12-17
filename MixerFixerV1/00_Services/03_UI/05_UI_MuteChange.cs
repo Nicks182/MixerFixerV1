@@ -14,8 +14,9 @@ namespace Services
         // Update mute from client input
         private void _MuteChange(Web_InterCommMessage P_CommObject)
         {
-            Arc_Device L_Arc_Device = G_Srv_AudioCore._Get_VisibleDevice();
-            Arc_AudioObject L_AudioCore_Object = L_Arc_Device.AudioObjects.Where(s => s.UniqueId.ToString() == P_CommObject.Data[0].Id).FirstOrDefault();
+            //Arc_Device L_Arc_Device = G_Srv_AudioCore.Device;
+            //Arc_AudioObject L_AudioCore_Object = L_Arc_Device.Sessions.Where(s => s.UniqueId.ToString() == P_CommObject.Data[0].Id).FirstOrDefault();
+            Arc_AudioObject L_AudioCore_Object = G_Srv_AudioCore.Device._Get_Object(P_CommObject.Data[0].Id);
 
             if (L_AudioCore_Object != null)
             {

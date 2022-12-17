@@ -69,6 +69,10 @@ namespace HtmlGenerator
                     _GetTag_IsLabel(P_HTML_Object, P_IsClosing);
                     break;
 
+                case HTML_Object_Type.IsButton:
+                    _GetTag_IsButton(P_HTML_Object, P_IsClosing);
+                    break;
+
                 case HTML_Object_Type.IsRaw:
                     _GetTag_IsRaw(P_HTML_Object, P_IsClosing);
                     break;

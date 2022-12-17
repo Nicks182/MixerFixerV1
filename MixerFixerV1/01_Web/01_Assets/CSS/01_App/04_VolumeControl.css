@@ -11,10 +11,12 @@
     grid-template-areas:
         "image label label managed"
         "image text volume mute";
-    box-shadow: 0px 0px 10px 6px rgba(31,34,39,1) inset;
-    -webkit-box-shadow: 0px 0px 10px 6px rgba(31,34,39,1) inset;
-    -moz-box-shadow: 0px 0px 10px 6px rgba(31,34,39,1) inset;
-    background-color: rgb(40, 44, 50);
+    /*box-shadow: 0px 0px 10px 6px rgba(var(--MF_BG_Theme_Red),var(--MF_BG_Theme_Green),var(--MF_BG_Theme_Blue),1) inset;
+    -webkit-box-shadow: 0px 0px 10px 6px rgba(var(--MF_BG_Theme_Red),var(--MF_BG_Theme_Green),var(--MF_BG_Theme_Blue),1) inset;
+    -moz-box-shadow: 0px 0px 10px 6px rgba(var(--MF_BG_Theme_Red),var(--MF_BG_Theme_Green),var(--MF_BG_Theme_Blue),1) inset;*/
+    /*background-color: rgb(40, 44, 50);*/
+    background-color: rgba(var(--MF_VC_Theme_Red),var(--MF_VC_Theme_Green),var(--MF_VC_Theme_Blue),1);
+    /*filter: brightness(120%);*/
 }
 
 
@@ -43,7 +45,7 @@
 .MF_AppControl_Text
 {
     grid-area: text;
-    width: 30px;
+    width: 40px;
     justify-content: right;
 }
 

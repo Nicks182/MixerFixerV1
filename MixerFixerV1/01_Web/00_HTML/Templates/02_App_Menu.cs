@@ -20,12 +20,14 @@ namespace Web
             L_HTML_Object.Add_Attribute("id", "MixerAppMenu");
             L_HTML_Object.Add_Attribute("class", "MF_MixerAppMenu");
 
+            L_HTML_Object.Add_Child(_Template_App_Menu_DeviceBtn(G_Srv_AudioCore.Device));
+
             L_HTML_Object.Add_Child(_Template_App_Menu_SettingsBtn());
 
-            for (int i = 0; i < G_Srv_AudioCore.Devices.Count; i++)
-            {
-                L_HTML_Object.Add_Child(_Template_App_Menu_DeviceBtn(G_Srv_AudioCore.Devices[i]));
-            }
+            //for (int i = 0; i < G_Srv_AudioCore.Devices.Count; i++)
+            //{
+            //    L_HTML_Object.Add_Child(_Template_App_Menu_DeviceBtn(G_Srv_AudioCore.Devices[i]));
+            //}
 
 
 
