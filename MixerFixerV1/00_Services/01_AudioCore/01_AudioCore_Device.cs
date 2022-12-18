@@ -37,6 +37,7 @@ namespace Services
 
         private void _LoadSessions()
         {
+            G_Device.Sessions.Clear();
             Arc_AudioObject L_Arc_AudioObject = G_Device.Device;
             SessionCollection L_SessionCollection = L_Arc_AudioObject._GetSessions();
             for (int i = 0; i < L_SessionCollection.Count; i++)

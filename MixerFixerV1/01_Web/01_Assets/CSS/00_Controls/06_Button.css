@@ -2,8 +2,8 @@
 
 .button
 {
-    color: var(--MF_Theme_Foreground);
-    background-color: rgba(var(--MF_VC_Theme_Red),var(--MF_VC_Theme_Green),var(--MF_VC_Theme_Blue),1);
+    color: var(--MF_Theme_Text);
+    background-color: var(--MF_Theme_Foreground);
     text-decoration: none;
     padding: 5px 7px;
     display: flex;

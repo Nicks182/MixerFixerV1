@@ -2,15 +2,16 @@
 
 .MF_AppControl
 {
+    color: var(--MF_Theme_Foreground);
     display: grid;
-    grid-template-columns: min-content 45px auto min-content;
+    grid-template-columns: min-content auto min-content min-content;
     grid-template-rows: min-content min-content;
     align-items: center;
     gap: 10px;
     padding: 10px;
     grid-template-areas:
-        "image label label managed"
-        "image text volume mute";
+        "image label managed mute"
+        "image volume text text";
     /*box-shadow: 0px 0px 10px 6px rgba(var(--MF_BG_Theme_Red),var(--MF_BG_Theme_Green),var(--MF_BG_Theme_Blue),1) inset;
     -webkit-box-shadow: 0px 0px 10px 6px rgba(var(--MF_BG_Theme_Red),var(--MF_BG_Theme_Green),var(--MF_BG_Theme_Blue),1) inset;
     -moz-box-shadow: 0px 0px 10px 6px rgba(var(--MF_BG_Theme_Red),var(--MF_BG_Theme_Green),var(--MF_BG_Theme_Blue),1) inset;*/
@@ -45,8 +46,8 @@
 .MF_AppControl_Text
 {
     grid-area: text;
-    width: 40px;
-    justify-content: right;
+    width: 50px;
+    justify-content: center;
 }
 
 .MF_AppControl_Volume
@@ -67,11 +68,12 @@
 {
     position: absolute;
     display: grid;
-    grid-template-columns: auto min-content;
+    grid-template-columns: min-content auto;
     grid-template-rows: min-content min-content;
     grid-template-areas:
-        "lmeter ltext"
-        "rmeter rtext";
+        "ltext lmeter"
+        "rtext rmeter ";
+    column-gap: 5px;
     width: 100%;
     font-size: 10px;
 }
@@ -79,13 +81,14 @@
 .MF_AppControl_VolumeMeterText_Left
 {
     grid-area: ltext;
+    justify-self: start;
     
 }
 
 .MF_AppControl_VolumeMeterText_Right
 {
     grid-area: rtext;
-    
+    justify-self: start;
 }
 
 .MF_AppControl_VolumeMeter_Left

@@ -33,6 +33,6 @@
 html
 {
     background-color: var(--MF_Theme_Background);
-    color: var(--MF_Theme_Foreground);
+    color: var(--MF_Theme_Text);
 }
 

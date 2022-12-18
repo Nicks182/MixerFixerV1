@@ -59,14 +59,9 @@ namespace HtmlGenerator
         IsCheck,
         IsLabel,
         IsButton,
+        IsIcon,
     }
 
-    public enum HTML_Object_Icon_Type
-    {
-        None,
-        IsLeft,
-        IsRight,
-    }
 
     public enum HTML_Object_Icon_Pos
     {
@@ -84,4 +79,13 @@ namespace HtmlGenerator
         public string Name { get; set; }
         public StringBuilder Value { get; set; }
     }
+
+
+    public enum HTML_Object_Icon
+    {
+        None,
+        settings,
+        
+    }
+
 }

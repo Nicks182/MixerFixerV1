@@ -28,6 +28,22 @@ namespace Services
             _StartDataPush();
         }
 
+        public void _Reload(Web_InterCommMessage P_Web_InterCommMessage)
+        {
+            G_Srv_AudioCore.Reload();
+
+            P_Web_InterCommMessage.HTMLs = new List<Web_InterCommMessage_HTML>
+            {
+                new Web_InterCommMessage_HTML
+                {
+                    ContainerId = "#PanelHolder",
+                    HTML = G_HTML_Templates._Template_GetVisiblePanel_HTML().ToString()
+                }
+            };
+
+            _StartDataPush();
+        }
+
         private void _StartDataPush()
         {
             G_TimerManager.PrepareTimer(() => G_CommandHub.Clients.All.SendAsync("ReceiveMessage", _GetData()));

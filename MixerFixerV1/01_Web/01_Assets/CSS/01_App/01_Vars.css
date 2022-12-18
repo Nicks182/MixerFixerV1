@@ -9,10 +9,11 @@
     --MF_FG_Theme_Blue: 111;
     --MF_Theme_Background: rgba(var(--MF_BG_Theme_Red), var(--MF_BG_Theme_Green), var(--MF_BG_Theme_Blue),1);
     --MF_Theme_Foreground: rgba(var(--MF_FG_Theme_Red), var(--MF_FG_Theme_Green), var(--MF_FG_Theme_Blue),1);
+    --MF_Theme_Text: #c8c8c8;
     --MF_Border_Radius_SM: 4px;
     --MF_Border_Radius_MD: 6px;
     --MF_Border_Radius_LG: 8px;
-    --MF_VC_Theme_Offset: 10;
+    --MF_VC_Theme_Offset: 15;
     --MF_VC_Theme_Red: calc(var(--MF_BG_Theme_Red) + var(--MF_VC_Theme_Offset));
     --MF_VC_Theme_Green: calc(var(--MF_BG_Theme_Green) + var(--MF_VC_Theme_Offset));
     --MF_VC_Theme_Blue: calc(var(--MF_BG_Theme_Blue) + var(--MF_VC_Theme_Offset));

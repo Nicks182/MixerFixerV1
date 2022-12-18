@@ -36,8 +36,8 @@ namespace Services
 
         private void G_Srv_AudioCore_DoUpdate()
         {
-            Web_InterCommMessage L_CommMessage = new Web_InterCommMessage { CommType = Web_InterCommMessage_Type.Init };
-            _Init(L_CommMessage);
+            Web_InterCommMessage L_CommMessage = new Web_InterCommMessage { CommType = Web_InterCommMessage_Type.SwitchPanel };
+            _Reload(L_CommMessage);
 
             G_CommandHub.Clients.All.SendAsync("ReceiveMessage", L_CommMessage);
         }

@@ -13,15 +13,15 @@ namespace Web
 
         private HTML_Object _Template_Button(string P_Id, string P_Text)
         {
-            return _Template_Button(P_Id, P_Text, HTML_Object_Icon_Type.None, HTML_Object_Icon_Pos.None);
+            return _Template_Button(P_Id, P_Text, HTML_Object_Icon.None, HTML_Object_Icon_Pos.None);
         }
 
-        private HTML_Object _Template_Button(string P_Id, string P_Text, HTML_Object_Icon_Type P_IconType)
+        private HTML_Object _Template_Button(string P_Id, string P_Text, HTML_Object_Icon P_IconType)
         {
             return _Template_Button(P_Id, P_Text, P_IconType, HTML_Object_Icon_Pos.None);
         }
 
-        private HTML_Object _Template_Button(string P_Id, string P_Text, HTML_Object_Icon_Type P_IconType, HTML_Object_Icon_Pos P_IconPos)
+        private HTML_Object _Template_Button(string P_Id, string P_Text, HTML_Object_Icon P_IconType, HTML_Object_Icon_Pos P_IconPos)
         {
             HTML_Object L_HTML_Object = new HTML_Object();
             L_HTML_Object.Type = HTML_Object_Type.IsButton;
@@ -30,7 +30,20 @@ namespace Web
             L_HTML_Object.Add_Attribute("type", "button");
             L_HTML_Object.Add_Attribute("class", "button");
 
-            L_HTML_Object.Add_Child(_Template_Button_Text(P_Id, P_Text));
+            if(P_IconType != HTML_Object_Icon.None && P_IconPos == HTML_Object_Icon_Pos.IsLeft)
+            {
+                L_HTML_Object.Add_Child(_Template_Icon(P_Id, P_IconType));
+            }
+
+            if (P_Text != null)
+            {
+                L_HTML_Object.Add_Child(_Template_Button_Text(P_Id, P_Text));
+            }
+
+            if (P_IconType != HTML_Object_Icon.None && P_IconPos == HTML_Object_Icon_Pos.IsRight)
+            {
+                L_HTML_Object.Add_Child(_Template_Icon(P_Id, P_IconType));
+            }
 
             return L_HTML_Object;
         }

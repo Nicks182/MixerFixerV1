@@ -42,10 +42,16 @@ namespace Services
             
         }
 
+        public void Reload()
+        {
+            _LoadSessions();
+
+        }
+
         //public Arc_Device _Get_VisibleDevice()
         //{
         //    Arc_Device L_Arc_Device = G_Devices.Where(d => d.IsVisible == true).FirstOrDefault();
-            
+
         //    return L_Arc_Device;
         //}
 

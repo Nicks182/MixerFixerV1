@@ -48,7 +48,7 @@ namespace Services
                 new Web_InterCommMessage_Data
                 {
                     Id = G_HTML_Templates._Template_VolumeControl_VolumeText_Id_Data(P_Arc_AudioObject),
-                Value = P_Arc_AudioObject._Get_Volume().ToString(),
+                Value = P_Arc_AudioObject._Get_Volume().ToString() + "%",
                 DataType = Web_InterCommMessage_DataType.ButtonText
                 }
             };
