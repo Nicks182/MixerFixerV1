@@ -31,6 +31,7 @@
 .MF_AppControl_Label
 {
     grid-area: label;
+    filter: brightness(var(--MF_Hover));
 }
 
 .MF_AppControl_IsManaged

@@ -4,6 +4,7 @@ function _Message_Receive(P_CommObject)
     try
     {
         _SetAllHTMLs(P_CommObject.HTMLs);
+        _Modal_SetState(P_CommObject.ModalInfo);
 
         switch (P_CommObject.CommType)
         {

@@ -38,7 +38,12 @@ namespace MixerFixerV1
             //SolidColorBrush L_MainThemeBG = new SolidColorBrush(Color.FromArgb(255, (byte)30, (byte)30, (byte)30));
             //SolidColorBrush L_MainThemeFG = new SolidColorBrush(Color.FromArgb(255, (byte)77, (byte)100, (byte)111));
 
-            SolidColorBrush L_MainThemeBG = new SolidColorBrush(Color.FromArgb(255, (byte)33, (byte)33, (byte)33));
+            int r = 33;
+            int g = 33;
+            int b = 33;
+            int offset = 5;
+
+            SolidColorBrush L_MainThemeBG = new SolidColorBrush(Color.FromArgb(255, (byte)(r - offset), (byte)(g - offset), (byte)(b - offset)));
             SolidColorBrush L_MainThemeFG = new SolidColorBrush(Color.FromArgb(255, (byte)77, (byte)100, (byte)111));
 
             var resourceDictionary = Application.Current.Resources.MergedDictionaries[0];

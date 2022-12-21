@@ -29,7 +29,7 @@
     .button:hover,
     .button:focus
     {
-        filter: brightness(120%);
+        filter: brightness(var(--MF_Hover));
     }
 
 

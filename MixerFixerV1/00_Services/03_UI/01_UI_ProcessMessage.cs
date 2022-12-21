@@ -34,6 +34,10 @@ namespace Services
                         _ManamgedChange(P_Web_InterCommMessage);
                         break;
 
+                    case Web_InterCommMessage_Type.ShowSettings:
+                        _Modal_Settings(P_Web_InterCommMessage);
+                        break;
+
                     case Web_InterCommMessage_Type.SwitchPanel: // Device
                         _SwitchPanel(P_Web_InterCommMessage);
                         break;

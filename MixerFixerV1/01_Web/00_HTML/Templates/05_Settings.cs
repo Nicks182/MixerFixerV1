@@ -17,12 +17,25 @@ namespace Web
             HTML_Object L_HTML_Object = _Template_Button("", null, HTML_Object_Icon.settings, HTML_Object_Icon_Pos.IsLeft);
 
             L_HTML_Object.Add_Attribute("class", "MF_MixerAppMenu_Settings");
-            L_HTML_Object.Add_Attribute("onclick", "_MenuBtn_Click('settings', " + (int)Web_InterCommMessage_Type.SwitchPanel + ");");
+            L_HTML_Object.Add_Attribute("onclick", "_App_SettingsShow('" + Web_InterCommMessage_Type.ShowSettings.ToString() + "');");
 
             return L_HTML_Object;
         }
 
-        private HTML_Object _Template_SettingsPanel()
+        public StringBuilder _Template_SettingsModal_HTML()
+        {
+            return new HTML()._BuildHtml(_Template_SettingsModal());
+        }
+
+        private HTML_Object _Template_SettingsModal()
+        {
+            HTML_Object L_HTML_Object = _Template_Modal(_Template_SettingsModal_Id(), "Settings", _Template_SettingsModal_Body());
+
+
+            return L_HTML_Object;
+        }
+
+        private HTML_Object _Template_SettingsModal_Body()
         {
             HTML_Object L_HTML_Object = new HTML_Object();
             L_HTML_Object.Type = HTML_Object_Type.IsDiv;
@@ -30,17 +43,34 @@ namespace Web
             L_HTML_Object.Add_Attribute("id", "SettingsPanel");
             L_HTML_Object.Add_Attribute("class", "MF_SettingsPanel");
 
-            L_HTML_Object.Add_Child(new HTML_Object
-            {
-                Type = HTML_Object_Type.IsRaw,
-                RawValue = new StringBuilder("Settings goes here!!!!!")
-            });
+            L_HTML_Object.Add_Child(_Template_SettingsModal_Body_TestButton());
 
 
             return L_HTML_Object;
         }
 
-        
+        private HTML_Object _Template_SettingsModal_Body_TestButton()
+        {
+            HTML_Object L_HTML_Object = new HTML_Object();
+            L_HTML_Object.Type = HTML_Object_Type.IsButton;
+
+            
+            L_HTML_Object.Add_Attribute("onclick", "_App_SettingsShowSaved();");
+
+            L_HTML_Object.Add_Child(new HTML_Object
+            {
+                Type = HTML_Object_Type.IsRaw,
+                RawValue = new StringBuilder("Test")
+            }); ;
+
+
+            return L_HTML_Object;
+        }
+
+        public string _Template_SettingsModal_Id()
+        {
+            return "Modal_Settings";
+        }
 
 
     }

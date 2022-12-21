@@ -10,6 +10,12 @@
     outline: none;
 }
 
+    .slider:hover,
+    .slider:focus
+    {
+        filter: brightness(var(--MF_Hover));
+    }
+
     .slider::-moz-range-thumb
     {
         border: 1px solid var(--main-border-color);

@@ -85,7 +85,8 @@ namespace HtmlGenerator
     {
         None,
         settings,
-        
+        close,
+
     }
 
 }

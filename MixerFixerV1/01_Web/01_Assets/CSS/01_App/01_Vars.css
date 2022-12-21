@@ -10,6 +10,7 @@
     --MF_Theme_Background: rgba(var(--MF_BG_Theme_Red), var(--MF_BG_Theme_Green), var(--MF_BG_Theme_Blue),1);
     --MF_Theme_Foreground: rgba(var(--MF_FG_Theme_Red), var(--MF_FG_Theme_Green), var(--MF_FG_Theme_Blue),1);
     --MF_Theme_Text: #c8c8c8;
+    --MF_AppHeader_Background: rgba(calc(var(--MF_FG_Theme_Red) - 10), calc(var(--MF_FG_Theme_Green) - 10), calc(var(--MF_FG_Theme_Blue) - 10),1);
     --MF_Border_Radius_SM: 4px;
     --MF_Border_Radius_MD: 6px;
     --MF_Border_Radius_LG: 8px;
@@ -21,4 +22,5 @@
     --slider-thumb-color: #435862;
     --slider-track-color: #374850;
     --progress-color: #2c393f;
+    --MF_Hover: 130%;
 }

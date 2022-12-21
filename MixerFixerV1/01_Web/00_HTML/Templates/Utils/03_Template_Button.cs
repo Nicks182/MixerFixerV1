@@ -32,7 +32,7 @@ namespace Web
 
             if(P_IconType != HTML_Object_Icon.None && P_IconPos == HTML_Object_Icon_Pos.IsLeft)
             {
-                L_HTML_Object.Add_Child(_Template_Icon(P_Id, P_IconType));
+                L_HTML_Object.Add_Child(_Template_Icon(P_IconType));
             }
 
             if (P_Text != null)
@@ -42,7 +42,7 @@ namespace Web
 
             if (P_IconType != HTML_Object_Icon.None && P_IconPos == HTML_Object_Icon_Pos.IsRight)
             {
-                L_HTML_Object.Add_Child(_Template_Icon(P_Id, P_IconType));
+                L_HTML_Object.Add_Child(_Template_Icon(P_IconType));
             }
 
             return L_HTML_Object;

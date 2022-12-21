@@ -21,6 +21,16 @@ namespace Services
         public List<Web_InterCommMessage_HTML> HTMLs { get; set; }
         public List<Web_InterCommMessage_Data> Data { get; set; }
 
+        public Web_InterCommMessage_Modal ModalInfo { get; set; }
+
+    }
+
+    public class Web_InterCommMessage_Modal
+    {
+        
+        public string Id { get; set; }
+        public int State { get; set; }
+
     }
 
     public class Web_InterCommMessage_Data
@@ -44,6 +54,7 @@ namespace Services
     {
         public string ContainerId { get; set; }
         public string HTML { get; set; }
+        public bool IsAppend {get;set;}
     }
 
     public enum Web_InterCommMessage_Type
@@ -59,6 +70,7 @@ namespace Services
         Device_Change = 8,
         ShowMessage = 9,
         SwitchPanel = 10,
+        ShowSettings = 11,
 
     }
 }

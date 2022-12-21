@@ -50,10 +50,10 @@ namespace Web
 
         public HTML_Object _Template_GetVisiblePanel()
         {
-            if(G_Srv_AudioCore.G_ShowSettings == true)
-            {
-                return _Template_SettingsPanel();
-            }
+            //if(G_Srv_AudioCore.G_ShowSettings == true)
+            //{
+            //    return _Template_SettingsPanel();
+            //}
             return _Template_Device(G_Srv_AudioCore.Device);
             
         }
