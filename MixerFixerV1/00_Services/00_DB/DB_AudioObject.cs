@@ -15,6 +15,7 @@ namespace Services
         public bool IsDefault { get; set; } = false;
         public bool IsActive { get; set; } = false;
         public bool IsMute { get; set; } = false;
+        public bool IsDevice { get; set; } = false;
         public double Volume { get; set; }
         public int Priority { get; set; }
         public int DisplayOrder { get; set; }

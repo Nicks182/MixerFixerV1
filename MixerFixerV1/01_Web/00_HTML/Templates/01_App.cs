@@ -12,9 +12,11 @@ namespace Web
     public partial class HTML_Templates
     {
         Srv_AudioCore G_Srv_AudioCore;
-        public HTML_Templates(Srv_AudioCore P_Srv_AudioCore)
+        Srv_DB G_Srv_DB;
+        public HTML_Templates(Srv_AudioCore P_Srv_AudioCore, Srv_DB P_Srv_DB)
         {
             G_Srv_AudioCore = P_Srv_AudioCore;
+            G_Srv_DB = P_Srv_DB;
         }
 
         public StringBuilder _Template_App_HTML()

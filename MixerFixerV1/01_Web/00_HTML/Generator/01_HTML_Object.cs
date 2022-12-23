@@ -86,7 +86,8 @@ namespace HtmlGenerator
         None,
         settings,
         close,
-
+        arrow_drop_up,
+        arrow_drop_down,
     }
 
 }

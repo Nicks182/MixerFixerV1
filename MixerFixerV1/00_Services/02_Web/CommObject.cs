@@ -71,6 +71,8 @@ namespace Services
         ShowMessage = 9,
         SwitchPanel = 10,
         ShowSettings = 11,
+        Settings_Priority_MoveUp = 12,
+        Settings_Priority_MoveDown = 13,
 
     }
 }

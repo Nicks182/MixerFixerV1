@@ -2,8 +2,8 @@
 
 .toggle
 {
-    --height: 30px;
-    --width: calc(var(--height) / 2);
+    --width: 30px;
+    --height: calc(var(--width) / 2);
     --border-radius: calc(var(--width) / 2);
     display: inline-block;
     cursor: pointer;
@@ -36,8 +36,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: var(--width);
-    width: var(--width);
+    height: var(--height);
+    width: var(--height);
     background: #999999;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     border-radius: var(--border-radius);
@@ -46,7 +46,23 @@
 
 
 
-.toggle[IsChecked="1"] > .toggle__fill::after 
+.toggle[IsChecked="1"] > .toggle__fill::after
 {
-    transform: translateY(var(--width));
+    transform: translateX(var(--height));
+}
+
+
+.toggle[IsRotate="90"]
+{
+    transform: rotate(90deg);
+}
+
+.toggle[IsRotate="180"]
+{
+    transform: rotate(180deg);
+}
+
+.toggle[IsRotate="270"]
+{
+    transform: rotate(270deg);
 }

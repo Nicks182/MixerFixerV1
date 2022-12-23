@@ -3,13 +3,78 @@
 .MF_SettingsPanel
 {
     display: grid;
-    grid-template-columns: min-content auto min-content min-content;
+    grid-template-columns: auto min-content;
     grid-template-rows: min-content min-content;
     align-items: center;
-    gap: 10px;
-    padding: 10px;
+    row-gap: 10px;
+    column-gap: 20px;
+    padding: 5px;
     grid-template-areas:
-        "image label label managed"
-        "image volume text mute";
+        "usedefaultvolume defaultvolume"
+        "devicepriorityhelp devicepriorityhelp"
+        "devicepriority devicepriority";
+}
+
+.MF_SettingsPanel_UseDefaultVolume
+{
+    grid-area: usedefaultvolume;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.MF_SettingsPanel_DefaultVolume
+{
+    grid-area: defaultvolume;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.MF_SettingsPanel_DevicePriority
+{
+    grid-area: devicepriority;
+    border: 1px solid var(--MF_Theme_Foreground);
+}
+
+.MF_SettingsPanel_DevicePriorityHelp
+{
+    grid-area: devicepriorityhelp;
+    color: var(--MF_Theme_Foreground);
+    filter: brightness(var(--MF_Hover));
+}
+
+.MF_SettingsPanel_DevicePriorityItems
+{
     
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.MF_SettingsPanel_DevicePriority_Item
+{
+    background-color: var(--MF_Theme_Background_HL);
+    display: grid;
+    grid-template-columns: min-content auto min-content min-content;
+    grid-template-rows: min-content;
+    gap: 3px;
+    align-items:center;
+    padding: 2px;
+}
+
+
+.MF_SettingsPanel_DevicePriority_Item_Priority
+{
+    padding: 0px 3px;
+}
+
+.MF_SettingsPanel_DevicePriority_Item_Name
+{
+    padding: 0px 3px;
+    white-space:nowrap;
 }

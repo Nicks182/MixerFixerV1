@@ -15,6 +15,7 @@ namespace Services
         Srv_TimerManager G_TimerManager;
         HTML_Templates G_HTML_Templates;
         Srv_AudioCore G_Srv_AudioCore;
+        Srv_DB G_Srv_DB = new Srv_DB();
 
         Web_InterCommMessage G_DataPushMessage = new Web_InterCommMessage
         { 
@@ -25,8 +26,8 @@ namespace Services
         {
             G_CommandHub = P_CommandHub;
             G_TimerManager = new Srv_TimerManager();
-            G_Srv_AudioCore = new Srv_AudioCore();
-            G_HTML_Templates = new HTML_Templates(G_Srv_AudioCore);
+            G_Srv_AudioCore = new Srv_AudioCore(G_Srv_DB);
+            G_HTML_Templates = new HTML_Templates(G_Srv_AudioCore, G_Srv_DB);
 
             G_Srv_AudioCore.DoUpdate += G_Srv_AudioCore_DoUpdate;
             G_Srv_AudioCore.OnVolumeChanged += G_Srv_AudioCore_OnVolumeChanged;

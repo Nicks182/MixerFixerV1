@@ -97,6 +97,7 @@ namespace Services
                     Id = Guid.Empty, // New object
                     IsActive = false,
                     IsDefault = false,
+                    IsDevice = (G_ObjectType == Arc_AudioObject_Type.IsDevice || G_ObjectType == Arc_AudioObject_Type.IsMicrophone),
                     IsManaged = false,
                     IsMute = _Get_Mute(),
                     Name = G_Name,

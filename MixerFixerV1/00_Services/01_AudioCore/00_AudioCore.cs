@@ -12,7 +12,7 @@ namespace Services
     public partial class Srv_AudioCore
     {
         MMDeviceEnumerator G_MMDeviceEnumerator = new MMDeviceEnumerator();
-        Srv_DB G_Srv_DB = new Srv_DB();
+        Srv_DB G_Srv_DB;
 
         //Arc_AudioObject G_Device { get; set; }
         //List<Arc_AudioObject> G_Sessions = new List<Arc_AudioObject>();
@@ -31,9 +31,9 @@ namespace Services
         public delegate void OnVolumeChangedDelegate(Arc_AudioObject P_Arc_AudioObject);
         public event OnVolumeChangedDelegate OnVolumeChanged;
 
-        public Srv_AudioCore()
+        public Srv_AudioCore(Srv_DB P_Srv_DB)
         {
-
+            G_Srv_DB = P_Srv_DB;
         }
 
         public void Init()

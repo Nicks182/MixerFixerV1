@@ -76,6 +76,7 @@ namespace Web
                                         );
 
             L_HTML_Object.Add_Attribute("class", "MF_AppControl_IsMute");
+            //L_HTML_Object.Add_Attribute("IsRotate", "270");
             L_HTML_Object.Add_Attribute("onclick", _Template_VolumeControl_IsMute_Event(P_AudioCore_Object));
 
             return L_HTML_Object;
@@ -103,6 +104,7 @@ namespace Web
                                         );
 
             L_HTML_Object.Add_Attribute("class", "MF_AppControl_IsManaged");
+            //L_HTML_Object.Add_Attribute("IsRotate", "270");
             L_HTML_Object.Add_Attribute("onclick", "_App_ManagedChange('" + P_AudioCore_Object.UniqueId.ToString() + "');");
 
             return L_HTML_Object;
