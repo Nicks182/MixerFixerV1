@@ -14,6 +14,7 @@ namespace Services
         private LiteDatabase G_DB;
 
         private ILiteCollection<DB_AudioObject> G_DB_AudioObject;
+        private ILiteCollection<DB_DevicePriority> G_DB_DevicePriority;
 
         //private ILiteCollection<DB_Apps> G_DB_Apps;
 
@@ -30,6 +31,7 @@ namespace Services
             //this.G_DB_Apps = G_DB.GetCollection<DB_Apps>("Apps");
             //this.G_DB_Devices = G_DB.GetCollection<DB_Devices>("Devices");
             this.G_DB_Settings = G_DB.GetCollection<DB_Settings>("Settings");
+            this.G_DB_DevicePriority = G_DB.GetCollection<DB_DevicePriority>("DevicePriority");
 
         }
 

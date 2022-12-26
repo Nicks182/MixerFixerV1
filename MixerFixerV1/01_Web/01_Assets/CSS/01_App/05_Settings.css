@@ -1,5 +1,18 @@
 
 
+.MF_Settings
+{
+
+}
+
+.MF_Settings_Footer
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    padding: 5px 5px 5px 5px;
+}
+
 .MF_SettingsPanel
 {
     display: grid;
@@ -46,6 +59,7 @@
     grid-area: devicepriorityhelp;
     color: var(--MF_Theme_Foreground);
     filter: brightness(var(--MF_Hover));
+    padding: 3px;
 }
 
 .MF_SettingsPanel_DevicePriorityItems
@@ -68,13 +82,26 @@
 }
 
 
-.MF_SettingsPanel_DevicePriority_Item_Priority
+.MF_SettingsPanel_DevicePriority_Item_EnforceDefault
 {
     padding: 0px 3px;
 }
 
 .MF_SettingsPanel_DevicePriority_Item_Name
 {
+    display: flex;
+    flex-direction: column;
+}
+
+.MF_SettingsPanel_DevicePriority_Item_Name_Text
+{
     padding: 0px 3px;
-    white-space:nowrap;
+    white-space: nowrap;
+}
+
+.MF_SettingsPanel_DevicePriority_Item_Name_Device
+{
+    padding: 0px 3px;
+    white-space: nowrap;
+    color: var(--MF_Theme_Foreground);
 }

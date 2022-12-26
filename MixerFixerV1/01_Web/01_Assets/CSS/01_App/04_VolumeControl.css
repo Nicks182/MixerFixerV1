@@ -4,7 +4,7 @@
 {
     color: var(--MF_Theme_Foreground);
     display: grid;
-    grid-template-columns: min-content auto min-content min-content;
+    grid-template-columns: min-content auto 20px 20px;
     grid-template-rows: min-content min-content;
     align-items: center;
     gap: 10px;
@@ -37,11 +37,13 @@
 .MF_AppControl_IsManaged
 {
     grid-area: managed;
+    justify-self: center;
 }
 
 .MF_AppControl_IsMute
 {
     grid-area: mute;
+    justify-self: center;
 }
 
 .MF_AppControl_Text
@@ -63,6 +65,7 @@
 .MF_AppControl_Slider
 {
     position: absolute;
+    padding-left: 5px;
 }
 
 .MF_AppControl_VolumeMeter

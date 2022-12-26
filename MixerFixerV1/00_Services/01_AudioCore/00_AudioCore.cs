@@ -38,6 +38,7 @@ namespace Services
 
         public void Init()
         {
+            LoadPriorityList();
             _LoadDevice();
             
         }
@@ -46,6 +47,20 @@ namespace Services
         {
             _LoadSessions();
 
+        }
+
+        public void LoadPriorityList()
+        {
+            foreach (var L_Device in G_MMDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.All).OrderBy(d => d.DeviceFriendlyName))
+            {
+                G_Srv_DB.DevicePriority_GetOneOrAdd(L_Device.FriendlyName, LoadPriorityList_Get_DisplayText(L_Device), L_Device.DeviceFriendlyName);
+            }
+
+        }
+
+        public string LoadPriorityList_Get_DisplayText(MMDevice P_MMDevice)
+        {
+            return P_MMDevice.FriendlyName.Replace("(" + P_MMDevice.DeviceFriendlyName + ")", "");
         }
 
         //public Arc_Device _Get_VisibleDevice()

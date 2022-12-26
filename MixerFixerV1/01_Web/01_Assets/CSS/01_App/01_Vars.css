@@ -1,21 +1,29 @@
 
 :root
 {
+    /* App background */
     --MF_BG_Theme_Red: 33;
     --MF_BG_Theme_Green: 33;
     --MF_BG_Theme_Blue: 33;
+    --MF_Theme_Background: rgba(var(--MF_BG_Theme_Red), var(--MF_BG_Theme_Green), var(--MF_BG_Theme_Blue),1);
+    /* App header background */
+    --MF_AH_Theme_Red: calc(var(--MF_BG_Theme_Red) - 5);
+    --MF_AH_Theme_Green: calc(var(--MF_BG_Theme_Green) - 5);
+    --MF_AH_Theme_Blue: calc(var(--MF_BG_Theme_Blue) - 5);
+    --MF_AppHeader_Background: rgba(var(--MF_AH_Theme_Red), var(--MF_AH_Theme_Green), var(--MF_AH_Theme_Blue),1);
+    /* App accent color */
     --MF_FG_Theme_Red: 77;
     --MF_FG_Theme_Green: 100;
     --MF_FG_Theme_Blue: 111;
+    --MF_Theme_Foreground: rgba(var(--MF_FG_Theme_Red), var(--MF_FG_Theme_Green), var(--MF_FG_Theme_Blue),1);
+    /* App background offset/highlight */
     --MF_Theme_Offset: 15;
     --MF_BG_Theme_Red_HL: calc(var(--MF_BG_Theme_Red) + var(--MF_Theme_Offset));
     --MF_BG_Theme_Green_HL: calc(var(--MF_BG_Theme_Green) + var(--MF_Theme_Offset));
     --MF_BG_Theme_Blue_HL: calc(var(--MF_BG_Theme_Blue) + var(--MF_Theme_Offset));
-    --MF_Theme_Background: rgba(var(--MF_BG_Theme_Red), var(--MF_BG_Theme_Green), var(--MF_BG_Theme_Blue),1);
-    --MF_Theme_Foreground: rgba(var(--MF_FG_Theme_Red), var(--MF_FG_Theme_Green), var(--MF_FG_Theme_Blue),1);
     --MF_Theme_Background_HL: rgba(var(--MF_BG_Theme_Red_HL), var(--MF_BG_Theme_Green_HL), var(--MF_BG_Theme_Blue_HL),1);
+    /* App default text color */
     --MF_Theme_Text: #c8c8c8;
-    --MF_AppHeader_Background: rgba(calc(var(--MF_FG_Theme_Red) - 10), calc(var(--MF_FG_Theme_Green) - 10), calc(var(--MF_FG_Theme_Blue) - 10),1);
     --MF_Border_Radius_SM: 4px;
     --MF_Border_Radius_MD: 6px;
     --MF_Border_Radius_LG: 8px;

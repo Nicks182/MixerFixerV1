@@ -50,7 +50,7 @@ namespace Web
             
             L_HTML_Object.Add_Child(_Template_Modal_Content_Header(P_Id, P_Title));
             L_HTML_Object.Add_Child(_Template_Modal_Content_Body(P_Body));
-            L_HTML_Object.Add_Child(_Template_Modal_Content_Footer());
+            //L_HTML_Object.Add_Child(_Template_Modal_Content_Footer());
 
             return L_HTML_Object;
         }

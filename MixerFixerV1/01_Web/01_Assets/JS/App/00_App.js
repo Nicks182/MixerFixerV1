@@ -16,18 +16,6 @@ $(document)
 
 
 
-function _Init()
-{
-    var L_Comm =
-    {
-        CommType: "Init"
-    }
-    
-    _Comm_Send(L_Comm);
-
-    
-}
-
 
 
 G_HubConnection.on("ReceiveMessage", function (P_CommObject)

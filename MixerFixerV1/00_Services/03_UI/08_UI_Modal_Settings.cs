@@ -13,6 +13,8 @@ namespace Services
     {
         private void _Modal_Settings(Web_InterCommMessage P_Web_InterCommMessage)
         {
+            _Modal_Settings_AddDevicestoDB();
+
             P_Web_InterCommMessage.ModalInfo = new Web_InterCommMessage_Modal
             {
                 Id = G_HTML_Templates._Template_SettingsModal_Id(),
@@ -27,5 +29,12 @@ namespace Services
                 IsAppend = true
             });
         }
+
+
+        private void _Modal_Settings_AddDevicestoDB()
+        {
+            
+        }
+
     }
 }
