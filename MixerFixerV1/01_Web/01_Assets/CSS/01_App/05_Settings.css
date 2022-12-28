@@ -25,7 +25,7 @@
     grid-template-areas:
         "usedefaultvolume defaultvolume"
         "devicepriorityhelp devicepriorityhelp"
-        "devicepriority devicepriority";
+        "soundpriority micpriority";
 }
 
 .MF_SettingsPanel_UseDefaultVolume
@@ -48,11 +48,7 @@
     white-space: nowrap;
 }
 
-.MF_SettingsPanel_DevicePriority
-{
-    grid-area: devicepriority;
-    border: 1px solid var(--MF_Theme_Foreground);
-}
+
 
 .MF_SettingsPanel_DevicePriorityHelp
 {
@@ -60,6 +56,27 @@
     color: var(--MF_Theme_Foreground);
     filter: brightness(var(--MF_Hover));
     padding: 3px;
+}
+
+.MF_SettingsPanel_DevicePriorityHeading
+{
+    background-color: var(--MF_AppHeader_Background);
+    color: var(--MF_Theme_Foreground);
+    padding: 3px;
+}
+
+.MF_SettingsPanel_SoundPriority
+{
+    grid-area: soundpriority;
+    border: 1px solid var(--MF_Theme_Foreground);
+    align-self: start;
+}
+
+.MF_SettingsPanel_MicPriority
+{
+    grid-area: micpriority;
+    border: 1px solid var(--MF_Theme_Foreground);
+    align-self: start;
 }
 
 .MF_SettingsPanel_DevicePriorityItems

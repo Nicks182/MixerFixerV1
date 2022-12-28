@@ -14,7 +14,8 @@ function _App_Settings_PriorityItemMove(P_DeviceId, P_MessageType)
 {
     var L_Comm =
     {
-        CommType: P_MessageType
+        CommType: P_MessageType,
+        Data: [{ Id: "DeviceId", Value: P_DeviceId }]
     }
     _Comm_Send(L_Comm);
 }

@@ -65,7 +65,9 @@ namespace Web
 
             L_HTML_Object.Add_Child(_Template_SettingsModal_Body_UseDefaultVolume());
             L_HTML_Object.Add_Child(_Template_SettingsModal_Body_DefaultVolume());
-            L_HTML_Object.Add_Child(_Template_SettingsModal_Body_DevicePriority());
+            L_HTML_Object.Add_Child(_Template_SettingsModal_Body_DevicePriorityHelp());
+            L_HTML_Object.Add_Child(_Template_SettingsModal_Body_SoundPriority());
+            L_HTML_Object.Add_Child(_Template_SettingsModal_Body_MicPriority());
 
 
             return L_HTML_Object;
@@ -197,21 +199,97 @@ namespace Web
 
         #endregion DefaultVolume
 
-        #region DevicePriority
-        private HTML_Object _Template_SettingsModal_Body_DevicePriority()
+        #region SoundPriority
+        private HTML_Object _Template_SettingsModal_Body_SoundPriority()
         {
             HTML_Object L_HTML_Object = new HTML_Object();
             L_HTML_Object.Type = HTML_Object_Type.IsDiv;
 
-            L_HTML_Object.Add_Attribute("class", "MF_SettingsPanel_DevicePriority");
+            L_HTML_Object.Add_Attribute("id", "Div_Settings_SoundPriority");
+            L_HTML_Object.Add_Attribute("class", "MF_SettingsPanel_SoundPriority");
 
-            L_HTML_Object.Add_Child(_Template_SettingsModal_Body_DevicePriorityHelp());
-            L_HTML_Object.Add_Child(_Template_SettingsModal_Body_DevicePriority_Items());
+            L_HTML_Object.Children.AddRange(_Template_SettingsModal_Body_SoundPriority_Body());
+
+            //L_HTML_Object.Add_Child(_Template_SettingsModal_Body_DevicePriority_Heading("Playback Priority:"));
+
+            //List<DB_DevicePriority> L_Devices = G_Srv_DB.DevicePriority_GetAll().Find(ao => ao.IsMic == false).OrderBy(ao => ao.Priority).ToList();
+            //L_HTML_Object.Add_Child(_Template_SettingsModal_Body_DevicePriority_Items(L_Devices));
 
             return L_HTML_Object;
         }
 
-        #endregion DevicePriority
+        private List<HTML_Object> _Template_SettingsModal_Body_SoundPriority_Body()
+        {
+            List<DB_DevicePriority> L_Devices = G_Srv_DB.DevicePriority_GetAll().Find(ao => ao.IsMic == false).OrderBy(ao => ao.Priority).ToList();
+
+            return new List<HTML_Object>
+            {
+                _Template_SettingsModal_Body_DevicePriority_Heading("Playback Priority:"),
+                _Template_SettingsModal_Body_DevicePriority_Items(L_Devices)
+            };
+        }
+
+        public StringBuilder _Template_SettingsModal_Body_SoundPriority_HTML()
+        {
+            return G_HTML._BuildHtml(_Template_SettingsModal_Body_SoundPriority_Body());
+        }
+
+        #endregion SoundPriority
+
+        #region MicPriority
+        private HTML_Object _Template_SettingsModal_Body_MicPriority()
+        {
+            HTML_Object L_HTML_Object = new HTML_Object();
+            L_HTML_Object.Type = HTML_Object_Type.IsDiv;
+
+            L_HTML_Object.Add_Attribute("id", "Div_Settings_MicPriority");
+            L_HTML_Object.Add_Attribute("class", "MF_SettingsPanel_MicPriority");
+
+            L_HTML_Object.Children.AddRange(_Template_SettingsModal_Body_MicPriority_Body());
+
+            //L_HTML_Object.Add_Child(_Template_SettingsModal_Body_DevicePriority_Heading("Capture Priority:"));
+
+            //List<DB_DevicePriority> L_Devices = G_Srv_DB.DevicePriority_GetAll().Find(ao => ao.IsMic == true).OrderBy(ao => ao.Priority).ToList();
+            //L_HTML_Object.Add_Child(_Template_SettingsModal_Body_DevicePriority_Items(L_Devices));
+
+            return L_HTML_Object;
+        }
+
+        private List<HTML_Object> _Template_SettingsModal_Body_MicPriority_Body()
+        {
+            List<DB_DevicePriority> L_Devices = G_Srv_DB.DevicePriority_GetAll().Find(ao => ao.IsMic == true).OrderBy(ao => ao.Priority).ToList();
+
+            return new List<HTML_Object>
+            {
+                _Template_SettingsModal_Body_DevicePriority_Heading("Capture Priority:"),
+                _Template_SettingsModal_Body_DevicePriority_Items(L_Devices)
+            };
+        }
+
+        public StringBuilder _Template_SettingsModal_Body_MicPriority_HTML()
+        {
+            return G_HTML._BuildHtml(_Template_SettingsModal_Body_MicPriority_Body());
+        }
+
+        #endregion MicPriority
+
+        private HTML_Object _Template_SettingsModal_Body_DevicePriority_Heading(string P_Text)
+        {
+            HTML_Object L_HTML_Object = new HTML_Object();
+            L_HTML_Object.Type = HTML_Object_Type.IsDiv;
+
+            L_HTML_Object.Add_Attribute("class", "MF_SettingsPanel_DevicePriorityHeading");
+
+            L_HTML_Object.Add_Child(new HTML_Object
+            {
+                Type = HTML_Object_Type.IsRaw,
+                RawValue = new StringBuilder(P_Text)
+            });
+
+            
+            return L_HTML_Object;
+        }
+
 
         #region DevicePriorityHelp
         private HTML_Object _Template_SettingsModal_Body_DevicePriorityHelp()
@@ -234,20 +312,17 @@ namespace Web
 
 
         #region DevicePriorityItems
-        private HTML_Object _Template_SettingsModal_Body_DevicePriority_Items()
+        private HTML_Object _Template_SettingsModal_Body_DevicePriority_Items(List<DB_DevicePriority> P_Devices)
         {
             HTML_Object L_HTML_Object = new HTML_Object();
             L_HTML_Object.Type = HTML_Object_Type.IsDiv;
 
 
             L_HTML_Object.Add_Attribute("class", "MF_SettingsPanel_DevicePriorityItems");
-            L_HTML_Object.Add_Attribute("onclick", "_App_SettingsShowSaved();");
 
-            List<DB_DevicePriority> L_Devices = G_Srv_DB.DevicePriority_GetAll().FindAll().OrderBy(ao => ao.Priority).ToList();
-
-            for(int i = 0; i < L_Devices.Count; i++)
+            for(int i = 0; i < P_Devices.Count; i++)
             {
-                L_HTML_Object.Add_Child(_Template_SettingsModal_Body_DevicePriority_Item(L_Devices[i]));
+                L_HTML_Object.Add_Child(_Template_SettingsModal_Body_DevicePriority_Item(P_Devices[i]));
             }
 
             return L_HTML_Object;
@@ -274,7 +349,7 @@ namespace Web
         {
             HTML_Object L_HTML_Object = _Template_Toggle(
                                             P_Id: _Template_SettingsModal_Body_DevicePriority_Item_EnforceDefault_Id(P_DB_DevicePriority),
-                                            P_Title: "Set Mute",
+                                            P_Title: "Enforce Priority",
                                             P_IsChecked: P_DB_DevicePriority.EnforceDefault
                                         );
 
@@ -346,7 +421,7 @@ namespace Web
 
         private HTML_Object _Template_SettingsModal_Body_DevicePriority_Item_MoveUp(DB_DevicePriority P_DB_DevicePriority)
         {
-            HTML_Object L_HTML_Object = _Template_Button("", null, HTML_Object_Icon.arrow_drop_up, HTML_Object_Icon_Pos.IsLeft);
+            HTML_Object L_HTML_Object = _Template_Button("Btn_DevicePriority_MoveUp", null, HTML_Object_Icon.arrow_drop_up, HTML_Object_Icon_Pos.IsLeft);
 
             //L_HTML_Object.Add_Attribute("class", "MF_MixerAppMenu_Settings");
             L_HTML_Object.Add_Attribute("onclick", "_App_Settings_PriorityItemMove('" + P_DB_DevicePriority.Id + "', '" + Web_InterCommMessage_Type.Settings_Priority_MoveUp.ToString() + "');");
@@ -357,7 +432,7 @@ namespace Web
 
         private HTML_Object _Template_SettingsModal_Body_DevicePriority_Item_MoveDown(DB_DevicePriority P_DB_DevicePriority)
         {
-            HTML_Object L_HTML_Object = _Template_Button("", null, HTML_Object_Icon.arrow_drop_down, HTML_Object_Icon_Pos.IsLeft);
+            HTML_Object L_HTML_Object = _Template_Button("Btn_DevicePriority_MoveDown", null, HTML_Object_Icon.arrow_drop_down, HTML_Object_Icon_Pos.IsLeft);
 
             //L_HTML_Object.Add_Attribute("class", "MF_MixerAppMenu_Settings");
             L_HTML_Object.Add_Attribute("onclick", "_App_Settings_PriorityItemMove('" + P_DB_DevicePriority.Id + "', '" + Web_InterCommMessage_Type.Settings_Priority_MoveDown.ToString() + "');");

@@ -35,6 +35,8 @@ namespace Services
                         break;
 
                     case Web_InterCommMessage_Type.ShowSettings:
+                    case Web_InterCommMessage_Type.Settings_Priority_MoveUp:
+                    case Web_InterCommMessage_Type.Settings_Priority_MoveDown:
                         _Modal_Settings(P_Web_InterCommMessage);
                         break;
 

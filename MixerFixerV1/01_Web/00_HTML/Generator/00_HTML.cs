@@ -16,6 +16,16 @@ namespace HtmlGenerator
             return G_HtmlString;
         }
 
+        public StringBuilder _BuildHtml(List<HTML_Object> P_HTML_Objects)
+        {
+            G_HtmlString.Clear();
+            for (int i = 0; i < P_HTML_Objects.Count; i++)
+            {
+                _GenerateHtml(P_HTML_Objects[i]);
+            }
+            return G_HtmlString;
+        }
+
         private void _GenerateHtml(HTML_Object P_HTML_Object)
         {
             // Build object

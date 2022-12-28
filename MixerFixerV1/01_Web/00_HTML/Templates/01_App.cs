@@ -13,6 +13,9 @@ namespace Web
     {
         Srv_AudioCore G_Srv_AudioCore;
         Srv_DB G_Srv_DB;
+
+        HTML G_HTML = new HTML();
+
         public HTML_Templates(Srv_AudioCore P_Srv_AudioCore, Srv_DB P_Srv_DB)
         {
             G_Srv_AudioCore = P_Srv_AudioCore;

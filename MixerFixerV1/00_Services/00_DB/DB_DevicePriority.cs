@@ -15,6 +15,7 @@ namespace Services
         public string DeviceName { get; set; } = "NA";
         public bool EnforceDefault { get; set; } = false;
         public bool IsDefault { get; set; } = false;
+        public bool IsMic { get; set; } = false;
         public int Priority { get; set; }
     }
 
@@ -31,6 +32,11 @@ namespace Services
             return this.G_DB_DevicePriority.FindOne(a => a.Name == P_Name);
         }
 
+        public DB_DevicePriority DevicePriority_GetOne_ById(Guid P_Id)
+        {
+            return this.G_DB_DevicePriority.FindOne(a => a.Id == P_Id);
+        }
+
         public DB_DevicePriority DevicePriority_AddNew(string P_Name)
         {
             DB_DevicePriority L_MWM_DB_DevicePriority = new DB_DevicePriority
@@ -43,7 +49,7 @@ namespace Services
             return L_MWM_DB_DevicePriority;
         }
 
-        public DB_DevicePriority DevicePriority_GetOneOrAdd(string P_Name, string P_DisplayText, string P_DeviceName, int P_Priority)
+        public DB_DevicePriority DevicePriority_GetOneOrAdd(string P_Name, string P_DisplayText, string P_DeviceName, bool P_IsMic, int P_Priority)
         {
             DB_DevicePriority L_MWM_DB_DevicePriority = DevicePriority_GetOne(P_Name);
             if (L_MWM_DB_DevicePriority == null)
@@ -61,17 +67,18 @@ namespace Services
             return L_MWM_DB_DevicePriority;
         }
 
-        public DB_DevicePriority DevicePriority_GetOneOrAdd(string P_Name, string P_DisplayText, string P_DeviceName)
+        public DB_DevicePriority DevicePriority_GetOneOrAdd(string P_Name, string P_DisplayText, string P_DeviceName, bool P_IsMic)
         {
             DB_DevicePriority L_MWM_DB_DevicePriority = DevicePriority_GetOne(P_Name);
             if (L_MWM_DB_DevicePriority == null)
             {
                 L_MWM_DB_DevicePriority = new DB_DevicePriority
                 {
-                    Priority = G_DB_DevicePriority.Count(),
+                    Priority = G_DB_DevicePriority.Find(d => d.IsMic == P_IsMic).Count(),
                     Name = P_Name,
                     DisplayText = P_DisplayText,
-                    DeviceName = P_DeviceName
+                    DeviceName = P_DeviceName,
+                    IsMic = P_IsMic
                 };
                 DevicePriority_Save(L_MWM_DB_DevicePriority);
             }
