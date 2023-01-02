@@ -1,13 +1,16 @@
 
 
-input[type=text]
+input[type=text],
+input[type=number]
 {
     border: 1px solid var(--main-border-color);
     background-color: transparent;
     color: var(--MF_Theme_Foreground);
+    width: 100%;
 }
 
-    input[type=text]:focus
+    input[type=text]:focus,
+    input[type=number]:focus
     {
         outline: none;
     }

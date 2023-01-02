@@ -19,6 +19,7 @@ function _Message_Receive(P_CommObject)
             case "ShowMessage":
                 alert('bla');
                 break;
+
         }
 
     }

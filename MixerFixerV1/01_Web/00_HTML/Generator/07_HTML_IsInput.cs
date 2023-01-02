@@ -35,6 +35,10 @@ namespace HtmlGenerator
                 case HTML_Object_Type.IsSlider:
                     G_HtmlString.Append("range");
                     break;
+
+                case HTML_Object_Type.IsNumber:
+                    G_HtmlString.Append("number");
+                    break;
             }
             G_HtmlString.Append("\"");
         }

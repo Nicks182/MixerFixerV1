@@ -11,6 +11,11 @@ function _Modal_SetState(P_ModalInfo)
         {
             _Modal_Hide(P_ModalInfo.Id);
         }
+
+        if (P_ModalInfo.Focus && P_ModalInfo.Focus != "")
+        {
+            $("#" + P_ModalInfo.Focus).focus();
+        }
     }
 }
 

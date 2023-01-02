@@ -7,9 +7,9 @@
 
 .MF_Settings_Footer
 {
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
+    display: grid;
+    grid-template-columns: auto min-content;
+    align-items: end;
     padding: 5px 5px 5px 5px;
 }
 

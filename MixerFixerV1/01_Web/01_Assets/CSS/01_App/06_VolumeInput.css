@@ -1,0 +1,23 @@
+
+
+.MF_VolumeInput
+{
+}
+
+
+.MF_VolumeInput_Panel
+{
+    padding: 5px;
+}
+
+.MF_VolumeInput_Input
+{
+}
+
+.MF_VolumeInput_Footer
+{
+    display: grid;
+    grid-template-columns: auto min-content;
+    align-items: end;
+    padding: 5px 5px 5px 5px;
+}

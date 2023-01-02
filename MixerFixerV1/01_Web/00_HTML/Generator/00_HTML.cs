@@ -68,6 +68,7 @@ namespace HtmlGenerator
 
                 case HTML_Object_Type.IsText:
                 case HTML_Object_Type.IsSlider:
+                case HTML_Object_Type.IsNumber:
                     _GetTag_IsInput(P_HTML_Object, P_IsClosing);
                     break;
 

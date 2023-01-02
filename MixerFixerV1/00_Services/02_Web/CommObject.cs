@@ -27,10 +27,9 @@ namespace Services
 
     public class Web_InterCommMessage_Modal
     {
-        
         public string Id { get; set; }
+        public string Focus { get; set; }
         public int State { get; set; }
-
     }
 
     public class Web_InterCommMessage_Data
@@ -73,6 +72,9 @@ namespace Services
         ShowSettings = 11,
         Settings_Priority_MoveUp = 12,
         Settings_Priority_MoveDown = 13,
+        Settings_UseDefault_Change = 14,
+        Settings_DefaultVolume_Show = 15,
+        Settings_DefaultVolume_Change = 16,
 
     }
 }

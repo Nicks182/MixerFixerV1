@@ -54,6 +54,7 @@ namespace HtmlGenerator
         IsDiv,
         IsImg,
         IsText,
+        IsNumber,
         IsTextarea,
         IsSlider,
         IsCheck,
