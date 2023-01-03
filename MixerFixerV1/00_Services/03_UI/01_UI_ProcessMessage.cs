@@ -37,6 +37,7 @@ namespace Services
                     case Web_InterCommMessage_Type.ShowSettings:
                     case Web_InterCommMessage_Type.Settings_Priority_MoveUp:
                     case Web_InterCommMessage_Type.Settings_Priority_MoveDown:
+                    case Web_InterCommMessage_Type.Settings_Priority_Enforce:
                     case Web_InterCommMessage_Type.Settings_UseDefault_Change:
                     case Web_InterCommMessage_Type.Settings_DefaultVolume_Show:
                     case Web_InterCommMessage_Type.Settings_DefaultVolume_Change:

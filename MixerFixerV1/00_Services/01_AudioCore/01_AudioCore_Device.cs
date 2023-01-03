@@ -13,11 +13,11 @@ namespace Services
         private void _LoadDevice()
         {
             // Only load device if none is set.
-            if (G_Device == null)
-            {
+            //if (G_Device == null)
+            //{
                 MMDevice L_DefaultDevice = G_MMDeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
                 _SetDevice(L_DefaultDevice);
-            }
+            //}
         }
 
         private void _SetDevice(MMDevice P_MMDevice)
@@ -26,13 +26,20 @@ namespace Services
             G_Device.Device = new Arc_AudioObject(G_Srv_DB, P_MMDevice);
             G_Device.Device.OnNewSession += L_Arc_AudioObject_OnNewSession;
             G_Device.Device.OnVolumeChange += L_Arc_AudioObject_OnVolumeChange;
+            G_Device.Device.DeviceChanged += Device_DeviceChanged;
 
-            
+
             //G_Device = new Arc_AudioObject(G_Srv_DB, P_MMDevice);
             //G_Device.OnNewSession += L_Arc_AudioObject_OnNewSession;
             //G_Device.OnVolumeChange += L_Arc_AudioObject_OnVolumeChange;
 
             _LoadSessions();
+        }
+
+        private void Device_DeviceChanged(object? sender, EventArgs e)
+        {
+            //SetDefault_Devices();
+            DoUpdate?.Invoke();
         }
 
         private void _LoadSessions()

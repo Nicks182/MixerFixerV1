@@ -62,14 +62,15 @@ namespace Services
                         {
                             //G_Name = G_AudioSessionControl.DisplayName == "" ? process.ProcessName : process.MainWindowTitle;
                             G_Name = G_AudioSessionControl.DisplayName;
-                            if(string.IsNullOrEmpty(G_Name) == true)
-                            {
-                                G_Name = process.MainWindowTitle;
-                            }
 
                             if (string.IsNullOrEmpty(G_Name) == true)
                             {
                                 G_Name = process.ProcessName;
+                            }
+
+                            if (string.IsNullOrEmpty(G_Name) == true)
+                            {
+                                G_Name = process.MainWindowTitle;
                             }
                         }
 

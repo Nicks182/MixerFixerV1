@@ -24,6 +24,10 @@ namespace Services
                     _Modal_Settings_DevicePriority_Move(P_Web_InterCommMessage);
                     break;
 
+                case Web_InterCommMessage_Type.Settings_Priority_Enforce:
+                    _Modal_Settings_DevicePriority_Enforce(P_Web_InterCommMessage);
+                    break;
+
 
                 case Web_InterCommMessage_Type.Settings_UseDefault_Change:
                     _Modal_Settings_UseDefaultVolume_Change(P_Web_InterCommMessage);
@@ -207,55 +211,33 @@ namespace Services
             }
         }
 
-        //private void _Modal_Settings_DevicePriority_MoveDown(Web_InterCommMessage P_Web_InterCommMessage)
-        //{
-        //    Web_InterCommMessage_Data L_Data = P_Web_InterCommMessage.Data.Where(d => d.Id == "DeviceId").FirstOrDefault();
-        //    if(L_Data != null)
-        //    {
-        //        Guid L_DeviceId = Guid.Parse(L_Data.Value);
-        //        DB_DevicePriority L_Device = G_Srv_DB.DevicePriority_GetOne_ById(L_DeviceId);
+        private void _Modal_Settings_DevicePriority_Enforce(Web_InterCommMessage P_Web_InterCommMessage)
+        {
+            Web_InterCommMessage_Data L_Data = P_Web_InterCommMessage.Data.Where(d => d.Id == "DeviceId").FirstOrDefault();
+            if (L_Data != null)
+            {
+                Guid L_DeviceId = Guid.Parse(L_Data.Value);
+                DB_DevicePriority L_Device = G_Srv_DB.DevicePriority_GetOne_ById(L_DeviceId);
+                if (L_Device != null)
+                {
+                    L_Device.EnforceDefault = !L_Device.EnforceDefault;
+                    G_Srv_DB.DevicePriority_Save(L_Device);
 
-        //        List<DB_DevicePriority> L_Devices = G_Srv_DB.DevicePriority_GetAll().Find(d => d.IsMic == L_Device.IsMic).ToList();
+                    P_Web_InterCommMessage.Data = new List<Web_InterCommMessage_Data>
+                    {
+                        new Web_InterCommMessage_Data
+                        {
+                            Id = G_HTML_Templates._Template_SettingsModal_Body_DevicePriority_Item_EnforceDefault_Id(L_Device),
+                            Value = Convert.ToInt32(L_Device.EnforceDefault).ToString(),
+                            DataType = Web_InterCommMessage_DataType.Toggle
+                        }
+                    };
 
-        //        L_Device = L_Devices.Where(d => d.Id == L_DeviceId).FirstOrDefault();
-        //        if(L_Device != null)
-        //        {
-        //            int L_CurrentIndex = L_Devices.IndexOf(L_Device);
-        //            int L_NewIndex = L_CurrentIndex + 1;
+                    P_Web_InterCommMessage.CommType = Web_InterCommMessage_Type.DataUpdate;
+                }
+            }
+        }
 
-        //            if(L_Devices.Count > L_NewIndex)
-        //            {
-        //                L_Devices.Remove(L_Device);
-        //                L_Devices.Insert(L_NewIndex, L_Device);
-        //            }
-        //        }
-        //    }
-        //}
-
-        //private void _Modal_Settings_DevicePriority_MoveUp(Web_InterCommMessage P_Web_InterCommMessage)
-        //{
-        //    Web_InterCommMessage_Data L_Data = P_Web_InterCommMessage.Data.Where(d => d.Id == "DeviceId").FirstOrDefault();
-        //    if (L_Data != null)
-        //    {
-        //        Guid L_DeviceId = Guid.Parse(L_Data.Value);
-        //        DB_DevicePriority L_Device = G_Srv_DB.DevicePriority_GetOne_ById(L_DeviceId);
-
-        //        List<DB_DevicePriority> L_Devices = G_Srv_DB.DevicePriority_GetAll().Find(d => d.IsMic == L_Device.IsMic).ToList();
-
-        //        //DB_DevicePriority L_Device = L_Devices.Where(d => d.Id == L_DeviceId).FirstOrDefault();
-        //        if (L_Device != null)
-        //        {
-        //            int L_CurrentIndex = L_Devices.IndexOf(L_Device);
-        //            int L_NewIndex = L_CurrentIndex - 1;
-
-        //            if (L_NewIndex > 0)
-        //            {
-        //                L_Devices.Remove(L_Device);
-        //                L_Devices.Insert(L_NewIndex, L_Device);
-        //            }
-        //        }
-        //    }
-        //}
 
     }
 }

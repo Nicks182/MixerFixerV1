@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.SignalR;
@@ -37,8 +38,9 @@ namespace Services
 
         private void G_Srv_AudioCore_DoUpdate()
         {
-            Web_InterCommMessage L_CommMessage = new Web_InterCommMessage { CommType = Web_InterCommMessage_Type.SwitchPanel };
-            _Reload(L_CommMessage);
+            Thread.Sleep(1000);
+            Web_InterCommMessage L_CommMessage = new Web_InterCommMessage { CommType = Web_InterCommMessage_Type.Init };
+            _Init(L_CommMessage);
 
             G_CommandHub.Clients.All.SendAsync("ReceiveMessage", L_CommMessage);
         }

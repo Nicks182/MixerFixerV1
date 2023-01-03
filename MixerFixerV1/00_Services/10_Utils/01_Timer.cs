@@ -15,6 +15,7 @@ namespace Services
         public bool IsTimerStarted { get; set; }
         public void PrepareTimer(Action action)
         {
+            StopTimer();
             if (IsTimerStarted == false)
             {
                 G_Action = action;
@@ -28,6 +29,14 @@ namespace Services
             G_Action();
         }
 
-        
+        public void StopTimer()
+        {
+            if(IsTimerStarted == true)
+            {
+                G_Timer.Dispose();
+                G_Action = null;
+                IsTimerStarted = false;
+            }
+        }
     }
 }

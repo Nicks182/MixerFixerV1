@@ -3,6 +3,11 @@ function _Message_Receive(P_CommObject)
 {
     try
     {
+        if (P_CommObject.CommType != "DataUpdate")
+        {
+            console.log(P_CommObject);
+        }
+
         _SetAllHTMLs(P_CommObject.HTMLs);
         _Modal_SetState(P_CommObject.ModalInfo);
 

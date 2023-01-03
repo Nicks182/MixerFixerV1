@@ -70,11 +70,12 @@ namespace Services
         ShowMessage = 9,
         SwitchPanel = 10,
         ShowSettings = 11,
-        Settings_Priority_MoveUp = 12,
-        Settings_Priority_MoveDown = 13,
-        Settings_UseDefault_Change = 14,
-        Settings_DefaultVolume_Show = 15,
-        Settings_DefaultVolume_Change = 16,
+        Settings_Priority_Enforce = 12,
+        Settings_Priority_MoveUp = 13,
+        Settings_Priority_MoveDown = 14,
+        Settings_UseDefault_Change = 15,
+        Settings_DefaultVolume_Show = 16,
+        Settings_DefaultVolume_Change = 17,
 
     }
 }

@@ -14,38 +14,44 @@ namespace Services
         
         public void _Init(Web_InterCommMessage P_Web_InterCommMessage)
         {
+            G_TimerManager.StopTimer();
+            G_TimerManager = new Srv_TimerManager();
             G_Srv_AudioCore.Init();
 
+            //G_HTML_Templates = new HTML_Templates(G_Srv_AudioCore, G_Srv_DB);
             P_Web_InterCommMessage.HTMLs = new List<Web_InterCommMessage_HTML>
             {
                 new Web_InterCommMessage_HTML
                 {
                     ContainerId = "#Body",
-                    HTML = G_HTML_Templates._Template_App_HTML().ToString()
+                    HTML = G_HTML_Templates._Template_App_HTML().ToString(),
+                    IsAppend = false
                 }
             };
 
             _StartDataPush();
         }
 
-        public void _Reload(Web_InterCommMessage P_Web_InterCommMessage)
-        {
-            G_Srv_AudioCore.Reload();
+        //public void _Reload(Web_InterCommMessage P_Web_InterCommMessage)
+        //{
+        //    G_Srv_AudioCore.Init();
 
-            P_Web_InterCommMessage.HTMLs = new List<Web_InterCommMessage_HTML>
-            {
-                new Web_InterCommMessage_HTML
-                {
-                    ContainerId = "#PanelHolder",
-                    HTML = G_HTML_Templates._Template_GetVisiblePanel_HTML().ToString()
-                }
-            };
+        //    P_Web_InterCommMessage.HTMLs = new List<Web_InterCommMessage_HTML>
+        //    {
+        //        new Web_InterCommMessage_HTML
+        //        {
+        //            ContainerId = "#PanelHolder",
+        //            HTML = G_HTML_Templates._Template_GetVisiblePanel_HTML().ToString()
+        //        }
+        //    };
 
-            _StartDataPush();
-        }
+        //    _StartDataPush();
+        //}
 
         private void _StartDataPush()
         {
+            G_TimerManager.StopTimer();
+            G_TimerManager = new Srv_TimerManager();
             G_TimerManager.PrepareTimer(() => G_CommandHub.Clients.All.SendAsync("ReceiveMessage", _GetData()));
         }
 

@@ -28,7 +28,7 @@ namespace Services
             {
                 _GetUpdate_Data(P_CommObject, L_Arc_Device.Device);
 
-                foreach (var L_AudioObj in L_Arc_Device.Sessions)
+                foreach (var L_AudioObj in L_Arc_Device.Sessions.ToList())
                 {
                     _GetUpdate_Data(P_CommObject, L_AudioObj);
                 }
@@ -40,20 +40,27 @@ namespace Services
         {
             if (P_Arc_AudioObject != null)
             {
-                Arc_AudioObject_PeakVolum L_PeakVolum = P_Arc_AudioObject._Get_PeakVolume(); ;
-                P_CommObject.Data.Add(new Web_InterCommMessage_Data
+                try
                 {
-                    Id = G_HTML_Templates._Template_VolumeControl_VolumeMeter_Left_Id(P_Arc_AudioObject),
-                    Value = L_PeakVolum.Left.ToString() + "%",
-                    DataType = Web_InterCommMessage_DataType.Progress
-                });
+                    Arc_AudioObject_PeakVolum L_PeakVolum = P_Arc_AudioObject._Get_PeakVolume(); ;
+                    P_CommObject.Data.Add(new Web_InterCommMessage_Data
+                    {
+                        Id = G_HTML_Templates._Template_VolumeControl_VolumeMeter_Left_Id(P_Arc_AudioObject),
+                        Value = L_PeakVolum.Left.ToString() + "%",
+                        DataType = Web_InterCommMessage_DataType.Progress
+                    });
 
-                P_CommObject.Data.Add(new Web_InterCommMessage_Data
+                    P_CommObject.Data.Add(new Web_InterCommMessage_Data
+                    {
+                        Id = G_HTML_Templates._Template_VolumeControl_VolumeMeter_Right_Id(P_Arc_AudioObject),
+                        Value = L_PeakVolum.Right.ToString() + "%",
+                        DataType = Web_InterCommMessage_DataType.Progress
+                    });
+                }
+                catch (Exception ex)
                 {
-                    Id = G_HTML_Templates._Template_VolumeControl_VolumeMeter_Right_Id(P_Arc_AudioObject),
-                    Value = L_PeakVolum.Right.ToString() + "%",
-                    DataType = Web_InterCommMessage_DataType.Progress
-                });
+
+                }
             }
 
         }

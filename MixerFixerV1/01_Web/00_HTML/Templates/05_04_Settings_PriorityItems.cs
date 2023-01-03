@@ -110,7 +110,7 @@ namespace Web
 
         public string _Template_SettingsModal_Body_DevicePriority_Item_EnforceDefault_Event(DB_DevicePriority P_DB_DevicePriority)
         {
-            return "_App_MuteChange(event, '" + P_DB_DevicePriority.Id.ToString() + "');";
+            return "_App_Settings_EnforceItemPriority('" + P_DB_DevicePriority.Id.ToString() + "', '" + Web_InterCommMessage_Type.Settings_Priority_Enforce + "');";
         }
 
         private HTML_Object _Template_SettingsModal_Body_DevicePriority_Item_Name(DB_DevicePriority P_DB_DevicePriority)
