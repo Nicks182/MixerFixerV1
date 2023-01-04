@@ -13,7 +13,7 @@ namespace Services
     {
         MMDeviceEnumerator G_MMDeviceEnumerator = new MMDeviceEnumerator();
         Srv_DB G_Srv_DB;
-
+        //NotificationClientImplementation G_NotificationClientImplementation;
         //Arc_AudioObject G_Device { get; set; }
         //List<Arc_AudioObject> G_Sessions = new List<Arc_AudioObject>();
 
@@ -31,27 +31,32 @@ namespace Services
         public delegate void OnVolumeChangedDelegate(Arc_AudioObject P_Arc_AudioObject);
         public event OnVolumeChangedDelegate OnVolumeChanged;
 
+        public delegate void OnDefaultDeviceSetDelegate(string P_DeviceId);
+        public event OnDefaultDeviceSetDelegate OnDefaultDeviceSet;
+
         public Srv_AudioCore(Srv_DB P_Srv_DB)
         {
             G_Srv_DB = P_Srv_DB;
+
+            //G_NotificationClientImplementation = new NotificationClientImplementation();
+            //G_NotificationClientImplementation.OnDefaultDeviceChange += G_NotificationClientImplementation_OnDefaultDeviceChange;
+            //G_NotificationClientImplementation.OnDeviceStateChange += G_NotificationClientImplementation_OnDeviceStateChange;
+            //G_MMDeviceEnumerator.RegisterEndpointNotificationCallback(G_NotificationClientImplementation);
         }
 
         public void Init()
         {
             G_Device = null;
-            SetDefault_Devices();
+            //SetDefault_Devices();
             LoadPriorityList();
             _LoadDevice();
             
         }
 
-        //public void Reload()
-        //{
-        //    SetDefault_Devices();
-        //    _LoadDevice();
-        //    //_LoadSessions();
-
-        //}
+        public void Reload()
+        {
+            _LoadSessions();
+        }
 
         public void LoadPriorityList()
         {
@@ -98,4 +103,6 @@ namespace Services
         //}
 
     }
+
+    
 }

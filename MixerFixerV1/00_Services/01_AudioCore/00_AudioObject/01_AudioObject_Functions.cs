@@ -132,6 +132,19 @@ namespace Services
             }
         }
 
+        public string _Get_ID()
+        {
+            switch (G_ObjectType)
+            {
+                case Arc_AudioObject_Type.IsDevice:
+                case Arc_AudioObject_Type.IsMicrophone:
+                    return G_MMDevice.ID;
+
+            }
+
+            return string.Empty;
+        }
+
         public SessionCollection _GetSessions()
         {
             if (G_ObjectType == Arc_AudioObject_Type.IsDevice)

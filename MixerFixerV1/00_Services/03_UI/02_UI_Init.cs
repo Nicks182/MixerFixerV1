@@ -18,6 +18,8 @@ namespace Services
             G_TimerManager = new Srv_TimerManager();
             G_Srv_AudioCore.Init();
 
+            G_Srv_Logger._LogMessage("Default Device: " + G_Srv_AudioCore.Device.Device.Name);
+
             //G_HTML_Templates = new HTML_Templates(G_Srv_AudioCore, G_Srv_DB);
             P_Web_InterCommMessage.HTMLs = new List<Web_InterCommMessage_HTML>
             {
@@ -30,29 +32,31 @@ namespace Services
             };
 
             _StartDataPush();
+
+            G_TimerDeviceManager.PrepareTimer(() => G_Srv_AudioCore.SetDefault_Devices(), 500, 500);
         }
 
-        //public void _Reload(Web_InterCommMessage P_Web_InterCommMessage)
-        //{
-        //    G_Srv_AudioCore.Init();
+        public void _Reload(Web_InterCommMessage P_Web_InterCommMessage)
+        {
+            G_Srv_AudioCore.Reload();
 
-        //    P_Web_InterCommMessage.HTMLs = new List<Web_InterCommMessage_HTML>
-        //    {
-        //        new Web_InterCommMessage_HTML
-        //        {
-        //            ContainerId = "#PanelHolder",
-        //            HTML = G_HTML_Templates._Template_GetVisiblePanel_HTML().ToString()
-        //        }
-        //    };
+            P_Web_InterCommMessage.HTMLs = new List<Web_InterCommMessage_HTML>
+            {
+                new Web_InterCommMessage_HTML
+                {
+                    ContainerId = "#PanelHolder",
+                    HTML = G_HTML_Templates._Template_GetVisiblePanel_HTML().ToString()
+                }
+            };
 
-        //    _StartDataPush();
-        //}
+            //_StartDataPush();
+        }
 
         private void _StartDataPush()
         {
             G_TimerManager.StopTimer();
             G_TimerManager = new Srv_TimerManager();
-            G_TimerManager.PrepareTimer(() => G_CommandHub.Clients.All.SendAsync("ReceiveMessage", _GetData()));
+            G_TimerManager.PrepareTimer(() => G_CommandHub.Clients.All.SendAsync("ReceiveMessage", _GetData()), 250, 30);
         }
 
 

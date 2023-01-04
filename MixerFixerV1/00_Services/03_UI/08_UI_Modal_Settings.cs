@@ -54,7 +54,7 @@ namespace Services
             P_Web_InterCommMessage.HTMLs.Clear();
             P_Web_InterCommMessage.HTMLs.Add(new Web_InterCommMessage_HTML
             {
-                ContainerId = "#Body",
+                ContainerId = "#ModalHolder",
                 HTML = G_HTML_Templates._Template_SettingsModal_HTML().ToString(),
                 IsAppend = true
             });
@@ -72,7 +72,7 @@ namespace Services
             P_Web_InterCommMessage.HTMLs.Clear();
             P_Web_InterCommMessage.HTMLs.Add(new Web_InterCommMessage_HTML
             {
-                ContainerId = "#Body",
+                ContainerId = "#ModalHolder",
                 HTML = G_HTML_Templates._Template_Modal_VolumeInput_HTML(Web_InterCommMessage_Type.Settings_DefaultVolume_Change, G_Srv_DB.G_DefaultVolume).ToString(),
                 IsAppend = true
             });

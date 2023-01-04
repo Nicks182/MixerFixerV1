@@ -25,11 +25,23 @@ function _Message_Receive(P_CommObject)
                 alert('bla');
                 break;
 
+            case "_Log":
+                _LogToConsole(P_CommObject);
+                break;
+
         }
 
     }
     catch (ex)
     {
         _Log(ex);
+    }
+}
+
+function _LogToConsole(P_CommObject)
+{
+    for (var i = 0; i < P_CommObject.Data.length; i++)
+    {
+        console.log(P_CommObject.Data[i].Id + " - " + P_CommObject.Data[i].Value)
     }
 }

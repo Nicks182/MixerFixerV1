@@ -26,15 +26,28 @@ namespace Services
             if (L_DB_Devices.Count > 0)
             {
                 MMDevice L_DefaultDevice = G_MMDeviceEnumerator.GetDefaultAudioEndpoint(_GetDataFlowType(P_IsMic), _GetRoleType(P_IsMic));
-                MMDevice L_MMDevice = null;
-
-                for(int i = 0; i < L_DB_Devices.Count; i++)
+                if (L_DefaultDevice != null)
                 {
-                    L_MMDevice = _Get_Device(L_DB_Devices[i].Name, _GetDataFlowType(P_IsMic));
-                    if(L_MMDevice != null && L_DefaultDevice != null && L_DefaultDevice.ID != L_MMDevice.ID)
+                    MMDevice L_MMDevice = null;
+
+                    for (int i = 0; i < L_DB_Devices.Count; i++)
                     {
-                        SetDefaultEndpoint(L_MMDevice);
-                        break;
+                        L_MMDevice = _Get_Device(L_DB_Devices[i].Name, _GetDataFlowType(P_IsMic));
+                        if (L_MMDevice != null && L_DefaultDevice.ID.Equals(L_MMDevice.ID) == true)
+                        {
+                            break;
+                        }
+                        if (L_MMDevice != null && L_DefaultDevice.ID.Equals(L_MMDevice.ID) == false)
+                        {
+                            SetDefaultEndpoint(L_MMDevice);
+                            OnDefaultDeviceSet?.Invoke(L_MMDevice.ID);
+                            break;
+                        }
+                    }
+
+                    if (P_IsMic == false && G_Device != null && G_Device.Device != null && G_Device.Device._Get_ID().Equals(L_DefaultDevice.ID) == false)
+                    {
+                        OnDefaultDeviceSet?.Invoke(L_MMDevice.ID);
                     }
                 }
             }

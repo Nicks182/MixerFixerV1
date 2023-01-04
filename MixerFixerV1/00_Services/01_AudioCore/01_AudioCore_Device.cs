@@ -39,7 +39,7 @@ namespace Services
         private void Device_DeviceChanged(object? sender, EventArgs e)
         {
             //SetDefault_Devices();
-            DoUpdate?.Invoke();
+            //DoUpdate?.Invoke();
         }
 
         private void _LoadSessions()
