@@ -13,9 +13,9 @@ using System.Windows.Media.Imaging;
 
 namespace Services
 {
-    internal class Srv_Utils
+    public class Srv_Utils
     {
-        public static string _ImageToBase64(Bitmap P_Image)
+        public string _ImageToBase64(Bitmap P_Image)
         {
             if (P_Image == null)
             {
@@ -30,19 +30,21 @@ namespace Services
             }
         }
 
-        public static float _Volume_FromDouble(double P_Value)
+        public float _Volume_FromInt(int P_Value)
         {
-            float L_New = (float)(P_Value / 100);
+            //float L_New = (float)(P_Value / 100);
+            //float L_New = ((float)(P_Value / 100));
 
-            return L_New;
+            //return L_New;
+            return (float)Math.Round((P_Value / 100.0f),2);
         }
 
-        public static float _Volume_FromString(string P_Value)
+        public float _Volume_FromString(string P_Value)
         {
-            return _Volume_FromDouble(Convert.ToDouble(P_Value));
+            return _Volume_FromInt(Convert.ToInt32(P_Value));
         }
 
-        public static string _GetIp()
+        public string _GetIp()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (var ip in host.AddressList)

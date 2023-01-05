@@ -15,7 +15,7 @@ namespace Services
         public bool IsActive { get; set; } = false;
         public bool IsMute { get; set; } = false;
         public bool IsDevice { get; set; } = false;
-        public double Volume { get; set; }
+        public int Volume { get; set; }
     }
 
     public partial class Srv_DB

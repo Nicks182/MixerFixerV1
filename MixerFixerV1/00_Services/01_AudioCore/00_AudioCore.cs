@@ -13,7 +13,7 @@ namespace Services
     {
         MMDeviceEnumerator G_MMDeviceEnumerator = new MMDeviceEnumerator();
         Srv_DB G_Srv_DB;
-        //NotificationClientImplementation G_NotificationClientImplementation;
+        NotificationClientImplementation G_NotificationClientImplementation;
         //Arc_AudioObject G_Device { get; set; }
         //List<Arc_AudioObject> G_Sessions = new List<Arc_AudioObject>();
 
@@ -30,6 +30,9 @@ namespace Services
 
         public delegate void OnVolumeChangedDelegate(Arc_AudioObject P_Arc_AudioObject);
         public event OnVolumeChangedDelegate OnVolumeChanged;
+
+        public delegate void OnDeviceStateChangeDelegate(string P_DeviceId, DeviceState P_NewState);
+        public event OnDeviceStateChangeDelegate OnDeviceStateChange;
 
         public delegate void OnDefaultDeviceSetDelegate(string P_DeviceId);
         public event OnDefaultDeviceSetDelegate OnDefaultDeviceSet;

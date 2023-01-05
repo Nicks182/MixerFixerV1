@@ -47,11 +47,19 @@ namespace Services
         public void OnVolumeChanged(float volume, bool isMuted)
         {
             if (G_DB_AudioObject.IsManaged == true
-                && (_Get_Volume() != G_DB_AudioObject.Volume
-                || _Get_Mute() != G_DB_AudioObject.IsMute))
+                //&& (_Get_Volume() != G_DB_AudioObject.Volume
+                //|| _Get_Mute() != G_DB_AudioObject.IsMute)
+                )
             {
-                _Set_Volume_FromDB();
-                _Set_Mute_FromDB();
+                if (_Get_Volume() != G_DB_AudioObject.Volume)
+                {
+                    _Set_Volume_FromDB();
+                }
+
+                if (_Get_Mute() != G_DB_AudioObject.IsMute)
+                {
+                    _Set_Mute_FromDB();
+                }
             }
             else
             {

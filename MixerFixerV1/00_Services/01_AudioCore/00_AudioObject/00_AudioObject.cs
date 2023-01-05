@@ -15,6 +15,7 @@ namespace Services
     {
         Arc_AudioObject_Type G_ObjectType { get; set; }
         Srv_DB G_Srv_DB = null;
+        Srv_Utils G_Srv_Utils = new Srv_Utils();
         MMDevice G_MMDevice = null;
         AudioSessionControl G_AudioSessionControl = null;
 

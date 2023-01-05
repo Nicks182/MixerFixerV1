@@ -273,7 +273,8 @@ namespace Services
                     break;
             }
 
-            _Update_DB_Object();
+            //_Update_DB_Object();
+            _Update_DB_Mute();
         }
 
         public bool _Get_Managed()
@@ -284,11 +285,11 @@ namespace Services
         public bool _Set_Managed()
         {
             G_DB_AudioObject.IsManaged = !G_DB_AudioObject.IsManaged;
-            _Update_DB_Object();
+            G_Srv_DB.AudioObject_Save(G_DB_AudioObject);
             return _Get_Managed();
         }
 
-        public double _Get_Volume()
+        public int _Get_Volume()
         {
             switch (G_ObjectType)
             {
@@ -297,13 +298,13 @@ namespace Services
                     {
                         if (G_MMDevice.State == DeviceState.Active)
                         {
-                            return Math.Floor(G_MMDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
+                            return (int)Math.Floor(G_MMDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
                         }
                         break;
                     }
 
                 case Arc_AudioObject_Type.IsSession:
-                    return Math.Floor(G_AudioSessionControl.SimpleAudioVolume.Volume * 100);
+                    return (int)Math.Floor(G_AudioSessionControl.SimpleAudioVolume.Volume * 100);
                     
             }
 
@@ -312,22 +313,33 @@ namespace Services
 
         public void _Set_Volume(string P_Value)
         {
-            _Set_Volume(Convert.ToDouble(P_Value));
-            _Update_DB_Object();
+            _Set_Volume(Convert.ToInt32(P_Value));
+            _Update_DB_Volume(Convert.ToInt32(P_Value));
         }
 
-        private void _Set_Volume(double P_Value)
+        private void _Set_Volume(int P_Value)
         {
             switch (G_ObjectType)
             {
                 case Arc_AudioObject_Type.IsDevice:
                 case Arc_AudioObject_Type.IsMicrophone:
-                    G_MMDevice.AudioEndpointVolume.MasterVolumeLevelScalar = Srv_Utils._Volume_FromDouble(P_Value);
+                    //if ((int)Math.Floor(G_MMDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100) != P_Value)
+                    //{
+                        G_MMDevice.AudioEndpointVolume.MasterVolumeLevelScalar = G_Srv_Utils._Volume_FromInt(P_Value);
+                    //}
                     break;
 
 
                 case Arc_AudioObject_Type.IsSession:
-                    G_AudioSessionControl.SimpleAudioVolume.Volume = Srv_Utils._Volume_FromDouble(P_Value);
+                    //if ((int)Math.Floor(G_AudioSessionControl.SimpleAudioVolume.Volume * 100) != P_Value)
+                    //{
+                        G_AudioSessionControl.SimpleAudioVolume.Volume = G_Srv_Utils._Volume_FromInt(P_Value);
+                    //}
+                    //float volume;
+                    //volume = 10 / 100.0f;
+                    //var newVolume = volume / 1;
+                    //G_AudioSessionControl.SimpleAudioVolume.Volume = newVolume;
+
                     break;
 
             }
@@ -339,12 +351,41 @@ namespace Services
         }
 
 
+        private void _Update_DB_Volume(int P_Volume)
+        {
+            G_DB_AudioObject.Volume = _Get_Volume();
+
+            G_Srv_DB.AudioObject_Save(G_DB_AudioObject);
+        }
+
+        private void _Update_DB_Mute()
+        {
+            G_DB_AudioObject.IsMute = _Get_Mute();
+
+            G_Srv_DB.AudioObject_Save(G_DB_AudioObject);
+        }
+
         private void _Update_DB_Object()
         {
             G_DB_AudioObject.Volume = _Get_Volume();
             G_DB_AudioObject.IsMute = _Get_Mute();
 
             G_Srv_DB.AudioObject_Save(G_DB_AudioObject);
+        }
+
+        public void Dispose()
+        {
+            switch (G_ObjectType)
+            {
+                case Arc_AudioObject_Type.IsDevice:
+                case Arc_AudioObject_Type.IsMicrophone:
+                    G_MMDevice.Dispose();
+                    break;
+
+                case Arc_AudioObject_Type.IsSession:
+                    G_AudioSessionControl.Dispose();
+                    break;
+            }
         }
     }
 

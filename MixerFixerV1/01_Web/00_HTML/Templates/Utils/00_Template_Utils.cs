@@ -13,9 +13,10 @@ namespace Web
 {
     public partial class HTML_Templates
     {
+        Srv_Utils G_Srv_Utils = new Srv_Utils();
         public string _Img_GetSrc(Bitmap P_Image)
         {
-            return "data:image/png;base64, " + Srv_Utils._ImageToBase64(P_Image);
+            return "data:image/png;base64, " + G_Srv_Utils._ImageToBase64(P_Image);
         }
 
         
