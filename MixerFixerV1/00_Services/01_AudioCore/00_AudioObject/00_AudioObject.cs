@@ -19,7 +19,7 @@ namespace Services
         MMDevice G_MMDevice = null;
         AudioSessionControl G_AudioSessionControl = null;
 
-        DB_AudioObject G_DB_AudioObject = null;
+        //DB_AudioObject G_DB_AudioObject = null;
 
         private Guid G_UniqueId = Guid.NewGuid(); // used only during running of app. Only temporarily
         public Guid UniqueId{get { return G_UniqueId; }}
@@ -43,7 +43,7 @@ namespace Services
             G_Srv_DB = P_Srv_DB;
             G_MMDevice = P_MMDevice;
 
-            _Init();
+            //_Init();
         }
 
         public Arc_AudioObject(Srv_DB P_Srv_DB, AudioSessionControl P_AudioSessionControl)
@@ -52,7 +52,7 @@ namespace Services
             G_Srv_DB = P_Srv_DB;
             G_AudioSessionControl = P_AudioSessionControl;
 
-            _Init();
+            //_Init();
         }
 
     }

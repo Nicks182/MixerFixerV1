@@ -16,6 +16,7 @@ namespace Services
         Srv_Logger G_Srv_Logger;
         Srv_TimerManager G_TimerManager;
         Srv_TimerManager G_TimerDeviceManager;
+        Srv_TimerManager G_TimerVolumeManager;
         HTML_Templates G_HTML_Templates;
         Srv_AudioCore G_Srv_AudioCore;
         Srv_DB G_Srv_DB = new Srv_DB();
@@ -31,11 +32,12 @@ namespace Services
             G_Srv_Logger = P_Srv_Logger;
             G_TimerManager = new Srv_TimerManager();
             G_TimerDeviceManager = new Srv_TimerManager();
+            G_TimerVolumeManager = new Srv_TimerManager();
             G_Srv_AudioCore = new Srv_AudioCore(G_Srv_DB);
             G_HTML_Templates = new HTML_Templates(G_Srv_AudioCore, G_Srv_DB);
 
             G_Srv_AudioCore.DoUpdate += G_Srv_AudioCore_DoUpdate;
-            G_Srv_AudioCore.OnVolumeChanged += G_Srv_AudioCore_OnVolumeChanged;
+            G_Srv_AudioCore.OnVolumeHasChanged += G_Srv_AudioCore_OnVolumeChanged;
             G_Srv_AudioCore.OnDefaultDeviceSet += G_Srv_AudioCore_OnDefaultDeviceSet;
             G_Srv_AudioCore.OnDeviceStateChange += G_Srv_AudioCore_OnDeviceStateChange;
         }

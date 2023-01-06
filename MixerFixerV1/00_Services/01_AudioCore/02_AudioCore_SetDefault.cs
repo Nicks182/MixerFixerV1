@@ -17,7 +17,59 @@ namespace Services
             SetDefaultDevice(false);
             // Set Capture, example Microphone
             SetDefaultDevice(true);
+
+            //CheckForVolumeChanges();
         }
+
+        //public void CheckForVolumeChanges()
+        //{
+        //    try
+        //    {
+        //        if (G_Device != null && G_Device.Device != null)
+        //        {
+        //            CheckForVolumeChanges_UpdateObject(G_Device.Device);
+        //        }
+
+        //        if (G_Device != null && G_Device.Sessions != null)
+        //        {
+        //            for (int i = 0; i < G_Device.Sessions.Count; i++)
+        //            {
+        //                CheckForVolumeChanges_UpdateObject(G_Device.Sessions[i]);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //if (ex.Message.Equals("0x88890004") == false)
+        //        //{
+        //            throw ex;
+        //        //}
+        //    }
+        //}
+
+        //private void CheckForVolumeChanges_UpdateObject(Arc_AudioObject P_Arc_AudioObject)
+        //{
+        //    if (P_Arc_AudioObject._Get_IsActive() == true)
+        //    {
+        //        if (
+        //            P_Arc_AudioObject._Get_Mute() != P_Arc_AudioObject._Get_DB_Mute()
+        //            || P_Arc_AudioObject._Get_Volume() != P_Arc_AudioObject._Get_DB_Volume()
+        //        )
+        //        {
+        //            if (P_Arc_AudioObject._Get_DB_Managed() == true)
+        //            {
+        //                P_Arc_AudioObject._Set_Mute_FromDB();
+        //                P_Arc_AudioObject._Set_Volume_FromDB();
+        //            }
+        //            else
+        //            {
+        //                P_Arc_AudioObject._Update_DB_Object();
+        //                OnVolumeChanged?.Invoke(P_Arc_AudioObject);
+        //            }
+        //        }
+        //    }
+        //}
+
 
         private void SetDefaultDevice(bool P_IsMic)
         {
@@ -40,7 +92,7 @@ namespace Services
                         if (L_MMDevice != null && L_DefaultDevice.ID.Equals(L_MMDevice.ID) == false)
                         {
                             SetDefaultEndpoint(L_MMDevice);
-                            OnDefaultDeviceSet?.Invoke(L_MMDevice.ID);
+                            //OnDefaultDeviceSet?.Invoke(L_MMDevice.ID);
                             break;
                         }
                     }

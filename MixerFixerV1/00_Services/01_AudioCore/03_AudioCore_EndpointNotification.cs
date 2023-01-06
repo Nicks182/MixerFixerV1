@@ -20,7 +20,7 @@ namespace Services
 
         private void G_NotificationClientImplementation_OnDeviceStateChange(string P_DeviceId, DeviceState P_NewState)
         {
-            OnDeviceStateChange?.Invoke(P_DeviceId, P_NewState);
+            //OnDeviceStateChange?.Invoke(P_DeviceId, P_NewState);
         }
     }
     
@@ -34,7 +34,7 @@ namespace Services
 
         public void OnDefaultDeviceChanged(DataFlow dataFlow, Role deviceRole, string defaultDeviceId)
         {
-            OnDefaultDeviceChange?.Invoke(dataFlow, deviceRole, defaultDeviceId);
+            //OnDefaultDeviceChange?.Invoke(dataFlow, deviceRole, defaultDeviceId);
             //Do some Work
             //Console.WriteLine("OnDefaultDeviceChanged --> {0}", dataFlow.ToString());
         }

@@ -18,8 +18,8 @@ namespace Services
         public delegate void OnNewSessionDelegate(Arc_AudioObject_SessionInfo P_AudioCore_Object_SessionInfo);
         public event OnNewSessionDelegate OnNewSession;
 
-        public delegate void OnVolumeChangeDelegate(Arc_AudioObject sender);
-        public event OnVolumeChangeDelegate OnVolumeChange;
+        public delegate void OnVolumeHasChangedDelegate(Arc_AudioObject sender);
+        public event OnVolumeHasChangedDelegate OnVolumeHasChanged;
 
 
 
@@ -30,9 +30,10 @@ namespace Services
 
         void AudioEndpointVolume_OnVolumeNotification(AudioVolumeNotificationData data)
         {
-            if (G_DB_AudioObject.IsManaged == true
-                && (_Get_Volume() != G_DB_AudioObject.Volume
-                || _Get_Mute() != G_DB_AudioObject.IsMute))
+            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
+            if (L_DB_AudioObject.IsManaged == true
+                && (_Get_Volume() != L_DB_AudioObject.Volume
+                || _Get_Mute() != L_DB_AudioObject.IsMute))
             {
                 _Set_Volume_FromDB();
                 _Set_Mute_FromDB();
@@ -40,32 +41,35 @@ namespace Services
             else
             {
                 _Update_DB_Object();
-                OnVolumeChange?.Invoke(this);
+                OnVolumeHasChanged?.Invoke(this);
             }
         }
 
         public void OnVolumeChanged(float volume, bool isMuted)
         {
-            if (G_DB_AudioObject.IsManaged == true
-                //&& (_Get_Volume() != G_DB_AudioObject.Volume
-                //|| _Get_Mute() != G_DB_AudioObject.IsMute)
-                )
+            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
+
+            if (L_DB_AudioObject.IsManaged == true)
             {
-                if (_Get_Volume() != G_DB_AudioObject.Volume)
+                if (Convert.ToInt32(volume * 100) != L_DB_AudioObject.Volume)
                 {
-                    _Set_Volume_FromDB();
+                    //_Set_Volume_FromDB();
+                    _Set_Volume(L_DB_AudioObject.Volume);
                 }
 
-                if (_Get_Mute() != G_DB_AudioObject.IsMute)
+                if (isMuted != L_DB_AudioObject.IsMute)
                 {
-                    _Set_Mute_FromDB();
+                    _Set_Mute(L_DB_AudioObject.IsMute);
+                    //_Set_Mute_FromDB();
                 }
             }
             else
             {
                 _Update_DB_Object();
-                OnVolumeChange?.Invoke(this);
+                
             }
+            
+            OnVolumeHasChanged?.Invoke(this);
         }
 
 

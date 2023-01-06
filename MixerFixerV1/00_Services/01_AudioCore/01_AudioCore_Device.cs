@@ -24,10 +24,15 @@ namespace Services
         {
             if (G_Device != null && G_Device.Device != null)
             {
+                G_Device.Device.OnNewSession -= L_Arc_AudioObject_OnNewSession;
+                G_Device.Device.OnVolumeHasChanged -= L_Arc_AudioObject_OnVolumeChange;
+                G_Device.Device.DeviceChanged -= Device_DeviceChanged;
                 G_Device.Device.Dispose();
 
                 for (int i = 0; i < G_Device.Sessions.Count; i++)
                 {
+                    G_Device.Sessions[i].OnNewSession -= L_Arc_AudioObject_OnNewSession;
+                    G_Device.Sessions[i].OnVolumeHasChanged -= L_Arc_AudioObject_OnVolumeChange;
                     G_Device.Sessions[i].Dispose();
                 }
             }
@@ -52,9 +57,9 @@ namespace Services
             G_Device = new Arc_Device();
             G_Device.Device = new Arc_AudioObject(G_Srv_DB, P_MMDevice);
             G_Device.Device.OnNewSession += L_Arc_AudioObject_OnNewSession;
-            G_Device.Device.OnVolumeChange += L_Arc_AudioObject_OnVolumeChange;
+            G_Device.Device.OnVolumeHasChanged += L_Arc_AudioObject_OnVolumeChange;
             G_Device.Device.DeviceChanged += Device_DeviceChanged;
-
+            G_Device.Device._Init();
 
             //G_Device = new Arc_AudioObject(G_Srv_DB, P_MMDevice);
             //G_Device.OnNewSession += L_Arc_AudioObject_OnNewSession;
@@ -72,13 +77,15 @@ namespace Services
         private void _LoadSessions()
         {
             G_Device.Sessions.Clear();
-            Arc_AudioObject L_Arc_AudioObject = G_Device.Device;
-            SessionCollection L_SessionCollection = L_Arc_AudioObject._GetSessions();
+            //Arc_AudioObject L_Arc_AudioObject = G_Device.Device;
+            SessionCollection L_SessionCollection = G_Device.Device._GetSessions();
             for (int i = 0; i < L_SessionCollection.Count; i++)
             {
-                L_Arc_AudioObject = new Arc_AudioObject(G_Srv_DB, L_SessionCollection[i]);
+                Arc_AudioObject L_Arc_AudioObject = new Arc_AudioObject(G_Srv_DB, L_SessionCollection[i]);
                 L_Arc_AudioObject.OnNewSession += L_Arc_AudioObject_OnNewSession;
-                L_Arc_AudioObject.OnVolumeChange += L_Arc_AudioObject_OnVolumeChange;
+                L_Arc_AudioObject.OnVolumeHasChanged += L_Arc_AudioObject_OnVolumeChange;
+
+                L_Arc_AudioObject._Init();
                 G_Device.Sessions.Add(L_Arc_AudioObject);
             }
 
@@ -151,7 +158,7 @@ namespace Services
 
         private void L_Arc_AudioObject_OnVolumeChange(Arc_AudioObject P_Arc_AudioObject)
         {
-            OnVolumeChanged?.Invoke(P_Arc_AudioObject);
+            OnVolumeHasChanged?.Invoke(P_Arc_AudioObject);
         }
 
         private void L_Arc_AudioObject_OnNewSession(Arc_AudioObject_SessionInfo P_AudioCore_Object_SessionInfo)

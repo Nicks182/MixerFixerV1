@@ -15,7 +15,9 @@ namespace Services
         public void _Init(Web_InterCommMessage P_Web_InterCommMessage)
         {
             G_TimerManager.StopTimer();
-            G_TimerManager = new Srv_TimerManager();
+            G_TimerDeviceManager.StopTimer();
+            //G_TimerVolumeManager.StopTimer();
+            
             G_Srv_AudioCore.Init();
 
             G_Srv_Logger._LogMessage("Default Device: " + G_Srv_AudioCore.Device.Device.Name);
@@ -34,6 +36,7 @@ namespace Services
             _StartDataPush();
 
             G_TimerDeviceManager.PrepareTimer(() => G_Srv_AudioCore.SetDefault_Devices(), 500, 500);
+            //G_TimerVolumeManager.PrepareTimer(() => G_Srv_AudioCore.CheckForVolumeChanges(), 500, 50);
         }
 
         public void _Reload(Web_InterCommMessage P_Web_InterCommMessage)

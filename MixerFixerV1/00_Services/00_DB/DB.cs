@@ -35,6 +35,11 @@ namespace Services
 
         }
 
+        public void Dispose()
+        {
+            G_DB.Dispose();
+        }
+
         private string GetAppPath()
         {
             return Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory , G_DB_Name);

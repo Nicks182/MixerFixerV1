@@ -28,8 +28,8 @@ namespace Services
         public delegate void DoUpdateDelegate();
         public event DoUpdateDelegate DoUpdate;
 
-        public delegate void OnVolumeChangedDelegate(Arc_AudioObject P_Arc_AudioObject);
-        public event OnVolumeChangedDelegate OnVolumeChanged;
+        public delegate void OnVolumeHasChangedDelegate(Arc_AudioObject P_Arc_AudioObject);
+        public event OnVolumeHasChangedDelegate OnVolumeHasChanged;
 
         public delegate void OnDeviceStateChangeDelegate(string P_DeviceId, DeviceState P_NewState);
         public event OnDeviceStateChangeDelegate OnDeviceStateChange;
