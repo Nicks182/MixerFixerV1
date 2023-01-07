@@ -9,6 +9,7 @@
 {
     display: grid;
     grid-template-columns: auto min-content;
+    grid-template-rows: min-content;
     align-items: end;
     padding: 5px 5px 5px 5px;
 }

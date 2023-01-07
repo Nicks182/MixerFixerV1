@@ -125,7 +125,7 @@ namespace Web
             HTML_Object L_HTML_Object = _Template_Button(_Template_VolumeControl_VolumeText_Id(P_AudioCore_Object), P_AudioCore_Object._Get_Volume().ToString() + "%");
 
             L_HTML_Object.Add_Attribute("class", "MF_AppControl_Text");
-
+            L_HTML_Object.Add_Attribute("onclick", "_App_VolumeModal_Show('" + P_AudioCore_Object.UniqueId.ToString() + "', '" + Web_InterCommMessage_Type.Volume_ModalShow.ToString() + "');");
 
             return L_HTML_Object;
         }

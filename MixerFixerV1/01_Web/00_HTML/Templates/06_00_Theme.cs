@@ -63,17 +63,38 @@ namespace Web
             L_HTML_Object.Add_Attribute("id", "ThemePanel");
             L_HTML_Object.Add_Attribute("class", "MF_ThemePanel");
 
-            List<DB_Theme> L_ThemeColors = G_Srv_DB.Theme_GetAll().FindAll().ToList();
+            L_HTML_Object.Children = _Template_ThemeModal_Body_Panel_Children();
 
-            for(int i = 0; i < L_ThemeColors.Count; i++)
-            {
-                L_HTML_Object.Add_Child(_Template_ThemeModal_Body_Panel_Color(L_ThemeColors[i]));
-            }
+            //List<DB_Theme> L_ThemeColors = G_Srv_DB.Theme_GetAll().FindAll().ToList();
+
+            //for(int i = 0; i < L_ThemeColors.Count; i++)
+            //{
+            //    L_HTML_Object.Add_Child(_Template_ThemeModal_Body_Panel_Color(L_ThemeColors[i]));
+            //}
 
             return L_HTML_Object;
         }
 
-        
+        public StringBuilder _Template_ThemeModal_Body_Panel_HTML()
+        {
+            return G_HTML._BuildHtml(_Template_ThemeModal_Body_Panel_Children());
+        }
+
+        private List<HTML_Object> _Template_ThemeModal_Body_Panel_Children()
+        {
+            List<HTML_Object> L_Items = new List<HTML_Object>();
+
+            List<DB_Theme> L_ThemeColors = G_Srv_DB.Theme_GetAll().FindAll().ToList();
+
+            for (int i = 0; i < L_ThemeColors.Count; i++)
+            {
+                L_Items.Add(_Template_ThemeModal_Body_Panel_Color(L_ThemeColors[i]));
+            }
+
+            return L_Items;
+        }
+
+
 
     }
 }

@@ -63,6 +63,8 @@ namespace Services
         Init,
         DataUpdate,
         Volume_Change,
+        Volume_ModalShow,
+        Volume_ModalSet,
         Mute_Change,
         Managed_Change,
         Device_On,
@@ -79,6 +81,7 @@ namespace Services
         Settings_DefaultVolume_Change,
 
         Theme_Show,
+        Theme_Reset,
         Theme_Color_Changed,
         Theme_Color_Change_Red,
         Theme_Color_Change_Green,

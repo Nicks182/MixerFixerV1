@@ -31,3 +31,13 @@ function _App_MouseVolumeChange(P_Event, P_Control, P_UniqueId)
         return false;
     }
 }
+
+function _App_VolumeModal_Show(P_UniqueId, P_CommType)
+{
+    var L_Comm =
+    {
+        CommType: P_CommType,
+        Data: [{ Id: "Id", Value: P_UniqueId }]
+    }
+    _Comm_Send(L_Comm);
+}

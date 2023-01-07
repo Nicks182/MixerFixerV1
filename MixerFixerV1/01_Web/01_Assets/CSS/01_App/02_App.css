@@ -112,7 +112,7 @@ input
 
 ::-webkit-scrollbar-thumb
 {
-    background-color: var(--MF_Theme_Background_HL); /* color of the scroll thumb */
+    background-color: var(--MF_Theme_Accent); /* color of the scroll thumb */
     border-radius: 20px; /* roundness of the scroll thumb */
     border: 0px solid var(--MF_Theme_Background); /* creates padding around scroll thumb */
 }
@@ -122,5 +122,5 @@ input
 div
 {
     scrollbar-width: thin; /* "auto" or "thin" */
-    scrollbar-color: var(--MF_Theme_Background_HL) var(--MF_Theme_Background); /* scroll thumb and track */
+    scrollbar-color: var(--MF_Theme_Accent) var(--MF_Theme_Background); /* scroll thumb and track */
 }

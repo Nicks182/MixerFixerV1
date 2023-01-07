@@ -25,6 +25,10 @@ namespace Services
                     _Modal_Theme_ColorChange(P_Web_InterCommMessage);
                     break;
 
+                case Web_InterCommMessage_Type.Theme_Reset:
+                    _Modal_Theme_Reset(P_Web_InterCommMessage);
+                    break;
+
             }
 
 
@@ -75,11 +79,7 @@ namespace Services
             this.G_Srv_MessageBus.Emit("themechanged", "yes");
 
             P_Web_InterCommMessage.HTMLs.Clear();
-            P_Web_InterCommMessage.HTMLs.Add(new Web_InterCommMessage_HTML
-            {
-                ContainerId = "#Style_Theme",
-                HTML = _Modal_Theme_ColorChange_StyleUpdate().ToString()
-            });
+            P_Web_InterCommMessage.HTMLs.Add(_Modal_Theme_ColorChange_StyleUpdate());
 
             P_Web_InterCommMessage.Data = new List<Web_InterCommMessage_Data>
             {
@@ -94,7 +94,32 @@ namespace Services
             P_Web_InterCommMessage.CommType = Web_InterCommMessage_Type.Theme_Color_Changed;
         }
 
-        private StringBuilder _Modal_Theme_ColorChange_StyleUpdate()
+
+        private void _Modal_Theme_Reset(Web_InterCommMessage P_Web_InterCommMessage)
+        {
+            List<DB_Theme> L_Themes = G_Srv_DB.Theme_GetAll().FindAll().ToList();
+
+            for(int i = 0; i < L_Themes.Count; i++)
+            {
+                G_Srv_DB.Theme_Delete(L_Themes[i]);
+            }
+
+            G_Srv_DB.Theme_SetDefaults();
+
+            P_Web_InterCommMessage.HTMLs.Clear();
+            P_Web_InterCommMessage.HTMLs.Add(new Web_InterCommMessage_HTML
+            {
+                ContainerId = "#ThemePanel",
+                HTML = G_HTML_Templates._Template_ThemeModal_Body_Panel_HTML().ToString()
+            });
+            P_Web_InterCommMessage.HTMLs.Add(_Modal_Theme_ColorChange_StyleUpdate());
+
+            P_Web_InterCommMessage.CommType = Web_InterCommMessage_Type.Theme_Color_Changed;
+
+            this.G_Srv_MessageBus.Emit("themechanged", "yes");
+        }
+
+        private Web_InterCommMessage_HTML _Modal_Theme_ColorChange_StyleUpdate()
         {
             StringBuilder L_Style = new StringBuilder();
 
@@ -119,7 +144,11 @@ namespace Services
 
             L_Style.Append("}");
 
-            return L_Style;
+            return new Web_InterCommMessage_HTML
+            {
+                ContainerId = "#Style_Theme",
+                HTML = L_Style.ToString()
+            };
         }
 
     }

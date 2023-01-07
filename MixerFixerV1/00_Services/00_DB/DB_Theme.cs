@@ -22,7 +22,7 @@ namespace Services
         public string MF_Theme_Background = "Background";
         public string MF_Theme_Accent = "Accent";
         public string MF_Theme_Text = "Text";
-        public void _SetDefaults()
+        public void Theme_SetDefaults()
         {
             DB_Theme L_DB_Theme_BG = Theme_GetOne(MF_Theme_Background);
             if (L_DB_Theme_BG == null)

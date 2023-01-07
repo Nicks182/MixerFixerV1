@@ -33,3 +33,12 @@ function _App_Theme_ColorChanged(P_CommObject)
     console.log(P_CommObject);
     _App_DataUpdate_Receive(P_CommObject);
 }
+
+function _App_ThemeReset(P_MessageType)
+{
+    var L_Comm =
+    {
+        CommType: P_MessageType
+    }
+    _Comm_Send(L_Comm);
+}

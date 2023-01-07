@@ -37,32 +37,32 @@ namespace Web
 
             L_HTML_Object.Add_Attribute("class", "MF_VolumeInput");
 
-            L_HTML_Object.Add_Child(_Template_Modal_VolumeInput_Body_Panel());
+            L_HTML_Object.Add_Child(_Template_Modal_VolumeInput_Body_Panel(P_CommType, P_ObjectId));
             L_HTML_Object.Add_Child(_Template_Modal_VolumeInput_Body_Footer(P_CommType, P_ObjectId));
 
             return L_HTML_Object;
         }
 
-        private HTML_Object _Template_Modal_VolumeInput_Body_Panel()
+        private HTML_Object _Template_Modal_VolumeInput_Body_Panel(Web_InterCommMessage_Type P_CommType, string P_ObjectId)
         {
             HTML_Object L_HTML_Object = new HTML_Object();
             L_HTML_Object.Type = HTML_Object_Type.IsDiv;
 
             L_HTML_Object.Add_Attribute("class", "MF_VolumeInput_Panel");
 
-            L_HTML_Object.Add_Child(_Template_Modal_VolumeInput_Body_Input());
+            L_HTML_Object.Add_Child(_Template_Modal_VolumeInput_Body_Input(P_CommType, P_ObjectId));
 
             return L_HTML_Object;
         }
 
-        private HTML_Object _Template_Modal_VolumeInput_Body_Input()
+        private HTML_Object _Template_Modal_VolumeInput_Body_Input(Web_InterCommMessage_Type P_CommType, string P_ObjectId)
         {
             HTML_Object L_HTML_Object = new HTML_Object();
             L_HTML_Object.Type = HTML_Object_Type.IsNumber;
 
             L_HTML_Object.Add_Attribute("id", _Template_Modal_VolumeInput_Body_Input_Id());
             L_HTML_Object.Add_Attribute("class", "MF_VolumeInput_Input");
-            //L_HTML_Object.Add_Attribute("onkeydown", "_App_VolumeInput_OnKeyDown(event);");
+            L_HTML_Object.Add_Attribute("onkeydown", "_App_VolumeInput_OnKeyDown(event, '" + P_CommType.ToString() + "', '" + P_ObjectId + "', '" + _Template_Modal_VolumeInput_Body_Input_Id() + "');");
 
             return L_HTML_Object;
         }
@@ -92,9 +92,14 @@ namespace Web
         {
             HTML_Object L_HTML_Object = _Template_Button("Btn_VolumeInputClose", "Set");
 
-            L_HTML_Object.Add_Attribute("onclick", "_App_VolumeInput_Save('" + P_CommType.ToString() + "', '" + P_ObjectId + "', '" + _Template_Modal_VolumeInput_Body_Input_Id() + "');");
+            L_HTML_Object.Add_Attribute("onclick", _Template_Modal_VolumeInput_SaveEvent(P_CommType, P_ObjectId));
 
             return L_HTML_Object;
+        }
+
+        private string _Template_Modal_VolumeInput_SaveEvent(Web_InterCommMessage_Type P_CommType, string P_ObjectId)
+        {
+            return "_App_VolumeInput_Save('" + P_CommType.ToString() + "', '" + P_ObjectId + "', '" + _Template_Modal_VolumeInput_Body_Input_Id() + "');";
         }
     }
 }

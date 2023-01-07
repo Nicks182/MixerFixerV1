@@ -72,7 +72,7 @@ namespace MixerFixerV1
             var resourceDictionary = Application.Current.Resources.MergedDictionaries[0];
 
             Srv_DB L_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
-            L_Srv_DB._SetDefaults();
+            L_Srv_DB.Theme_SetDefaults();
 
             DB_Theme L_DB_Theme_BG = L_Srv_DB.Theme_GetOne(L_Srv_DB.MF_Theme_Background);
 
@@ -80,7 +80,20 @@ namespace MixerFixerV1
             if (L_DB_Theme_BG != null)
             {
                 int offset = 5;
-                SolidColorBrush L_MainThemeBG = new SolidColorBrush(Color.FromArgb(255, (byte)(L_DB_Theme_BG.Red - offset), (byte)(L_DB_Theme_BG.Green - offset), (byte)(L_DB_Theme_BG.Blue - offset)));
+                int L_R = L_DB_Theme_BG.Red - offset;
+                int L_G = L_DB_Theme_BG.Green - offset;
+                int L_B = L_DB_Theme_BG.Blue - offset;
+
+                if(L_R < 0)
+                    L_R = 0;
+
+                if (L_G < 0)
+                    L_G = 0;
+
+                if (L_B < 0)
+                    L_B = 0;
+
+                SolidColorBrush L_MainThemeBG = new SolidColorBrush(Color.FromArgb(255, (byte)L_R, (byte)L_G, (byte)L_B));
                 resourceDictionary["BackgroundColour"] = L_MainThemeBG;
                 resourceDictionary["WindowBorderColour"] = L_MainThemeBG;
             }

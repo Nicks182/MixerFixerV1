@@ -9,14 +9,14 @@
     transform: translate(-50%, -50%);
     overflow: visible;
     max-height: 90vh;
-    max-width: 90vh;
-    width: 100%;
-    height: 100%;
+    max-width: 90vw;
+    /*width: 100%;
+    height: 100%;*/
 }
 
     .MF_Modal[IsVisible="1"]
     {
-        display: unset;
+        display: flex;
     }
 
     .MF_Modal[NoMask="1"] > .MF_Modal_Mask
@@ -39,17 +39,22 @@
 
 .MF_Modal_Content
 {
-    display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: min-content auto min-content;
+    /*display: grid;
+    grid-template-columns: min-content;
+    grid-template-rows: min-content auto min-content;*/
+    display: flex;
+    flex-direction: column;
     gap: 2px;
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
+    /*width: 100%;
+    height: 100%;*/
+    /*max-width: 100%;
     max-height: 100%;
+    min-height: 0;*/ /* NEW */
+    /*min-width: 0;*/ /* NEW; needed for Firefox */
     background-color: var(--MF_Theme_Background);
     box-shadow: 0 13px 17px rgba(0, 0, 0, 0.4);
     border-radius: 5px;
+    min-width: 0;
 }
 
 .MF_Modal_Content_Header
@@ -61,6 +66,8 @@
     color: var(--MF_Theme_Accent);
     padding: 3px;
     border-radius: 5px 5px 0px 0px;
+    /*min-height: 0;
+    min-width: 0;*/
 }
 
 .MF_Modal_Content_Header_Close
@@ -78,6 +85,15 @@
 {
     padding: 3px;
     overflow: auto;
+
+
+    /*overflow-y: scroll;*/
+    /*width: 100%;
+    height: 100%;*/
+    /*max-width: 100%;
+    max-height: 100%;
+    min-height: 0;
+    min-width: 0;*/
 }
 
 .MF_Modal_Content_Footer

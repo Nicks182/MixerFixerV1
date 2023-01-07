@@ -34,6 +34,14 @@ namespace Services
                         _ManamgedChange(P_Web_InterCommMessage);
                         break;
 
+                    case Web_InterCommMessage_Type.Volume_ModalShow:
+                        _VolumeChangeModal_Show(P_Web_InterCommMessage);
+                        break;
+
+                    case Web_InterCommMessage_Type.Volume_ModalSet:
+                        _VolumeChangeModal_Set(P_Web_InterCommMessage);
+                        break;
+
                     case Web_InterCommMessage_Type.Settings_Show:
                     case Web_InterCommMessage_Type.Settings_Priority_MoveUp:
                     case Web_InterCommMessage_Type.Settings_Priority_MoveDown:
@@ -45,6 +53,7 @@ namespace Services
                         break;
 
                     case Web_InterCommMessage_Type.Theme_Show:
+                    case Web_InterCommMessage_Type.Theme_Reset:
                     case Web_InterCommMessage_Type.Theme_Color_Change_Red:
                     case Web_InterCommMessage_Type.Theme_Color_Change_Green:
                     case Web_InterCommMessage_Type.Theme_Color_Change_Blue:

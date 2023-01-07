@@ -33,6 +33,8 @@ namespace Services
                 }
             };
 
+            P_Web_InterCommMessage.HTMLs.Add(_Modal_Theme_ColorChange_StyleUpdate());
+
             _StartDataPush();
 
             G_TimerDeviceManager.PrepareTimer(() => G_Srv_AudioCore.SetDefault_Devices(), 500, 500);

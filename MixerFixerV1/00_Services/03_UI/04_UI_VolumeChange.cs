@@ -55,5 +55,47 @@ namespace Services
 
         }
 
+
+        private void _VolumeChangeModal_Show(Web_InterCommMessage P_Web_InterCommMessage)
+        {
+            //Guid L_Id = Guid.Parse(P_Web_InterCommMessage.Data.Where(d => d.Id == "Id").FirstOrDefault().Value);
+
+            //Arc_AudioObject L_Arc_AudioObject = G_Srv_AudioCore.Device._Get_Object(P_Web_InterCommMessage.Data.Where(d => d.Id == "Id").FirstOrDefault().Value);
+
+            P_Web_InterCommMessage.ModalInfo = new Web_InterCommMessage_Modal
+            {
+                Id = G_HTML_Templates._Template_Modal_VolumeInput_Id(),
+                State = 1, // Show
+                Focus = G_HTML_Templates._Template_Modal_VolumeInput_Body_Input_Id()
+            };
+
+            P_Web_InterCommMessage.HTMLs.Clear();
+            P_Web_InterCommMessage.HTMLs.Add(new Web_InterCommMessage_HTML
+            {
+                ContainerId = "#ModalHolder",
+                HTML = G_HTML_Templates._Template_Modal_VolumeInput_HTML(Web_InterCommMessage_Type.Volume_ModalSet, P_Web_InterCommMessage.Data.Where(d => d.Id == "Id").FirstOrDefault().Value).ToString(),
+                IsAppend = true
+            }) ;
+        }
+
+        private void _VolumeChangeModal_Set(Web_InterCommMessage P_Web_InterCommMessage)
+        {
+            //Guid L_Id = Guid.Parse(P_Web_InterCommMessage.Data.Where(d => d.Id == "Id").FirstOrDefault().Value);
+
+            Arc_AudioObject L_Arc_AudioObject = G_Srv_AudioCore.Device._Get_Object(P_Web_InterCommMessage.Data[0].Id);
+
+            L_Arc_AudioObject._Set_Volume(P_Web_InterCommMessage.Data[0].Value);
+
+            P_Web_InterCommMessage.ModalInfo = new Web_InterCommMessage_Modal
+            {
+                Id = G_HTML_Templates._Template_Modal_VolumeInput_Id(),
+                State = 0, // Show
+            };
+
+            _GetUpdate(P_Web_InterCommMessage);
+            P_Web_InterCommMessage.CommType = Web_InterCommMessage_Type.DataUpdate;
+            
+        }
+
     }
 }
