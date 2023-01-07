@@ -71,7 +71,7 @@ namespace Web
         {
             HTML_Object L_HTML_Object = _Template_Toggle(
                                             P_Id:           _Template_VolumeControl_IsMute_Id(P_AudioCore_Object),
-                                            P_Title:        "Set Mute",
+                                            P_Title:        "Is Mute",
                                             P_IsChecked:    P_AudioCore_Object._Get_Mute()
                                         );
 

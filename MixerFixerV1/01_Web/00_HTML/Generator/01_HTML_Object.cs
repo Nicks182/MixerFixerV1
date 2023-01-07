@@ -89,6 +89,7 @@ namespace HtmlGenerator
         close,
         arrow_drop_up,
         arrow_drop_down,
+        color_lens,
     }
 
 }

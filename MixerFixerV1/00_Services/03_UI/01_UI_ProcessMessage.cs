@@ -34,7 +34,7 @@ namespace Services
                         _ManamgedChange(P_Web_InterCommMessage);
                         break;
 
-                    case Web_InterCommMessage_Type.ShowSettings:
+                    case Web_InterCommMessage_Type.Settings_Show:
                     case Web_InterCommMessage_Type.Settings_Priority_MoveUp:
                     case Web_InterCommMessage_Type.Settings_Priority_MoveDown:
                     case Web_InterCommMessage_Type.Settings_Priority_Enforce:
@@ -42,6 +42,13 @@ namespace Services
                     case Web_InterCommMessage_Type.Settings_DefaultVolume_Show:
                     case Web_InterCommMessage_Type.Settings_DefaultVolume_Change:
                         _Modal_Settings(P_Web_InterCommMessage);
+                        break;
+
+                    case Web_InterCommMessage_Type.Theme_Show:
+                    case Web_InterCommMessage_Type.Theme_Color_Change_Red:
+                    case Web_InterCommMessage_Type.Theme_Color_Change_Green:
+                    case Web_InterCommMessage_Type.Theme_Color_Change_Blue:
+                        _Modal_Theme(P_Web_InterCommMessage);
                         break;
 
                     case Web_InterCommMessage_Type.SwitchPanel: // Device

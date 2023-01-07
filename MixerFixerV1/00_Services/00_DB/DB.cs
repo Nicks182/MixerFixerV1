@@ -15,12 +15,8 @@ namespace Services
 
         private ILiteCollection<DB_AudioObject> G_DB_AudioObject;
         private ILiteCollection<DB_DevicePriority> G_DB_DevicePriority;
-
-        //private ILiteCollection<DB_Apps> G_DB_Apps;
-
-        //private ILiteCollection<DB_Devices> G_DB_Devices;
-
         private ILiteCollection<DB_Settings> G_DB_Settings;
+        private ILiteCollection<DB_Theme> G_DB_Theme;
 
 
         public Srv_DB()
@@ -28,11 +24,9 @@ namespace Services
             G_DB = new LiteDatabase(GetAppPath());
             
             this.G_DB_AudioObject = G_DB.GetCollection<DB_AudioObject>("AudioObject");
-            //this.G_DB_Apps = G_DB.GetCollection<DB_Apps>("Apps");
-            //this.G_DB_Devices = G_DB.GetCollection<DB_Devices>("Devices");
-            this.G_DB_Settings = G_DB.GetCollection<DB_Settings>("Settings");
             this.G_DB_DevicePriority = G_DB.GetCollection<DB_DevicePriority>("DevicePriority");
-
+            this.G_DB_Settings = G_DB.GetCollection<DB_Settings>("Settings");
+            this.G_DB_Theme = G_DB.GetCollection<DB_Theme>("Theme");
         }
 
         public void Dispose()

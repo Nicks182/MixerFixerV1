@@ -8,6 +8,10 @@
     top: 50%;
     transform: translate(-50%, -50%);
     overflow: visible;
+    max-height: 90vh;
+    max-width: 90vh;
+    width: 100%;
+    height: 100%;
 }
 
     .MF_Modal[IsVisible="1"]
@@ -41,6 +45,8 @@
     gap: 2px;
     width: 100%;
     height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     background-color: var(--MF_Theme_Background);
     box-shadow: 0 13px 17px rgba(0, 0, 0, 0.4);
     border-radius: 5px;
@@ -52,7 +58,7 @@
     grid-template-columns: auto min-content;
     grid-template-rows: min-content;
     background-color: var(--MF_AppHeader_Background);
-    color: var(--MF_Theme_Foreground);
+    color: var(--MF_Theme_Accent);
     padding: 3px;
     border-radius: 5px 5px 0px 0px;
 }
@@ -71,11 +77,12 @@
 .MF_Modal_Content_Body
 {
     padding: 3px;
+    overflow: auto;
 }
 
 .MF_Modal_Content_Footer
 {
-    border-top: 1px solid var(--MF_Theme_Foreground);
+    border-top: 1px solid var(--MF_Theme_Accent);
     padding: 3px;
     border-radius: 0px 0px 5px 5px;
 }
@@ -94,7 +101,7 @@
     {
         animation: MF_FadeOut ease 1000ms;
         animation-fill-mode: forwards;
-        color: var(--MF_Theme_Foreground);
+        color: var(--MF_Theme_Accent);
         filter: brightness(var(--MF_Hover));
         font-weight: bold;
     }

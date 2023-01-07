@@ -1,0 +1,77 @@
+
+
+.MF_Theme
+{
+
+}
+
+.MF_Theme_Footer
+{
+    display: grid;
+    grid-template-columns: auto min-content;
+    align-items: end;
+    padding: 5px 5px 5px 5px;
+}
+
+.MF_ThemePanel
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding: 5px;
+}
+
+.MF_ThemePanel_Color
+{
+    background-color: var(--MF_Theme_Background_HL);
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+    grid-template-areas:
+        "name"
+        "discription"
+        "slider";
+}
+
+.MF_ThemePanel_Color_Name
+{
+    grid-area: name;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.MF_ThemePanel_Color_Discription
+{
+    grid-area: discription;
+}
+
+.MF_ThemePanel_Color_Sliders
+{
+    grid-area: slider;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0px;
+}
+
+.MF_ThemePanel_Color_Slider
+{
+    display: grid;
+    grid-template-columns: min-content auto min-content;
+    grid-template-rows: min-content;
+    column-gap: 10px;
+    align-items: center;
+}
+
+.MF_ThemePanel_Color_Slider_Red
+{
+
+}
+
+.MF_ThemePanel_Color_Slider_Green
+{
+}
+
+.MF_ThemePanel_Color_Slider_Blue
+{
+}

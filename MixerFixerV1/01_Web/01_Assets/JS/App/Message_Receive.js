@@ -13,12 +13,16 @@ function _Message_Receive(P_CommObject)
 
         switch (P_CommObject.CommType)
         {
+            case "DataUpdate":
+                _App_DataUpdate_Receive(P_CommObject)
+                break;
+
             case "Init":
                 _App_Init(P_CommObject)
                 break;
 
-            case "DataUpdate":
-                _App_DataUpdate_Receive(P_CommObject)
+            case "Theme_Color_Changed":
+                _App_Theme_ColorChanged(P_CommObject)
                 break;
 
             case "ShowMessage":

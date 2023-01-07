@@ -3,7 +3,7 @@
 .button
 {
     color: var(--MF_Theme_Text);
-    background-color: var(--MF_Theme_Foreground);
+    background-color: var(--MF_Theme_Accent);
     text-decoration: none;
     padding: 5px 7px;
     display: flex;

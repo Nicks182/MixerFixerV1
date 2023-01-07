@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.SignalR;
+using MixerFixerV1;
 using Web;
 
 namespace Services
@@ -14,12 +15,14 @@ namespace Services
     {
         IHubContext<CommandHub> G_CommandHub;
         Srv_Logger G_Srv_Logger;
+        private Srv_MessageBus G_Srv_MessageBus;
+
         Srv_TimerManager G_TimerManager;
         Srv_TimerManager G_TimerDeviceManager;
         Srv_TimerManager G_TimerVolumeManager;
         HTML_Templates G_HTML_Templates;
         Srv_AudioCore G_Srv_AudioCore;
-        Srv_DB G_Srv_DB = new Srv_DB();
+        Srv_DB G_Srv_DB;
 
         Web_InterCommMessage G_DataPushMessage = new Web_InterCommMessage
         { 
@@ -30,6 +33,10 @@ namespace Services
         {
             G_CommandHub = P_CommandHub;
             G_Srv_Logger = P_Srv_Logger;
+
+            this.G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
+            this.G_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
+
             G_TimerManager = new Srv_TimerManager();
             G_TimerDeviceManager = new Srv_TimerManager();
             G_TimerVolumeManager = new Srv_TimerManager();

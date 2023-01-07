@@ -17,7 +17,7 @@ namespace Web
             HTML_Object L_HTML_Object = _Template_Button("", null, HTML_Object_Icon.settings, HTML_Object_Icon_Pos.IsLeft);
 
             L_HTML_Object.Add_Attribute("class", "MF_MixerAppMenu_Settings");
-            L_HTML_Object.Add_Attribute("onclick", "_App_SettingsShow('" + Web_InterCommMessage_Type.ShowSettings.ToString() + "');");
+            L_HTML_Object.Add_Attribute("onclick", "_App_SettingsShow('" + Web_InterCommMessage_Type.Settings_Show.ToString() + "');");
 
             return L_HTML_Object;
         }

@@ -22,6 +22,7 @@ namespace Services
 
         private void _SetDevice(MMDevice P_MMDevice)
         {
+            
             if (G_Device != null && G_Device.Device != null)
             {
                 G_Device.Device.OnNewSession -= L_Arc_AudioObject_OnNewSession;
@@ -37,22 +38,6 @@ namespace Services
                 }
             }
 
-            //if (G_Device != null)
-            //{
-            //    if(G_Device.Device != null)
-            //    {
-            //        G_Device.Device.OnNewSession -= L_Arc_AudioObject_OnNewSession;
-            //        G_Device.Device.OnVolumeChange -= L_Arc_AudioObject_OnVolumeChange;
-            //        G_Device.Device.DeviceChanged -= Device_DeviceChanged;
-
-            //        for(int i = 0; i < G_Device.Sessions.Count; i++)
-            //        {
-            //            G_Device.Sessions[i].OnNewSession -= L_Arc_AudioObject_OnNewSession;
-            //            G_Device.Sessions[i].OnVolumeChange -= L_Arc_AudioObject_OnVolumeChange;
-
-            //        }
-            //    }
-            //}
 
             G_Device = new Arc_Device();
             G_Device.Device = new Arc_AudioObject(G_Srv_DB, P_MMDevice);
@@ -60,10 +45,6 @@ namespace Services
             G_Device.Device.OnVolumeHasChanged += L_Arc_AudioObject_OnVolumeChange;
             G_Device.Device.DeviceChanged += Device_DeviceChanged;
             G_Device.Device._Init();
-
-            //G_Device = new Arc_AudioObject(G_Srv_DB, P_MMDevice);
-            //G_Device.OnNewSession += L_Arc_AudioObject_OnNewSession;
-            //G_Device.OnVolumeChange += L_Arc_AudioObject_OnVolumeChange;
 
             _LoadSessions();
         }
@@ -89,70 +70,7 @@ namespace Services
                 G_Device.Sessions.Add(L_Arc_AudioObject);
             }
 
-            //Arc_AudioObject L_Arc_AudioObject = null;
-            //SessionCollection L_SessionCollection = G_Device._GetSessions();
-            //for (int i = 0; i < L_SessionCollection.Count; i++)
-            //{
-            //    L_Arc_AudioObject = new Arc_AudioObject(G_Srv_DB, L_SessionCollection[i]);
-            //    L_Arc_AudioObject.OnNewSession += L_Arc_AudioObject_OnNewSession;
-            //    L_Arc_AudioObject.OnVolumeChange += L_Arc_AudioObject_OnVolumeChange;
-            //    G_Sessions.Add(L_Arc_AudioObject);
-            //}
         }
-
-        //private void _LoadDevices()
-        //{
-        //    if (G_Device == null)
-        //    {
-        //        MMDevice L_DefaultDevice = G_MMDeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
-
-        //        G_Device = _LoadDevice(L_DefaultDevice);
-        //    }
-
-        //    //G_Devices.Clear();
-
-        //    //MMDevice L_DefaultDevice = G_MMDeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
-
-        //    //G_Devices.Add(_LoadDevice(L_DefaultDevice, true));
-        //    //foreach (var L_Device in G_MMDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active))
-        //    //{
-        //    //    if(L_Device.ID != L_DefaultDevice.ID)
-        //    //    {
-        //    //        G_Devices.Add(_LoadDevice(L_Device, false));
-        //    //    }
-
-        //    //}
-        //}
-
-        ////private Arc_Device _LoadDevice(MMDevice P_Device, bool P_IsDefault)
-        //private Arc_Device _LoadDevice(MMDevice P_Device)
-        //{
-        //    PropertyStore props = P_Device.Properties;
-        //    for (int i = 0; i < props.Count; i++)
-        //    {
-        //        object bla = props[i];
-        //        string asdsd = "";
-        //    }
-        //    Arc_AudioObject L_Arc_AudioObject = new Arc_AudioObject(G_Srv_DB, P_Device);
-        //    L_Arc_AudioObject.OnNewSession += L_Arc_AudioObject_OnNewSession;
-        //    L_Arc_AudioObject.OnVolumeChange += L_Arc_AudioObject_OnVolumeChange;
-
-        //    Arc_Device L_Arc_Device = new Arc_Device();
-        //    L_Arc_Device.Name = L_Arc_AudioObject.Name;
-        //    L_Arc_Device.IsVisible = P_IsDefault && G_Devices.Where(a => a.IsVisible == true).Count() == 0;
-        //    L_Arc_Device.AudioObjects.Add(L_Arc_AudioObject);
-
-        //    SessionCollection L_SessionCollection = L_Arc_AudioObject._GetSessions();
-        //    for (int i = 0; i < L_SessionCollection.Count; i++)
-        //    {
-        //        L_Arc_AudioObject = new Arc_AudioObject(G_Srv_DB, L_SessionCollection[i]);
-        //        L_Arc_AudioObject.OnNewSession += L_Arc_AudioObject_OnNewSession;
-        //        L_Arc_AudioObject.OnVolumeChange += L_Arc_AudioObject_OnVolumeChange;
-        //        L_Arc_Device.AudioObjects.Add(L_Arc_AudioObject);
-        //    }
-
-        //    return L_Arc_Device;
-        //}
 
 
 
@@ -166,6 +84,7 @@ namespace Services
             DoUpdate?.Invoke();
         }
     }
+
     public class Arc_Device
     {
         public Arc_Device()
@@ -185,7 +104,7 @@ namespace Services
 
         public Arc_AudioObject _Get_Object(Guid P_UniqueId)
         {
-            if(Device.UniqueId == P_UniqueId)
+            if (Device.UniqueId == P_UniqueId)
             {
                 return Device;
             }

@@ -70,13 +70,19 @@ namespace Services
         Device_Change,
         ShowMessage,
         SwitchPanel,
-        ShowSettings,
+        Settings_Show,
         Settings_Priority_Enforce,
         Settings_Priority_MoveUp,
         Settings_Priority_MoveDown,
         Settings_UseDefault_Change,
         Settings_DefaultVolume_Show,
         Settings_DefaultVolume_Change,
+
+        Theme_Show,
+        Theme_Color_Changed,
+        Theme_Color_Change_Red,
+        Theme_Color_Change_Green,
+        Theme_Color_Change_Blue,
 
     }
 }

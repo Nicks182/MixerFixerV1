@@ -2,7 +2,7 @@
 
 .MF_AppControl
 {
-    color: var(--MF_Theme_Foreground);
+    color: var(--MF_Theme_Accent);
     display: grid;
     grid-template-columns: min-content auto 20px 20px;
     grid-template-rows: min-content min-content;

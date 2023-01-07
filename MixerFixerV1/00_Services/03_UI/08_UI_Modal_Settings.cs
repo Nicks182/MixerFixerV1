@@ -15,7 +15,7 @@ namespace Services
         {
             switch (P_Web_InterCommMessage.CommType)
             {
-                case Web_InterCommMessage_Type.ShowSettings:
+                case Web_InterCommMessage_Type.Settings_Show:
                     _Modal_Settings_Show(P_Web_InterCommMessage);
                     break;
 

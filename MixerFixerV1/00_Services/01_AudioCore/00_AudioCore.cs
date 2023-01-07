@@ -49,7 +49,6 @@ namespace Services
 
         public void Init()
         {
-            G_Device = null;
             //SetDefault_Devices();
             LoadPriorityList();
             _LoadDevice();

@@ -10,6 +10,12 @@
     width: var(--width);
 }
 
+    .toggle:hover,
+    .toggle:focus
+    {
+        filter: brightness(var(--MF_Hover));
+    }
+
 
 .toggle__fill
 {
@@ -17,7 +23,8 @@
     width: var(--width);
     height: var(--height);
     border-radius: var(--border-radius);
-    background: #616161;
+    background: var(--MF_Toggle_Fill_Color);
+    /*background: #616161;*/
     transition: background 0.2s;
 }
 
@@ -25,7 +32,7 @@
 
 .toggle[IsChecked="1"] > .toggle__fill
 {
-    background: var(--MF_Theme_Foreground);
+    background: var(--MF_Theme_Accent);
 }
 
 

@@ -53,7 +53,7 @@
 .MF_SettingsPanel_DevicePriorityHelp
 {
     grid-area: devicepriorityhelp;
-    color: var(--MF_Theme_Foreground);
+    color: var(--MF_Theme_Accent);
     filter: brightness(var(--MF_Hover));
     padding: 3px;
 }
@@ -61,21 +61,21 @@
 .MF_SettingsPanel_DevicePriorityHeading
 {
     background-color: var(--MF_AppHeader_Background);
-    color: var(--MF_Theme_Foreground);
+    color: var(--MF_Theme_Accent);
     padding: 3px;
 }
 
 .MF_SettingsPanel_SoundPriority
 {
     grid-area: soundpriority;
-    border: 1px solid var(--MF_Theme_Foreground);
+    border: 1px solid var(--MF_Theme_Accent);
     align-self: start;
 }
 
 .MF_SettingsPanel_MicPriority
 {
     grid-area: micpriority;
-    border: 1px solid var(--MF_Theme_Foreground);
+    border: 1px solid var(--MF_Theme_Accent);
     align-self: start;
 }
 
@@ -120,5 +120,5 @@
 {
     padding: 0px 3px;
     white-space: nowrap;
-    color: var(--MF_Theme_Foreground);
+    color: var(--MF_Theme_Accent);
 }

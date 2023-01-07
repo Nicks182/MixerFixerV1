@@ -31,12 +31,17 @@ namespace Services
         void AudioEndpointVolume_OnVolumeNotification(AudioVolumeNotificationData data)
         {
             DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
-            if (L_DB_AudioObject.IsManaged == true
-                && (_Get_Volume() != L_DB_AudioObject.Volume
-                || _Get_Mute() != L_DB_AudioObject.IsMute))
+            if (L_DB_AudioObject.IsManaged == true)
             {
-                _Set_Volume_FromDB();
-                _Set_Mute_FromDB();
+                if (Convert.ToInt32(data.MasterVolume * 100) != L_DB_AudioObject.Volume)
+                {
+                    _Set_Volume(L_DB_AudioObject.Volume);
+                }
+
+                if (data.Muted != L_DB_AudioObject.IsMute)
+                {
+                    _Set_Mute(L_DB_AudioObject.IsMute);
+                }
             }
             else
             {
@@ -53,14 +58,12 @@ namespace Services
             {
                 if (Convert.ToInt32(volume * 100) != L_DB_AudioObject.Volume)
                 {
-                    //_Set_Volume_FromDB();
                     _Set_Volume(L_DB_AudioObject.Volume);
                 }
 
                 if (isMuted != L_DB_AudioObject.IsMute)
                 {
                     _Set_Mute(L_DB_AudioObject.IsMute);
-                    //_Set_Mute_FromDB();
                 }
             }
             else

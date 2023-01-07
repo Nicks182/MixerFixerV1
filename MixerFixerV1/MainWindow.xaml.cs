@@ -73,7 +73,12 @@ namespace MixerFixerV1
                 }
             });
 
-            
+            //this.G_Srv_MessageBus.RegisterEvent("themechanged", (status) =>
+            //{
+            //    _LoadTheme();
+            //});
+
+
 
             InitializeComponent();
 
@@ -101,6 +106,25 @@ namespace MixerFixerV1
             }
             
             
+        }
+
+        private void _LoadTheme()
+        {
+            Srv_DB L_Srv_DB = new Srv_DB();
+
+            DB_Theme L_DB_Theme_BG = L_Srv_DB.Theme_GetAll().Find(t => t.Name == "MF_Theme_Background").FirstOrDefault();
+
+            if (L_DB_Theme_BG != null)
+            {
+
+            }
+
+            DB_Theme L_DB_Theme_Text = L_Srv_DB.Theme_GetAll().Find(t => t.Name == "MF_Theme_Text").FirstOrDefault();
+
+            if (L_DB_Theme_Text != null)
+            {
+
+            }
         }
 
         private void _Check_WV_Runtime()
@@ -143,8 +167,9 @@ namespace MixerFixerV1
         private void _LoadWebView2()
         {
             Grid_NoRuntime.Visibility = Visibility.Collapsed;
+
             WV2_Viewer = new WebView2();
-            
+            WV2_Viewer.CreationProperties = new CoreWebView2CreationProperties { AdditionalBrowserArguments = "--enable-smooth-scrolling" };
             WV2_Viewer.CoreWebView2InitializationCompleted += WV2_Viewer_CoreWebView2InitializationCompleted;
             Grid.SetRow(WV2_Viewer, 0);
 
@@ -155,7 +180,6 @@ namespace MixerFixerV1
                 WV2_Viewer.Source = new Uri("http://127.0.0.1:5000");
             }
         }
-
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if(G_WV_RunTime_Waiter != null && G_WV_RunTime_Waiter.IsEnabled == true)
@@ -176,6 +200,9 @@ namespace MixerFixerV1
 
         private void WV2_Viewer_CoreWebView2InitializationCompleted(object? sender, Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs e)
         {
+            //smooth-scrolling
+
+            
             //WV2_Viewer.CoreWebView2.OpenDevToolsWindow();
         }
 

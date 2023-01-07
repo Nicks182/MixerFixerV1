@@ -9,7 +9,7 @@
     .progress > div
     {
         min-height: 100%;
-        background-color: var(--progress-color);
+        background-color: var(--MF_Progress_Color);
         transition: width 0.1s;
         width: 0%;
     }

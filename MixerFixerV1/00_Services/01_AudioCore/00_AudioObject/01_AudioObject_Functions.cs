@@ -112,47 +112,18 @@ namespace Services
                 {
                     if (_Get_Volume() != L_DB_AudioObject.Volume)
                     {
-                        _Set_Volume_FromDB();
+                        _Set_Volume(L_DB_AudioObject.Volume);
                     }
 
                     if (_Get_Mute() != L_DB_AudioObject.IsMute)
                     {
-                        _Set_Mute_FromDB();
+                        _Set_Mute(L_DB_AudioObject.IsMute);
                     }
                 }
             }
 
             _Init_DBObject_SetAppDefaultVolume(L_DB_AudioObject);
 
-            //G_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
-
-            //if (G_DB_AudioObject == null)
-            //{
-
-
-            //    G_DB_AudioObject = new DB_AudioObject
-            //    {
-            //        Id = Guid.Empty, // New object
-            //        IsActive = false,
-            //        IsDevice = (G_ObjectType == Arc_AudioObject_Type.IsDevice || G_ObjectType == Arc_AudioObject_Type.IsMicrophone),
-            //        IsManaged = false,
-            //        IsMute = _Get_Mute(),
-            //        Name = G_Name,
-            //        Volume = _Get_Volume()
-            //    };
-
-            //    G_Srv_DB.AudioObject_Save(G_DB_AudioObject);
-            //}
-            //else
-            //{
-            //    if(G_DB_AudioObject.IsManaged == true)
-            //    {
-            //        _Set_Volume_FromDB();
-            //        _Set_Mute_FromDB();
-            //    }
-            //}
-
-            //_Init_DBObject_SetAppDefaultVolume(G_DB_AudioObject);
         }
 
         private void _Init_DBObject_SetAppDefaultVolume(DB_AudioObject G_DB_AudioObject)
@@ -279,13 +250,6 @@ namespace Services
             return false;
         }
 
-        public void _Set_Mute_FromDB()
-        {
-            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
-            _Set_Mute(L_DB_AudioObject.IsMute);
-            
-        }
-
         public void _Set_Mute(bool P_Mute)
         {
             DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
@@ -325,8 +289,7 @@ namespace Services
                     break;
             }
 
-            //_Update_DB_Object();
-            _Update_DB_Mute();
+            _Update_DB_Object();
         }
 
         public bool _Get_Managed()
@@ -370,22 +333,6 @@ namespace Services
             return 0;
         }
 
-        public bool _Get_IsActive()
-        {
-            switch (G_ObjectType)
-            {
-                case Arc_AudioObject_Type.IsDevice:
-                case Arc_AudioObject_Type.IsMicrophone:
-                    return G_MMDevice.State == DeviceState.Active;
-
-                case Arc_AudioObject_Type.IsSession:
-                    return G_AudioSessionControl.State == AudioSessionState.AudioSessionStateActive;
-
-            }
-
-            return false;
-        }
-
         public void _Set_Volume(string P_Value)
         {
             _Update_DB_Volume(Convert.ToInt32(P_Value));
@@ -422,43 +369,11 @@ namespace Services
             }
         }
 
-        public bool _Get_DB_Managed()
-        {
-            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
-            return L_DB_AudioObject.IsManaged;
-        }
-
-        public bool _Get_DB_Mute()
-        {
-            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
-            return L_DB_AudioObject.IsMute;
-        }
-
-        public int _Get_DB_Volume()
-        {
-            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
-            return L_DB_AudioObject.Volume;
-        }
-
-        public void _Set_Volume_FromDB()
-        {
-            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
-            _Set_Volume(L_DB_AudioObject.Volume);
-        }
-
 
         private void _Update_DB_Volume(int P_Volume)
         {
             DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
             L_DB_AudioObject.Volume = P_Volume;
-
-            G_Srv_DB.AudioObject_Save(L_DB_AudioObject);
-        }
-
-        private void _Update_DB_Mute()
-        {
-            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
-            L_DB_AudioObject.IsMute = _Get_Mute();
 
             G_Srv_DB.AudioObject_Save(L_DB_AudioObject);
         }

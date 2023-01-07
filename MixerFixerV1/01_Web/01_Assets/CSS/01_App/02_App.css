@@ -1,10 +1,46 @@
+html
+{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
 
+body
+{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin: unset !important;
+    
+}
+
+#Body
+{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
 
 .MF_MixerApp
 {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    /*overflow-y: scroll;
+    overflow-x: auto;*/
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    padding: 5px;
+    scroll-behavior: smooth !important;
 }
 
 .MF_MixerAppMenu
@@ -12,16 +48,22 @@
     /*display: flex;
     flex-direction: row;*/
 
-    display:grid;
-    grid-template-columns: auto min-content;
+    display: grid;
+    grid-template-columns: auto min-content min-content;
     grid-template-rows: min-content;
-    grid-template-areas: 
-        "device settings";
+    column-gap: 5px;
+    grid-template-areas:
+        "device settings theme";
 }
 
 .MF_MixerAppMenu_Settings
 {
     grid-area: settings;
+}
+
+.MF_MixerAppMenu_Theme
+{
+    grid-area: theme;
 }
 
 .MF_MixerAppMenu_Device
@@ -55,4 +97,30 @@ input[type=number]
 input
 {
     box-sizing: border-box
-} 
+}
+
+
+::-webkit-scrollbar
+{
+    width: 8px; /* width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track
+{
+    background: var(--MF_Theme_Background); /* color of the tracking area */
+}
+
+::-webkit-scrollbar-thumb
+{
+    background-color: var(--MF_Theme_Background_HL); /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    border: 0px solid var(--MF_Theme_Background); /* creates padding around scroll thumb */
+}
+
+
+:root,
+div
+{
+    scrollbar-width: thin; /* "auto" or "thin" */
+    scrollbar-color: var(--MF_Theme_Background_HL) var(--MF_Theme_Background); /* scroll thumb and track */
+}

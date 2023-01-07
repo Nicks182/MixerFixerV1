@@ -3,9 +3,9 @@
 input[type=text],
 input[type=number]
 {
-    border: 1px solid var(--main-border-color);
+    border: 1px solid var(--MF_Theme_Accent);
     background-color: transparent;
-    color: var(--MF_Theme_Foreground);
+    color: var(--MF_Theme_Accent);
     width: 100%;
 }
 
