@@ -169,8 +169,14 @@ namespace MixerFixerV1
             Grid_NoRuntime.Visibility = Visibility.Collapsed;
 
             WV2_Viewer = new WebView2();
-            WV2_Viewer.CreationProperties = new CoreWebView2CreationProperties { AdditionalBrowserArguments = "--enable-smooth-scrolling" };
+            WV2_Viewer.CreationProperties = new CoreWebView2CreationProperties 
+            { 
+                AdditionalBrowserArguments = "--enable-smooth-scrolling" 
+            };
+
+
             WV2_Viewer.CoreWebView2InitializationCompleted += WV2_Viewer_CoreWebView2InitializationCompleted;
+
             Grid.SetRow(WV2_Viewer, 0);
 
             Grid_Main.Children.Add(WV2_Viewer);

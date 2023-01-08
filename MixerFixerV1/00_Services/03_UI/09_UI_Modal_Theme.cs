@@ -81,15 +81,13 @@ namespace Services
             P_Web_InterCommMessage.HTMLs.Clear();
             P_Web_InterCommMessage.HTMLs.Add(_Modal_Theme_ColorChange_StyleUpdate());
 
-            P_Web_InterCommMessage.Data = new List<Web_InterCommMessage_Data>
+            P_Web_InterCommMessage.Data.Clear();
+            P_Web_InterCommMessage.Data.Add(new Web_InterCommMessage_Data
             {
-                new Web_InterCommMessage_Data
-                {
-                    Id = G_HTML_Templates._Template_ThemeModal_Body_Panel_Color_Slider_Template_Value_Id(L_Id, P_Web_InterCommMessage.CommType) + "_Text",
-                    Value = L_Value.ToString(),
-                    DataType = Web_InterCommMessage_DataType.ButtonText
-                }
-            };
+                Id = G_HTML_Templates._Template_ThemeModal_Body_Panel_Color_Slider_Template_Value_Id(L_Id, P_Web_InterCommMessage.CommType) + "_Text",
+                Value = L_Value.ToString(),
+                DataType = Web_InterCommMessage_DataType.ButtonText
+            });
 
             P_Web_InterCommMessage.CommType = Web_InterCommMessage_Type.Theme_Color_Changed;
         }

@@ -39,10 +39,6 @@ namespace MixerFixerV1
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            // Orignal colors
-            //SolidColorBrush L_MainThemeBG = new SolidColorBrush(Color.FromArgb(255, (byte)30, (byte)30, (byte)30));
-            //SolidColorBrush L_MainThemeFG = new SolidColorBrush(Color.FromArgb(255, (byte)77, (byte)100, (byte)111));
-
             this.G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
 
             this.G_Srv_MessageBus.RegisterEvent("themechanged", (status) =>
@@ -65,6 +61,12 @@ namespace MixerFixerV1
             //resourceDictionary["WindowBorderColour"] = L_MainThemeBG;
             //resourceDictionary["ControlDefaultForeground"] = L_MainThemeFG;
             //resourceDictionary["ControlGlythColour"] = L_MainThemeFG;
+
+            // Orignal colors
+            //SolidColorBrush L_MainThemeBG = new SolidColorBrush(Color.FromArgb(255, (byte)30, (byte)30, (byte)30));
+            //SolidColorBrush L_MainThemeFG = new SolidColorBrush(Color.FromArgb(255, (byte)77, (byte)100, (byte)111));
+
+
         }
 
         private void _LoadTheme()
