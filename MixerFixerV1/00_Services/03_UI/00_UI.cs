@@ -18,7 +18,7 @@ namespace Services
         private Srv_MessageBus G_Srv_MessageBus;
 
         Srv_TimerManager G_TimerManager;
-        Srv_TimerManager G_TimerDeviceManager;
+        //Srv_TimerManager G_TimerDeviceManager;
         Srv_TimerManager G_TimerVolumeManager;
         HTML_Templates G_HTML_Templates;
         Srv_AudioCore G_Srv_AudioCore;
@@ -30,23 +30,27 @@ namespace Services
         };
 
         public Srv_UI(IHubContext<CommandHub> P_CommandHub, Srv_Logger P_Srv_Logger)
+        //public Srv_UI(IHubContext<CommandHub> P_CommandHub, Srv_Logger P_Srv_Logger)
         {
             G_CommandHub = P_CommandHub;
             G_Srv_Logger = P_Srv_Logger;
 
-            this.G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
-            this.G_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
+            G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
+            G_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
+            //G_Srv_AudioCore = App.ServiceProvider.GetService(typeof(Srv_AudioCore)) as Srv_AudioCore;
+            //G_Srv_AudioCore = P_Srv_AudioCore;
 
             G_TimerManager = new Srv_TimerManager();
-            G_TimerDeviceManager = new Srv_TimerManager();
+            //G_TimerDeviceManager = new Srv_TimerManager();
             G_TimerVolumeManager = new Srv_TimerManager();
-            G_Srv_AudioCore = new Srv_AudioCore(G_Srv_DB);
-            G_HTML_Templates = new HTML_Templates(G_Srv_AudioCore, G_Srv_DB);
+            //G_Srv_AudioCore = new Srv_AudioCore(G_Srv_DB);
+            
+            //G_HTML_Templates = new HTML_Templates(G_Srv_AudioCore, G_Srv_DB);
 
-            G_Srv_AudioCore.DoUpdate += G_Srv_AudioCore_DoUpdate;
-            G_Srv_AudioCore.OnVolumeHasChanged += G_Srv_AudioCore_OnVolumeChanged;
-            G_Srv_AudioCore.OnDefaultDeviceSet += G_Srv_AudioCore_OnDefaultDeviceSet;
-            G_Srv_AudioCore.OnDeviceStateChange += G_Srv_AudioCore_OnDeviceStateChange;
+            //G_Srv_AudioCore.DoUpdate += G_Srv_AudioCore_DoUpdate;
+            //G_Srv_AudioCore.OnVolumeHasChanged += G_Srv_AudioCore_OnVolumeChanged;
+            //G_Srv_AudioCore.OnDefaultDeviceSet += G_Srv_AudioCore_OnDefaultDeviceSet;
+            //G_Srv_AudioCore.OnDeviceStateChange += G_Srv_AudioCore_OnDeviceStateChange;
         }
 
         private void G_Srv_AudioCore_OnDeviceStateChange(string P_DeviceId, NAudio.CoreAudioApi.DeviceState P_NewState)
@@ -67,7 +71,7 @@ namespace Services
         {
             //G_Srv_Logger._LogMessage(G_Srv_AudioCore.Device.Device._Get_ID() + " == " + P_DeviceId);
             Web_InterCommMessage L_CommMessage = new Web_InterCommMessage { CommType = Web_InterCommMessage_Type.Init };
-            _Init(L_CommMessage);
+            _LoadUI(L_CommMessage);
 
             G_CommandHub.Clients.All.SendAsync("ReceiveMessage", L_CommMessage);
         }

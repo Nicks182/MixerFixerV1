@@ -35,26 +35,28 @@ namespace MixerFixerV1
         DispatcherTimer G_WV_RunTime_Waiter = null;
         bool G_HasWVRuntime = false;
 
-        #region ServerStatus
-        public string G_ServerStatus
-        {
-            get
-            {
-                return (string)GetValue(ServerStatusProperty);
-            }
-            set
-            {
-                SetValue(ServerStatusProperty, value);
-            }
-        }
+        public string G_ServerStatus { get; set; }
 
-        public readonly DependencyProperty ServerStatusProperty = DependencyProperty.Register(
-                                                                        "ServerStatusProperty",
-                                                                        typeof(string),
-                                                                        typeof(MainWindow), new UIPropertyMetadata("started")
-                                                                    );
+        //#region ServerStatus
+        //public string G_ServerStatus
+        //{
+        //    get
+        //    {
+        //        return (string)GetValue(ServerStatusProperty);
+        //    }
+        //    set
+        //    {
+        //        SetValue(ServerStatusProperty, value);
+        //    }
+        //}
 
-        #endregion ServerStatus
+        //public readonly DependencyProperty ServerStatusProperty = DependencyProperty.Register(
+        //                                                                "ServerStatusProperty",
+        //                                                                typeof(string),
+        //                                                                typeof(MainWindow), new UIPropertyMetadata("started")
+        //                                                            );
+
+        //#endregion ServerStatus
 
         public MainWindow()
         {
@@ -62,16 +64,18 @@ namespace MixerFixerV1
             this.G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
 
 
-            this.G_Srv_MessageBus.RegisterEvent("serverstatuschanged", (status) =>
-            {
-                G_ServerStatus = this.G_Srv_Server.GetServerStatus();
-                Txt_ServerOutput.Text = "Status: " + G_ServerStatus;
+            
 
-                if (G_ServerStatus.Contains("Running") == true)
-                {
-                    _InitUI();
-                }
-            });
+            //this.G_Srv_MessageBus.RegisterEvent("serverstatuschanged", (status) =>
+            //{
+            //    G_ServerStatus = this.G_Srv_Server.GetServerStatus();
+            //    Txt_ServerOutput.Text = "Status: " + G_ServerStatus;
+
+            //    if (G_ServerStatus.Contains("Running") == true)
+            //    {
+            //        _InitUI();
+            //    }
+            //});
 
             //this.G_Srv_MessageBus.RegisterEvent("themechanged", (status) =>
             //{
@@ -87,10 +91,15 @@ namespace MixerFixerV1
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Task.Run(() =>
+            G_ServerStatus = this.G_Srv_Server.GetServerStatus();
+            if (G_ServerStatus.Contains("Running") == true)
             {
-                G_Srv_Server.StartServer();
-            });
+                _InitUI();
+            }
+            //Task.Run(() =>
+            //{
+            //    G_Srv_Server.StartServer();
+            //});
 
             _Check_WV_Runtime();
 
@@ -108,24 +117,24 @@ namespace MixerFixerV1
             
         }
 
-        private void _LoadTheme()
-        {
-            Srv_DB L_Srv_DB = new Srv_DB();
+        //private void _LoadTheme()
+        //{
+        //    Srv_DB L_Srv_DB = new Srv_DB();
 
-            DB_Theme L_DB_Theme_BG = L_Srv_DB.Theme_GetAll().Find(t => t.Name == "MF_Theme_Background").FirstOrDefault();
+        //    DB_Theme L_DB_Theme_BG = L_Srv_DB.Theme_GetAll().Find(t => t.Name == "MF_Theme_Background").FirstOrDefault();
 
-            if (L_DB_Theme_BG != null)
-            {
+        //    if (L_DB_Theme_BG != null)
+        //    {
 
-            }
+        //    }
 
-            DB_Theme L_DB_Theme_Text = L_Srv_DB.Theme_GetAll().Find(t => t.Name == "MF_Theme_Text").FirstOrDefault();
+        //    DB_Theme L_DB_Theme_Text = L_Srv_DB.Theme_GetAll().Find(t => t.Name == "MF_Theme_Text").FirstOrDefault();
 
-            if (L_DB_Theme_Text != null)
-            {
+        //    if (L_DB_Theme_Text != null)
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
         private void _Check_WV_Runtime()
         {

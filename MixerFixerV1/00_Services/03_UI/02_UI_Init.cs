@@ -12,13 +12,30 @@ namespace Services
     public partial class Srv_UI
     {
         
-        public void _Init(Web_InterCommMessage P_Web_InterCommMessage)
+        public void _Init(Srv_AudioCore P_Srv_AudioCore)
+        {
+            G_Srv_AudioCore = P_Srv_AudioCore;
+
+            G_Srv_AudioCore.DoUpdate -= G_Srv_AudioCore_DoUpdate;
+            G_Srv_AudioCore.OnVolumeHasChanged -= G_Srv_AudioCore_OnVolumeChanged;
+            G_Srv_AudioCore.OnDefaultDeviceSet -= G_Srv_AudioCore_OnDefaultDeviceSet;
+            G_Srv_AudioCore.OnDeviceStateChange -= G_Srv_AudioCore_OnDeviceStateChange;
+
+            G_Srv_AudioCore.DoUpdate += G_Srv_AudioCore_DoUpdate;
+            G_Srv_AudioCore.OnVolumeHasChanged += G_Srv_AudioCore_OnVolumeChanged;
+            G_Srv_AudioCore.OnDefaultDeviceSet += G_Srv_AudioCore_OnDefaultDeviceSet;
+            G_Srv_AudioCore.OnDeviceStateChange += G_Srv_AudioCore_OnDeviceStateChange;
+
+            G_HTML_Templates = new HTML_Templates(G_Srv_AudioCore, G_Srv_DB);
+        }
+
+        public void _LoadUI(Web_InterCommMessage P_Web_InterCommMessage)
         {
             G_TimerManager.StopTimer();
-            G_TimerDeviceManager.StopTimer();
+            //G_TimerDeviceManager.StopTimer();
             //G_TimerVolumeManager.StopTimer();
             
-            G_Srv_AudioCore.Init();
+            //G_Srv_AudioCore.Init();
 
             G_Srv_Logger._LogMessage("Default Device: " + G_Srv_AudioCore.Device.Device.Name);
 
@@ -37,7 +54,7 @@ namespace Services
 
             _StartDataPush();
 
-            G_TimerDeviceManager.PrepareTimer(() => G_Srv_AudioCore.SetDefault_Devices(), 500, 500);
+            //G_TimerDeviceManager.PrepareTimer(() => G_Srv_AudioCore.SetDefault_Devices(), 500, 500);
             //G_TimerVolumeManager.PrepareTimer(() => G_Srv_AudioCore.CheckForVolumeChanges(), 500, 50);
         }
 

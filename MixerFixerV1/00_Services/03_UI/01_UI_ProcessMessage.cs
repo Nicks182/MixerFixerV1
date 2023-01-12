@@ -19,7 +19,7 @@ namespace Services
                 switch (P_Web_InterCommMessage.CommType)
                 {
                     case Web_InterCommMessage_Type.Init:
-                        _Init(P_Web_InterCommMessage);
+                        _LoadUI(P_Web_InterCommMessage);
                         break;
 
                     case Web_InterCommMessage_Type.Volume_Change:

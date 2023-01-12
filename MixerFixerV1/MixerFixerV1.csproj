@@ -26,8 +26,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Remove="wwwroot\favicon-16x16.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Theme\Images\CloseIcon-16x16.png" />
+	  <None Remove="Theme\Images\TrayIcon.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Folder Include="00_Services\02_Web\" />
 	  <Folder Include="01_Web\01_Assets\_Libs\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Theme\Images\CloseIcon-16x16.png" />
+	  <Resource Include="Theme\Images\TrayIcon.ico" />
 	</ItemGroup>
 
 </Project>

@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Services;
+﻿
+
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,22 +8,83 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using Microsoft.Extensions.DependencyInjection;
+
+using NotifyIcon = System.Windows.Forms.NotifyIcon;
+using System.Windows.Forms;
+
+using Services;
+using System.IO;
 
 namespace MixerFixerV1
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : System.Windows.Application
     {
+        public static NotifyIcon G_NotifyIcon;
+        private ContextMenuStrip G_NotifyIcon_Menu;
+
         public static ServiceProvider ServiceProvider;
 
         private Srv_MessageBus G_Srv_MessageBus;
+        private Srv_Server G_Srv_Server;
+
+        private MainWindow G_MainWindow;
+        //private Srv_DB G_Srv_DB;
+        //public static Srv_AudioCore G_Srv_AudioCore;
+        //public static Srv_UI G_Srv_UI;
 
         public App()
         {
             LoadDepedencies();
         }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            _Init_TrayIcon();
+
+            base.OnStartup(e);
+        }
+
+        private void _Init_TrayIcon()
+        {
+            Stream L_MenuIconStream = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/MixerFixerV1;component/Theme/Images/CloseIcon-16x16.png")).Stream;
+
+            System.Drawing.Image L_ContextImage = System.Drawing.Image.FromStream(L_MenuIconStream);
+            L_MenuIconStream.Dispose();
+
+            G_NotifyIcon_Menu = new ContextMenuStrip();
+            G_NotifyIcon_Menu.Items.Add("Exit!", L_ContextImage, new System.EventHandler(Exit_Click));
+
+            App.G_NotifyIcon = new NotifyIcon();
+            G_NotifyIcon.Click += new EventHandler(icon_Click);
+            //G_NotifyIcon.Icon = new System.Drawing.Icon(typeof(App), "favicon.ico");
+            G_NotifyIcon.Text = "MixerFixer";
+            Stream L_TrayIconStream = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/MixerFixerV1;component/Theme/Images/TrayIcon.ico")).Stream;
+            G_NotifyIcon.Icon = new System.Drawing.Icon(L_TrayIconStream);
+            L_TrayIconStream.Dispose();
+
+            G_NotifyIcon.ContextMenuStrip = G_NotifyIcon_Menu;
+
+            G_NotifyIcon.Visible = true;
+        }
+
+        private void icon_Click(Object sender, EventArgs e)
+        {
+            if ((e as System.Windows.Forms.MouseEventArgs).Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                G_MainWindow = new MainWindow();
+                G_MainWindow.Show();
+            }
+        }
+
+        protected void Exit_Click(Object sender, System.EventArgs e)
+        {
+            App.Current.Shutdown();
+        }
+
 
         public static ServiceCollection Services { get; set; } = new ServiceCollection();
         private void LoadDepedencies()
@@ -31,23 +92,36 @@ namespace MixerFixerV1
             Services.AddSingleton<Srv_MessageBus>();
             Services.AddSingleton<Srv_DB>();
             Services.AddSingleton<Srv_Server>();
+            //Services.AddSingleton<Srv_AudioCore>();
+            //Services.AddSingleton<Srv_UI>();
+            
 
             App.ServiceProvider = Services.BuildServiceProvider();
 
-            
+            G_Srv_Server = App.ServiceProvider.GetService(typeof(Srv_Server)) as Srv_Server;
+            Task.Run(() =>
+            {
+                G_Srv_Server.StartServer();
+            });
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            this.G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
+            G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
+            //G_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
+            //G_Srv_AudioCore = App.ServiceProvider.GetService(typeof(Srv_AudioCore)) as Srv_AudioCore;
+            //G_Srv_AudioCore = new Srv_AudioCore(G_Srv_DB);
 
-            this.G_Srv_MessageBus.RegisterEvent("themechanged", (status) =>
+
+            G_Srv_MessageBus.RegisterEvent("themechanged", (status) =>
             {
                 _LoadTheme();
             });
 
             _LoadTheme();
 
+            //G_Srv_AudioCore.Init();
+            string bla = "";
             //int r = 33;
             //int g = 33;
             //int b = 33;
@@ -71,7 +145,7 @@ namespace MixerFixerV1
 
         private void _LoadTheme()
         {
-            var resourceDictionary = Application.Current.Resources.MergedDictionaries[0];
+            var resourceDictionary = System.Windows.Application.Current.Resources.MergedDictionaries[0];
 
             Srv_DB L_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
             L_Srv_DB.Theme_SetDefaults();
@@ -110,5 +184,10 @@ namespace MixerFixerV1
 
         }
 
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+            App.G_NotifyIcon.Visible = false;
+            App.G_NotifyIcon.Dispose();
+        }
     }
 }

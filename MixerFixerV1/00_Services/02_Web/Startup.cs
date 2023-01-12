@@ -36,9 +36,10 @@ namespace Services
         {
 
             services.AddSingleton<Srv_Logger>();
-            //services.AddSingleton<Srv_DB>();
+            services.AddSingleton<Srv_DB>();
             //services.AddSingleton<Srv_TimerManager>();
             //services.AddSingleton<HTML_Templates>();
+            //services.AddSingleton<Srv_AudioCore>();
             services.AddSingleton<Srv_UI>();
 
             services.AddCors();

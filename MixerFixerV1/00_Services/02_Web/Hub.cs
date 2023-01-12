@@ -10,17 +10,30 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.SignalR;
+using MixerFixerV1;
 
 namespace Services
 {
     public class CommandHub : Hub
     {
+        private Srv_MessageBus G_Srv_MessageBus;
         private Srv_UI G_UIService;
+        private Srv_AudioCore G_Srv_AudioCore;
 
         public CommandHub(Srv_UI P_UIService)
         {
+            G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
+
+            G_Srv_AudioCore = new Srv_AudioCore();
+            G_Srv_AudioCore.Init();
             G_UIService = P_UIService;
+            G_UIService._Init(G_Srv_AudioCore);
         }
+
+        //public CommandHub()
+        //{
+        //    G_UIService = App.ServiceProvider.GetService(typeof(Srv_UI)) as Srv_UI; ;
+        //}
 
         private Task G_UIService_UpdateData(Web_InterCommMessage P_Web_InterCommMessage)
         {
