@@ -60,47 +60,20 @@ namespace MixerFixerV1
 
         public MainWindow()
         {
-            this.G_Srv_Server = App.ServiceProvider.GetService(typeof(Srv_Server)) as Srv_Server;
-            this.G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
-
-
-            
-
-            //this.G_Srv_MessageBus.RegisterEvent("serverstatuschanged", (status) =>
-            //{
-            //    G_ServerStatus = this.G_Srv_Server.GetServerStatus();
-            //    Txt_ServerOutput.Text = "Status: " + G_ServerStatus;
-
-            //    if (G_ServerStatus.Contains("Running") == true)
-            //    {
-            //        _InitUI();
-            //    }
-            //});
-
-            //this.G_Srv_MessageBus.RegisterEvent("themechanged", (status) =>
-            //{
-            //    _LoadTheme();
-            //});
-
-
+            G_Srv_Server = App.ServiceProvider.GetService(typeof(Srv_Server)) as Srv_Server;
+            G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
 
             InitializeComponent();
-
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            G_ServerStatus = this.G_Srv_Server.GetServerStatus();
+            G_ServerStatus = G_Srv_Server.GetServerStatus();
             if (G_ServerStatus.Contains("Running") == true)
             {
                 _InitUI();
             }
-            //Task.Run(() =>
-            //{
-            //    G_Srv_Server.StartServer();
-            //});
-
+            
             _Check_WV_Runtime();
 
 
@@ -111,30 +84,10 @@ namespace MixerFixerV1
             else
             {
                 _LoadWebView2();
-                //MessageBox.Show(CurrentVersion);
             }
             
             
         }
-
-        //private void _LoadTheme()
-        //{
-        //    Srv_DB L_Srv_DB = new Srv_DB();
-
-        //    DB_Theme L_DB_Theme_BG = L_Srv_DB.Theme_GetAll().Find(t => t.Name == "MF_Theme_Background").FirstOrDefault();
-
-        //    if (L_DB_Theme_BG != null)
-        //    {
-
-        //    }
-
-        //    DB_Theme L_DB_Theme_Text = L_Srv_DB.Theme_GetAll().Find(t => t.Name == "MF_Theme_Text").FirstOrDefault();
-
-        //    if (L_DB_Theme_Text != null)
-        //    {
-
-        //    }
-        //}
 
         private void _Check_WV_Runtime()
         {
@@ -195,16 +148,8 @@ namespace MixerFixerV1
                 WV2_Viewer.Source = new Uri("http://127.0.0.1:5000");
             }
         }
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if(G_WV_RunTime_Waiter != null && G_WV_RunTime_Waiter.IsEnabled == true)
-            {
-                G_WV_RunTime_Waiter.Stop();
-            }
-
-            ClearBrowserCache();
-        }
-
+        
+        
         private void _InitUI()
         {
             if (WV2_Viewer != null)
@@ -223,7 +168,15 @@ namespace MixerFixerV1
 
         private void ClearBrowserCache()
         {
-            WV2_Viewer.CoreWebView2.Profile.ClearBrowsingDataAsync();
+            if (WV2_Viewer != null)
+            {
+                if (WV2_Viewer.CoreWebView2 != null)
+                {
+                    WV2_Viewer.CoreWebView2.Profile.ClearBrowsingDataAsync();
+                }
+
+                WV2_Viewer.Dispose();
+            }
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -231,5 +184,25 @@ namespace MixerFixerV1
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
             e.Handled = true;
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            bool L_DoShutdown = new Win_ConfirmShutdown().ShowDialog().GetValueOrDefault(false);
+
+            _DisposeOfWebviewStuffs();
+
+            G_Srv_MessageBus.Emit("windowclosed", L_DoShutdown);
+        }
+
+        public void _DisposeOfWebviewStuffs()
+        {
+            if (G_WV_RunTime_Waiter != null && G_WV_RunTime_Waiter.IsEnabled == true)
+            {
+                G_WV_RunTime_Waiter.Stop();
+            }
+
+            ClearBrowserCache();
+        }
+
     }
 }

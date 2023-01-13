@@ -16,12 +16,7 @@ namespace Services
         Srv_TimerManager G_TimerDeviceManager;
 
         //NotificationClientImplementation G_NotificationClientImplementation;
-        //Arc_AudioObject G_Device { get; set; }
-        //List<Arc_AudioObject> G_Sessions = new List<Arc_AudioObject>();
-
-        //List<Arc_Device> G_Devices = new List<Arc_Device>();
-        //public List<Arc_Device> Devices { get { return G_Devices; } }
-
+        
         Arc_Device G_Device { get; set; }
         public Arc_Device Device { get { return G_Device; } }
 
@@ -39,17 +34,16 @@ namespace Services
         public delegate void OnDefaultDeviceSetDelegate(string P_DeviceId);
         public event OnDefaultDeviceSetDelegate OnDefaultDeviceSet;
 
-        //public Srv_AudioCore(Srv_DB P_Srv_DB)
         public Srv_AudioCore()
         {
             G_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
             G_TimerDeviceManager = new Srv_TimerManager();
+            
             //G_NotificationClientImplementation = new NotificationClientImplementation();
             //G_NotificationClientImplementation.OnDefaultDeviceChange += G_NotificationClientImplementation_OnDefaultDeviceChange;
             //G_NotificationClientImplementation.OnDeviceStateChange += G_NotificationClientImplementation_OnDeviceStateChange;
             //G_MMDeviceEnumerator.RegisterEndpointNotificationCallback(G_NotificationClientImplementation);
 
-            //Init();
         }
 
         public void Init()

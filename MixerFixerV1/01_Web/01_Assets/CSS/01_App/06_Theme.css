@@ -64,9 +64,13 @@
     align-items: center;
 }
 
+    .MF_ThemePanel_Color_Slider > button
+    {
+        width: 37px;
+    }
+
 .MF_ThemePanel_Color_Slider_Red
 {
-
 }
 
 .MF_ThemePanel_Color_Slider_Green

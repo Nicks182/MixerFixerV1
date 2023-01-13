@@ -76,7 +76,7 @@ namespace Services
 
             G_Srv_DB.Theme_Save(L_DB_Theme);
 
-            this.G_Srv_MessageBus.Emit("themechanged", "yes");
+            G_Srv_MessageBus.Emit("themechanged", "yes");
 
             P_Web_InterCommMessage.HTMLs.Clear();
             P_Web_InterCommMessage.HTMLs.Add(_Modal_Theme_ColorChange_StyleUpdate());
@@ -114,7 +114,7 @@ namespace Services
 
             P_Web_InterCommMessage.CommType = Web_InterCommMessage_Type.Theme_Color_Changed;
 
-            this.G_Srv_MessageBus.Emit("themechanged", "yes");
+            G_Srv_MessageBus.Emit("themechanged", "yes");
         }
 
         private Web_InterCommMessage_HTML _Modal_Theme_ColorChange_StyleUpdate()

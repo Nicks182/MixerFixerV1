@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using Microsoft.Extensions.DependencyInjection;
+using System.IO;
+using System.Reflection;
 
 using NotifyIcon = System.Windows.Forms.NotifyIcon;
 using System.Windows.Forms;
 
 using Services;
-using System.IO;
+using System.Diagnostics;
 
 namespace MixerFixerV1
 {
@@ -23,6 +25,11 @@ namespace MixerFixerV1
     /// </summary>
     public partial class App : System.Windows.Application
     {
+        //public static string G_BaseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        //public static string G_BaseDir = Assembly.GetExecutingAssembly().Location.Replace("\\MixerFixerV1.dll","");
+        //public static string G_BaseDir = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
+        public static string G_BaseDir = Process.GetCurrentProcess().MainModule.FileName.Replace("\\MixerFixerV1.exe", "");
+
         public static NotifyIcon G_NotifyIcon;
         private ContextMenuStrip G_NotifyIcon_Menu;
 
@@ -30,15 +37,19 @@ namespace MixerFixerV1
 
         private Srv_MessageBus G_Srv_MessageBus;
         private Srv_Server G_Srv_Server;
+        private Srv_DB G_Srv_DB;
+        //public Srv_AudioCore G_Srv_AudioCore;
+        //private Srv_UI G_Srv_UI;
 
         private MainWindow G_MainWindow;
         //private Srv_DB G_Srv_DB;
-        //public static Srv_AudioCore G_Srv_AudioCore;
+        
         //public static Srv_UI G_Srv_UI;
 
         public App()
         {
-            LoadDepedencies();
+            
+        LoadDepedencies();
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -56,10 +67,10 @@ namespace MixerFixerV1
             L_MenuIconStream.Dispose();
 
             G_NotifyIcon_Menu = new ContextMenuStrip();
-            G_NotifyIcon_Menu.Items.Add("Exit!", L_ContextImage, new System.EventHandler(Exit_Click));
+            G_NotifyIcon_Menu.Items.Add("Exit!", L_ContextImage, new System.EventHandler(TrayIconExit_Click));
 
             App.G_NotifyIcon = new NotifyIcon();
-            G_NotifyIcon.Click += new EventHandler(icon_Click);
+            G_NotifyIcon.Click += new EventHandler(TrayIcon_Click);
             //G_NotifyIcon.Icon = new System.Drawing.Icon(typeof(App), "favicon.ico");
             G_NotifyIcon.Text = "MixerFixer";
             Stream L_TrayIconStream = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/MixerFixerV1;component/Theme/Images/TrayIcon.ico")).Stream;
@@ -71,7 +82,7 @@ namespace MixerFixerV1
             G_NotifyIcon.Visible = true;
         }
 
-        private void icon_Click(Object sender, EventArgs e)
+        private void TrayIcon_Click(Object sender, EventArgs e)
         {
             if ((e as System.Windows.Forms.MouseEventArgs).Button == System.Windows.Forms.MouseButtons.Left)
             {
@@ -80,9 +91,9 @@ namespace MixerFixerV1
             }
         }
 
-        protected void Exit_Click(Object sender, System.EventArgs e)
+        protected void TrayIconExit_Click(Object sender, System.EventArgs e)
         {
-            App.Current.Shutdown();
+            _DoShutdown();
         }
 
 
@@ -92,24 +103,66 @@ namespace MixerFixerV1
             Services.AddSingleton<Srv_MessageBus>();
             Services.AddSingleton<Srv_DB>();
             Services.AddSingleton<Srv_Server>();
-            //Services.AddSingleton<Srv_AudioCore>();
-            //Services.AddSingleton<Srv_UI>();
+            Services.AddSingleton<Srv_AudioCore>();
             
 
             App.ServiceProvider = Services.BuildServiceProvider();
 
+
+
+            G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
             G_Srv_Server = App.ServiceProvider.GetService(typeof(Srv_Server)) as Srv_Server;
+
+            G_Srv_MessageBus.RegisterEvent("serverstatuschanged", (status) =>
+            {
+                if (G_Srv_Server.GetServerStatus().Contains("Running") == true)
+                {
+                    _InitUI();
+                }
+            });
+
+            G_Srv_MessageBus.RegisterEvent("windowclosed", (P_DoShutdown) =>
+            {
+                if (Convert.ToBoolean(P_DoShutdown) == true)
+                {
+                    _DoShutdown();
+                }
+            });
+
             Task.Run(() =>
             {
                 G_Srv_Server.StartServer();
+                
             });
+        }
+
+        private void _DoShutdown()
+        {
+            if (G_MainWindow != null)
+            {
+                //G_MainWindow.Close();
+                //G_MainWindow._DisposeOfWebviewStuffs();
+                G_MainWindow = null;
+            }
+            App.Current.Shutdown();
+        }
+
+        private void _InitUI()
+        {
+            DB_Settings L_StartHidden = G_Srv_DB.Settings_GetOne(G_Srv_DB.G_StartHidden);
+
+            if (L_StartHidden.Value == "0")
+            {
+                G_MainWindow = new MainWindow();
+                G_MainWindow.Show();
+            }
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
             //G_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
-            //G_Srv_AudioCore = App.ServiceProvider.GetService(typeof(Srv_AudioCore)) as Srv_AudioCore;
+            
             //G_Srv_AudioCore = new Srv_AudioCore(G_Srv_DB);
 
 
@@ -120,7 +173,8 @@ namespace MixerFixerV1
 
             _LoadTheme();
 
-            //G_Srv_AudioCore.Init();
+            
+
             string bla = "";
             //int r = 33;
             //int g = 33;
@@ -147,10 +201,10 @@ namespace MixerFixerV1
         {
             var resourceDictionary = System.Windows.Application.Current.Resources.MergedDictionaries[0];
 
-            Srv_DB L_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
-            L_Srv_DB.Theme_SetDefaults();
+            G_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
+            G_Srv_DB.Theme_SetDefaults();
 
-            DB_Theme L_DB_Theme_BG = L_Srv_DB.Theme_GetOne(L_Srv_DB.MF_Theme_Background);
+            DB_Theme L_DB_Theme_BG = G_Srv_DB.Theme_GetOne(G_Srv_DB.MF_Theme_Background);
 
 
             if (L_DB_Theme_BG != null)
@@ -174,7 +228,7 @@ namespace MixerFixerV1
                 resourceDictionary["WindowBorderColour"] = L_MainThemeBG;
             }
 
-            DB_Theme L_DB_Theme_Accent = L_Srv_DB.Theme_GetOne(L_Srv_DB.MF_Theme_Accent);
+            DB_Theme L_DB_Theme_Accent = G_Srv_DB.Theme_GetOne(G_Srv_DB.MF_Theme_Accent);
             if (L_DB_Theme_Accent != null)
             {
                 SolidColorBrush L_MainThemeFG = new SolidColorBrush(Color.FromArgb(255, (byte)L_DB_Theme_Accent.Red, (byte)L_DB_Theme_Accent.Green, (byte)L_DB_Theme_Accent.Blue));

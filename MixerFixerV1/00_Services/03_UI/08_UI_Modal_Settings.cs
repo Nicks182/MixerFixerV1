@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Win32;
+using MixerFixerV1;
 using Web;
 
 namespace Services
@@ -39,6 +43,14 @@ namespace Services
 
                 case Web_InterCommMessage_Type.Settings_DefaultVolume_Change:
                     _Modal_Settings_VolumeInput_Change(P_Web_InterCommMessage);
+                    break;
+
+                case Web_InterCommMessage_Type.Settings_StartHidden_Change:
+                    _Modal_Settings_StartHidden_Change(P_Web_InterCommMessage);
+                    break;
+
+                case Web_InterCommMessage_Type.Settings_StartWithWindows_Change:
+                    _Modal_Settings_StartWithWindows_Change(P_Web_InterCommMessage);
                     break;
             }
         }
@@ -238,6 +250,77 @@ namespace Services
             }
         }
 
+        private void _Modal_Settings_StartHidden_Change(Web_InterCommMessage P_Web_InterCommMessage)
+        {
+            DB_Settings L_StartHidden = G_Srv_DB.Settings_GetOne(G_Srv_DB.G_StartHidden);
+            if (L_StartHidden.Value == "1")
+            {
+                L_StartHidden.Value = "0";
+            }
+            else
+            {
+                L_StartHidden.Value = "1";
+            }
+
+            G_Srv_DB.Settings_Save(L_StartHidden);
+
+            P_Web_InterCommMessage.Data = new List<Web_InterCommMessage_Data>
+            {
+                new Web_InterCommMessage_Data
+                {
+                    Id = G_HTML_Templates._Template_SettingsModal_Body_StartHidden_Id(),
+                    Value = L_StartHidden.Value,
+                    DataType = Web_InterCommMessage_DataType.Toggle
+                }
+            };
+
+            P_Web_InterCommMessage.CommType = Web_InterCommMessage_Type.DataUpdate;
+        }
+        
+        private void _Modal_Settings_StartWithWindows_Change(Web_InterCommMessage P_Web_InterCommMessage)
+        {
+            DB_Settings L_StartHidden = G_Srv_DB.Settings_GetOne(G_Srv_DB.G_StartWithWindows);
+            if (L_StartHidden.Value == "1")
+            {
+                L_StartHidden.Value = "0";
+                _Modal_Settings_StartWithWindows_Setup(false);
+            }
+            else
+            {
+                L_StartHidden.Value = "1";
+                _Modal_Settings_StartWithWindows_Setup(true);
+            }
+
+            G_Srv_DB.Settings_Save(L_StartHidden);
+
+            P_Web_InterCommMessage.Data = new List<Web_InterCommMessage_Data>
+            {
+                new Web_InterCommMessage_Data
+                {
+                    Id = G_HTML_Templates._Template_SettingsModal_Body_StartWithWindows_Id(),
+                    Value = L_StartHidden.Value,
+                    DataType = Web_InterCommMessage_DataType.Toggle
+                }
+            };
+
+            P_Web_InterCommMessage.CommType = Web_InterCommMessage_Type.DataUpdate;
+        }
+
+        private void _Modal_Settings_StartWithWindows_Setup(bool P_IsStartWithWindows)
+        {
+            if(P_IsStartWithWindows == true)
+            {
+                Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                string str = Assembly.GetExecutingAssembly().Location;
+                key.SetValue("MixerFixer", Path.Combine(App.G_BaseDir, "MixerFixerV1.exe"));
+            }
+            else
+            {
+                var path = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(path, true);
+                key.DeleteValue("MixerFixer", false);
+            }
+        }
 
     }
 }

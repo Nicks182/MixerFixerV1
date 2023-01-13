@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:MixerFixerV1"
              ShutdownMode="OnExplicitShutdown"
              Exit="Application_Exit"
+             Startup="Application_Startup"
              >
     
     <Application.Resources>

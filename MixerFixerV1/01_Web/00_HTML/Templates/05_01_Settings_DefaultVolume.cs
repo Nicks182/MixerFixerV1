@@ -52,7 +52,7 @@ namespace Web
                                         );
 
 
-            L_HTML_Object.Add_Attribute("class", "MF_SettingsPanel_UseDefaultVolume");
+            //L_HTML_Object.Add_Attribute("class", "MF_SettingsPanel_UseDefaultVolume");
             //L_HTML_Object.Add_Attribute("IsRotate", "270");
             L_HTML_Object.Add_Attribute("onclick", "_App_Settings_UseDefaultVolume_Change('" + Web_InterCommMessage_Type.Settings_UseDefault_Change.ToString() + "');");
 

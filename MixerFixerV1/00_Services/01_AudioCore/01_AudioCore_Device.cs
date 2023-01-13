@@ -40,7 +40,7 @@ namespace Services
 
 
             G_Device = new Arc_Device();
-            G_Device.Device = new Arc_AudioObject(G_Srv_DB, P_MMDevice);
+            G_Device.Device = new Arc_AudioObject(P_MMDevice);
             G_Device.Device.OnNewSession += L_Arc_AudioObject_OnNewSession;
             G_Device.Device.OnVolumeHasChanged += L_Arc_AudioObject_OnVolumeChange;
             G_Device.Device.DeviceChanged += Device_DeviceChanged;
@@ -62,7 +62,7 @@ namespace Services
             SessionCollection L_SessionCollection = G_Device.Device._GetSessions();
             for (int i = 0; i < L_SessionCollection.Count; i++)
             {
-                Arc_AudioObject L_Arc_AudioObject = new Arc_AudioObject(G_Srv_DB, L_SessionCollection[i]);
+                Arc_AudioObject L_Arc_AudioObject = new Arc_AudioObject(L_SessionCollection[i]);
                 L_Arc_AudioObject.OnNewSession += L_Arc_AudioObject_OnNewSession;
                 L_Arc_AudioObject.OnVolumeHasChanged += L_Arc_AudioObject_OnVolumeChange;
 

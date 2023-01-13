@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
 using Web;
+using MixerFixerV1;
 
 namespace Services
 {
@@ -78,6 +79,9 @@ namespace Services
 
 
             app.UseRouting();
+
+            Srv_AudioCore G_Srv_AudioCore = App.ServiceProvider.GetService(typeof(Srv_AudioCore)) as Srv_AudioCore;
+            G_Srv_AudioCore.Init();
 
             app.UseEndpoints(endpoints =>
             {

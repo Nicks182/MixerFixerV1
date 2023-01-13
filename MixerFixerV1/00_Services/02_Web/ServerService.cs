@@ -22,7 +22,7 @@ namespace Services
 
         public Srv_Server()
         {
-            this.G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
+            G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
         }
 
         public void StartServer()
@@ -32,7 +32,7 @@ namespace Services
                 return;
             }
 
-            this.G_Server = WebHost.CreateDefaultBuilder()
+            G_Server = WebHost.CreateDefaultBuilder()
                 .UseKestrel(x =>
                 {
                     x.ListenAnyIP(5000);
@@ -45,14 +45,14 @@ namespace Services
 
             G_ServerStatus = "Starting";
 
-            this.G_Srv_MessageBus.Emit("serverstatuschanged", G_ServerStatus);
+            G_Srv_MessageBus.Emit("serverstatuschanged", G_ServerStatus);
 
             Task.Run(() =>
             {
                 Thread.Sleep(1000);
                 G_Server.RunAsync();
                 G_ServerStatus = "Running...";
-                this.G_Srv_MessageBus.Emit("serverstatuschanged", G_ServerStatus);
+                G_Srv_MessageBus.Emit("serverstatuschanged", G_ServerStatus);
 
             });
 
@@ -64,16 +64,16 @@ namespace Services
 
         public void StopServer()
         {
-            if (this.G_Server != null)
+            if (G_Server != null)
             {
                 G_ServerStatus = "Shutting down";
-                this.G_Srv_MessageBus.Emit("serverstatuschanged", G_ServerStatus);
-                this.G_Server.StopAsync().Wait();
+                G_Srv_MessageBus.Emit("serverstatuschanged", G_ServerStatus);
+                G_Server.StopAsync().Wait();
 
             }
             Thread.Sleep(3000);
             G_ServerStatus = "Down";
-            this.G_Srv_MessageBus.Emit("serverstatuschanged", G_ServerStatus);
+            G_Srv_MessageBus.Emit("serverstatuschanged", G_ServerStatus);
 
         }
 

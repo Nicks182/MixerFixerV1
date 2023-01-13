@@ -1,10 +1,12 @@
 ﻿using LiteDB;
+using MixerFixerV1;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Services
 {
@@ -36,7 +38,9 @@ namespace Services
 
         private string GetAppPath()
         {
-            return Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory , G_DB_Name);
+            //return Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory , G_DB_Name);
+            //return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), G_DB_Name);
+            return Path.Combine(App.G_BaseDir, G_DB_Name);
         }
 
         public void ClearDB()

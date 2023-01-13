@@ -14,19 +14,22 @@ namespace Services
         
         public void _Init(Srv_AudioCore P_Srv_AudioCore)
         {
-            G_Srv_AudioCore = P_Srv_AudioCore;
+            if (G_Srv_AudioCore == null)
+            {
+                G_Srv_AudioCore = P_Srv_AudioCore;
 
-            G_Srv_AudioCore.DoUpdate -= G_Srv_AudioCore_DoUpdate;
-            G_Srv_AudioCore.OnVolumeHasChanged -= G_Srv_AudioCore_OnVolumeChanged;
-            G_Srv_AudioCore.OnDefaultDeviceSet -= G_Srv_AudioCore_OnDefaultDeviceSet;
-            G_Srv_AudioCore.OnDeviceStateChange -= G_Srv_AudioCore_OnDeviceStateChange;
+                G_Srv_AudioCore.DoUpdate -= G_Srv_AudioCore_DoUpdate;
+                G_Srv_AudioCore.OnVolumeHasChanged -= G_Srv_AudioCore_OnVolumeChanged;
+                G_Srv_AudioCore.OnDefaultDeviceSet -= G_Srv_AudioCore_OnDefaultDeviceSet;
+                G_Srv_AudioCore.OnDeviceStateChange -= G_Srv_AudioCore_OnDeviceStateChange;
 
-            G_Srv_AudioCore.DoUpdate += G_Srv_AudioCore_DoUpdate;
-            G_Srv_AudioCore.OnVolumeHasChanged += G_Srv_AudioCore_OnVolumeChanged;
-            G_Srv_AudioCore.OnDefaultDeviceSet += G_Srv_AudioCore_OnDefaultDeviceSet;
-            G_Srv_AudioCore.OnDeviceStateChange += G_Srv_AudioCore_OnDeviceStateChange;
+                G_Srv_AudioCore.DoUpdate += G_Srv_AudioCore_DoUpdate;
+                G_Srv_AudioCore.OnVolumeHasChanged += G_Srv_AudioCore_OnVolumeChanged;
+                G_Srv_AudioCore.OnDefaultDeviceSet += G_Srv_AudioCore_OnDefaultDeviceSet;
+                G_Srv_AudioCore.OnDeviceStateChange += G_Srv_AudioCore_OnDeviceStateChange;
 
-            G_HTML_Templates = new HTML_Templates(G_Srv_AudioCore, G_Srv_DB);
+                G_HTML_Templates = new HTML_Templates(G_Srv_AudioCore, G_Srv_DB);
+            }
         }
 
         public void _LoadUI(Web_InterCommMessage P_Web_InterCommMessage)
@@ -81,6 +84,13 @@ namespace Services
             G_TimerManager.PrepareTimer(() => G_CommandHub.Clients.All.SendAsync("ReceiveMessage", _GetData()), 250, 30);
         }
 
+        public void _StopDataPush()
+        {
+            if (G_TimerManager != null)
+            {
+                G_TimerManager.StopTimer();
+            }
+        }
 
     }
 }

@@ -21,6 +21,9 @@ namespace Services
     {
         public string G_DefaultVolume = "Default App Volume";
         public string G_DefaultVolumeEnable = "Default App Volume Enable";
+        public string G_StartHidden = "StartHidden";
+        public string G_StartWithWindows = "StartWithWindows";
+
         public ILiteCollection<DB_Settings> Settings_GetAll()
         {
             if(this.G_DB_Settings.Count() == 0)
@@ -50,6 +53,18 @@ namespace Services
             {
                 Name = G_DefaultVolume,
                 Value = "10"
+            });
+
+            Settings_Save(new DB_Settings
+            {
+                Name = G_StartHidden,
+                Value = "0" // False, Default, app will show main window when value is false. Will be false on first start up.
+            });
+
+            Settings_Save(new DB_Settings
+            {
+                Name = G_StartWithWindows,
+                Value = "0" // False, Default, app will not automatically startup with windows.
             });
         }
 

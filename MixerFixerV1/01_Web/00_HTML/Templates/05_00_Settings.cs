@@ -65,6 +65,8 @@ namespace Web
 
             L_HTML_Object.Add_Child(_Template_SettingsModal_Body_UseDefaultVolume());
             L_HTML_Object.Add_Child(_Template_SettingsModal_Body_DefaultVolume());
+            L_HTML_Object.Add_Child(_Template_SettingsModal_Body_StartWithWindows());
+            L_HTML_Object.Add_Child(_Template_SettingsModal_Body_StartHidden());
             L_HTML_Object.Add_Child(_Template_SettingsModal_Body_DevicePriorityHelp());
             L_HTML_Object.Add_Child(_Template_SettingsModal_Body_SoundPriority());
             L_HTML_Object.Add_Child(_Template_SettingsModal_Body_MicPriority());

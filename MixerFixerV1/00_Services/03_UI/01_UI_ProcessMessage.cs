@@ -49,6 +49,8 @@ namespace Services
                     case Web_InterCommMessage_Type.Settings_UseDefault_Change:
                     case Web_InterCommMessage_Type.Settings_DefaultVolume_Show:
                     case Web_InterCommMessage_Type.Settings_DefaultVolume_Change:
+                    case Web_InterCommMessage_Type.Settings_StartHidden_Change:
+                    case Web_InterCommMessage_Type.Settings_StartWithWindows_Change:
                         _Modal_Settings(P_Web_InterCommMessage);
                         break;
 

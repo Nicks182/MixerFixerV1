@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using MixerFixerV1;
 using NAudio.CoreAudioApi;
 using NAudio.CoreAudioApi.Interfaces;
 
@@ -37,19 +37,25 @@ namespace Services
         public bool IsMute { get { return G_IsMute; } }
 
 
-        public Arc_AudioObject(Srv_DB P_Srv_DB, MMDevice P_MMDevice)
+        //public Arc_AudioObject(Srv_DB P_Srv_DB, MMDevice P_MMDevice)
+        public Arc_AudioObject(MMDevice P_MMDevice)
         {
+            G_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
+
             G_ObjectType = Arc_AudioObject_Type.IsDevice;
-            G_Srv_DB = P_Srv_DB;
+            //G_Srv_DB = P_Srv_DB;
             G_MMDevice = P_MMDevice;
 
             //_Init();
         }
 
-        public Arc_AudioObject(Srv_DB P_Srv_DB, AudioSessionControl P_AudioSessionControl)
+        //public Arc_AudioObject(Srv_DB P_Srv_DB, AudioSessionControl P_AudioSessionControl)
+        public Arc_AudioObject(AudioSessionControl P_AudioSessionControl)
         {
+            G_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
+
             G_ObjectType = Arc_AudioObject_Type.IsSession;
-            G_Srv_DB = P_Srv_DB;
+            //G_Srv_DB = P_Srv_DB;
             G_AudioSessionControl = P_AudioSessionControl;
 
             //_Init();

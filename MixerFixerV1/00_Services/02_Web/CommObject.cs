@@ -77,6 +77,8 @@ namespace Services
         Settings_Priority_MoveUp,
         Settings_Priority_MoveDown,
         Settings_UseDefault_Change,
+        Settings_StartHidden_Change,
+        Settings_StartWithWindows_Change,
         Settings_DefaultVolume_Show,
         Settings_DefaultVolume_Change,
 

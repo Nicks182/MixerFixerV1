@@ -232,17 +232,17 @@ namespace Services
             {
                 case Arc_AudioObject_Type.IsDevice:
                 case Arc_AudioObject_Type.IsMicrophone:
-                    if (G_MMDevice.State == DeviceState.Active)
-                    {
+                    //if (G_MMDevice.State == DeviceState.Active)
+                    //{
                         return G_MMDevice.AudioEndpointVolume.Mute;
-                    }
+                    //}
                     break;
 
                 case Arc_AudioObject_Type.IsSession:
-                    if (G_AudioSessionControl.State == AudioSessionState.AudioSessionStateActive)
-                    {
+                    //if (G_AudioSessionControl.State == AudioSessionState.AudioSessionStateActive)
+                    //{
                         return G_AudioSessionControl.SimpleAudioVolume.Mute;
-                    }
+                    //}
                     break;
 
             }

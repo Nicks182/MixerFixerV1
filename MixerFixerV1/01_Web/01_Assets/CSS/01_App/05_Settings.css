@@ -17,12 +17,13 @@
 {
     display: grid;
     grid-template-columns: auto min-content;
-    grid-template-rows: min-content min-content;
+    grid-template-rows: min-content min-content min-content;
     align-items: center;
     row-gap: 10px;
     column-gap: 20px;
     padding: 5px;
     grid-template-areas:
+        "startwithwindows starthidden"
         "usedefaultvolume defaultvolume"
         "devicepriorityhelp devicepriorityhelp"
         "soundpriority micpriority";
@@ -41,6 +42,26 @@
 .MF_SettingsPanel_DefaultVolume
 {
     grid-area: defaultvolume;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.MF_SettingsPanel_StartWithWindows
+{
+    grid-area: startwithwindows;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.MF_SettingsPanel_StartHidden
+{
+    grid-area: starthidden;
     display: flex;
     flex-direction: row;
     gap: 5px;
