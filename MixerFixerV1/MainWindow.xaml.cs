@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -68,6 +69,8 @@ namespace MixerFixerV1
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            App.G_hwnd = new WindowInteropHelper(this).Handle;
+
             G_ServerStatus = G_Srv_Server.GetServerStatus();
             if (G_ServerStatus.Contains("Running") == true)
             {
@@ -200,7 +203,7 @@ namespace MixerFixerV1
             {
                 G_WV_RunTime_Waiter.Stop();
             }
-
+            
             ClearBrowserCache();
         }
 

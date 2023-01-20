@@ -49,11 +49,11 @@ body
     flex-direction: row;*/
 
     display: grid;
-    grid-template-columns: auto min-content min-content;
+    grid-template-columns: auto min-content min-content min-content;
     grid-template-rows: min-content;
     column-gap: 5px;
     grid-template-areas:
-        "device settings theme";
+        "device settings theme display";
 }
 
 .MF_MixerAppMenu_Settings
@@ -64,6 +64,11 @@ body
 .MF_MixerAppMenu_Theme
 {
     grid-area: theme;
+}
+
+.MF_MixerAppMenu_Display
+{
+    grid-area: display;
 }
 
 .MF_MixerAppMenu_Device

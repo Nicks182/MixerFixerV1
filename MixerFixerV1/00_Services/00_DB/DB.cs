@@ -19,6 +19,7 @@ namespace Services
         private ILiteCollection<DB_DevicePriority> G_DB_DevicePriority;
         private ILiteCollection<DB_Settings> G_DB_Settings;
         private ILiteCollection<DB_Theme> G_DB_Theme;
+        private ILiteCollection<DB_DisplaySettings> G_DB_DisplaySettings;
 
 
         public Srv_DB()
@@ -29,6 +30,7 @@ namespace Services
             this.G_DB_DevicePriority = G_DB.GetCollection<DB_DevicePriority>("DevicePriority");
             this.G_DB_Settings = G_DB.GetCollection<DB_Settings>("Settings");
             this.G_DB_Theme = G_DB.GetCollection<DB_Theme>("Theme");
+            this.G_DB_DisplaySettings = G_DB.GetCollection<DB_DisplaySettings>("DisplaySettings");
         }
 
         public void Dispose()

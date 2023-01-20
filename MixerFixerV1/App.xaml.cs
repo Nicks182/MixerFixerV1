@@ -25,9 +25,7 @@ namespace MixerFixerV1
     /// </summary>
     public partial class App : System.Windows.Application
     {
-        //public static string G_BaseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        //public static string G_BaseDir = Assembly.GetExecutingAssembly().Location.Replace("\\MixerFixerV1.dll","");
-        //public static string G_BaseDir = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
+        public static IntPtr G_hwnd = new IntPtr(0xFFFF);
         public static string G_BaseDir = Process.GetCurrentProcess().MainModule.FileName.Replace("\\MixerFixerV1.exe", "");
 
         public static NotifyIcon G_NotifyIcon;
@@ -38,18 +36,12 @@ namespace MixerFixerV1
         private Srv_MessageBus G_Srv_MessageBus;
         private Srv_Server G_Srv_Server;
         private Srv_DB G_Srv_DB;
-        //public Srv_AudioCore G_Srv_AudioCore;
-        //private Srv_UI G_Srv_UI;
 
         private MainWindow G_MainWindow;
-        //private Srv_DB G_Srv_DB;
-        
-        //public static Srv_UI G_Srv_UI;
 
         public App()
         {
-            
-        LoadDepedencies();
+            LoadDepedencies();
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -71,7 +63,6 @@ namespace MixerFixerV1
 
             App.G_NotifyIcon = new NotifyIcon();
             G_NotifyIcon.Click += new EventHandler(TrayIcon_Click);
-            //G_NotifyIcon.Icon = new System.Drawing.Icon(typeof(App), "favicon.ico");
             G_NotifyIcon.Text = "MixerFixer";
             Stream L_TrayIconStream = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/MixerFixerV1;component/Theme/Images/TrayIcon.ico")).Stream;
             G_NotifyIcon.Icon = new System.Drawing.Icon(L_TrayIconStream);
@@ -104,6 +95,7 @@ namespace MixerFixerV1
             Services.AddSingleton<Srv_DB>();
             Services.AddSingleton<Srv_Server>();
             Services.AddSingleton<Srv_AudioCore>();
+            Services.AddSingleton<Srv_DisplaySettings>();
             
 
             App.ServiceProvider = Services.BuildServiceProvider();

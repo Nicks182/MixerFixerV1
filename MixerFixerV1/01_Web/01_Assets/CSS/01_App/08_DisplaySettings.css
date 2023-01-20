@@ -1,0 +1,61 @@
+
+
+.MF_DisplaySettings
+{
+}
+
+
+.MF_DisplaySettings_Help
+{
+    color: var(--MF_Theme_Accent);
+}
+
+.MF_DisplaySettingsPanel
+{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.MF_DisplaySettingsPanel_Monitors
+{
+    border: 1px solid var(--MF_Theme_Accent);
+}
+
+.MF_DisplaySettingsPanelHeading
+{
+    background-color: var(--MF_AppHeader_Background);
+    color: var(--MF_Theme_Accent);
+    padding: 3px;
+}
+
+.MF_DisplaySettingsPanel_Items
+{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.MF_DisplaySettings_Panel_Item
+{
+    background-color: var(--MF_Theme_Background_HL);
+    display: grid;
+    grid-template-columns: min-content auto min-content;
+    grid-template-rows: min-content;
+    gap: 3px;
+    align-items: center;
+    padding: 2px;
+    min-height: 40px;
+    align-content: center;
+}
+
+.MF_DisplaySettings_Footer
+{
+    display: grid;
+    grid-template-columns: auto min-content;
+    align-items: end;
+    padding: 5px 5px 5px 5px;
+}

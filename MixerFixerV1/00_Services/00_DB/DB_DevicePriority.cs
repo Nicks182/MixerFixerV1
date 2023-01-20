@@ -16,6 +16,7 @@ namespace Services
         public bool EnforceDefault { get; set; } = false;
         public bool IsDefault { get; set; } = false;
         public bool IsMic { get; set; } = false;
+        public bool IsSelected { get; set; } = false;
         public int Priority { get; set; }
     }
 

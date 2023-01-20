@@ -46,7 +46,7 @@ namespace Services
             Settings_Save(new DB_Settings
             {
                 Name = G_DefaultVolumeEnable,
-                Value = "1"
+                Value = "0"
             });
 
             Settings_Save(new DB_Settings

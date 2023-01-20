@@ -36,7 +36,7 @@ namespace Services
             //float L_New = ((float)(P_Value / 100));
 
             //return L_New;
-            return (float)Math.Round((P_Value / 100.0f),2);
+            return (float)Math.Round((P_Value / 100.0f), 2);
         }
 
         public float _Volume_FromString(string P_Value)
@@ -56,6 +56,22 @@ namespace Services
             }
 
             throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
+
+        //public static string _StringToBase64(string P_Value)
+        //{
+        //    var plainTextBytes = Encoding.UTF8.GetBytes(P_Value);
+        //    return Convert.ToBase64String(plainTextBytes);
+        //}
+    }
+
+    public static class StringExtensions
+    {
+
+        public static string EncodeBase64(this string plainText)
+        {
+            byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+            return Convert.ToBase64String(plainTextBytes);
         }
     }
 

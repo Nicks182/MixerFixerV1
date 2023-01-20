@@ -13,7 +13,6 @@ namespace Web
     {
 
         
-        #region SoundPriority
         private HTML_Object _Template_SettingsModal_Body_SoundPriority()
         {
             HTML_Object L_HTML_Object = new HTML_Object();
@@ -43,7 +42,6 @@ namespace Web
             return G_HTML._BuildHtml(_Template_SettingsModal_Body_SoundPriority_Body());
         }
 
-        #endregion SoundPriority
 
        
 

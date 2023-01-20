@@ -106,6 +106,7 @@
     display: flex;
     flex-direction: column;
     gap: 3px;
+    padding: 3px;
 }
 
 .MF_SettingsPanel_DevicePriority_Item
@@ -117,7 +118,13 @@
     gap: 3px;
     align-items:center;
     padding: 2px;
+    border: 1px solid transparent;
 }
+
+    .MF_SettingsPanel_DevicePriority_Item[IsSelected="1"]
+    {
+        border-color: var(--MF_Theme_Accent);
+    }
 
 
 .MF_SettingsPanel_DevicePriority_Item_EnforceDefault

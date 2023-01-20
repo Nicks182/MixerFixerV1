@@ -90,6 +90,13 @@ namespace HtmlGenerator
         arrow_drop_up,
         arrow_drop_down,
         color_lens,
+
+        collections,
+        add_to_queue,
+        aspect_ratio,
+        computer,
+        desktop_windows,
+        personal_video,
     }
 
 }

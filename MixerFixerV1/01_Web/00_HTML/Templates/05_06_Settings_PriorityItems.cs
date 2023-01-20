@@ -75,8 +75,12 @@ namespace Web
             HTML_Object L_HTML_Object = new HTML_Object();
             L_HTML_Object.Type = HTML_Object_Type.IsDiv;
 
-
             L_HTML_Object.Add_Attribute("class", "MF_SettingsPanel_DevicePriority_Item");
+
+            if(P_DB_DevicePriority.IsSelected == true)
+            {
+                L_HTML_Object.Add_Attribute("IsSelected", "1");
+            }
 
             L_HTML_Object.Add_Child(_Template_SettingsModal_Body_DevicePriority_Item_EnforceDefault(P_DB_DevicePriority));
             L_HTML_Object.Add_Child(_Template_SettingsModal_Body_DevicePriority_Item_Name(P_DB_DevicePriority));
