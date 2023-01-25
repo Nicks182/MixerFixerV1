@@ -115,7 +115,7 @@ namespace MixerFixerV1
 
             G_Srv_MessageBus.RegisterEvent("windowclosed", (P_DoShutdown) =>
             {
-                if (Convert.ToBoolean(P_DoShutdown) == true)
+                if (Convert.ToInt32(P_DoShutdown) == 1)
                 {
                     _DoShutdown();
                 }

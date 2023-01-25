@@ -155,6 +155,7 @@ namespace MixerFixerV1
         
         private void _InitUI()
         {
+            Txt_ServerOutput.Text = G_ServerStatus;
             if (WV2_Viewer != null)
             {
                 WV2_Viewer.Source = new Uri("http://127.0.0.1:5000");
@@ -190,11 +191,18 @@ namespace MixerFixerV1
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            bool L_DoShutdown = new Win_ConfirmShutdown().ShowDialog().GetValueOrDefault(false);
+            Win_ConfirmShutdown L_Win_ConfirmShutdown = new Win_ConfirmShutdown();
+            L_Win_ConfirmShutdown.ShowDialog();
+
+            if(L_Win_ConfirmShutdown.G_DialogResult == 0)
+            {
+                e.Cancel = true;
+                return;
+            }
 
             _DisposeOfWebviewStuffs();
 
-            G_Srv_MessageBus.Emit("windowclosed", L_DoShutdown);
+            G_Srv_MessageBus.Emit("windowclosed", L_Win_ConfirmShutdown.G_DialogResult);
         }
 
         public void _DisposeOfWebviewStuffs()

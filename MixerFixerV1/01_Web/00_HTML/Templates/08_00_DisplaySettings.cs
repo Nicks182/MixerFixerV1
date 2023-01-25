@@ -154,7 +154,7 @@ namespace Web
         {
             List<HTML_Object> L_Items = new List<HTML_Object>();
 
-            List<DB_DisplaySettings> L_DisplaySettings = G_Srv_DB.DisplaySettings_GetAll().FindAll().ToList();
+            List<DB_DisplaySettings> L_DisplaySettings = G_Srv_DB.DisplaySettings_GetAll().FindAll().OrderBy(d => d.FriendlyName).ToList();
 
             for (int i = 0; i < L_DisplaySettings.Count; i++)
             {

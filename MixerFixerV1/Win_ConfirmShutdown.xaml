@@ -8,12 +8,12 @@
         
         Style="{DynamicResource CustomWindowStyle}"
         Title="Confirm..." 
-        BorderThickness="2" 
+        BorderThickness="5,5,5,5" 
         WindowStartupLocation="CenterScreen" 
         SizeToContent="WidthAndHeight"
         
-        WindowStyle="None" 
-        AllowsTransparency="True" ResizeMode="NoResize" Topmost="True">
+        WindowStyle="None" ResizeMode="NoResize" Topmost="True"
+        >
     <Grid Margin="10" HorizontalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>

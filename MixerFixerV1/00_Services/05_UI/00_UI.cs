@@ -40,6 +40,7 @@ namespace Services
             G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
             G_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
             G_Srv_DisplaySettings = App.ServiceProvider.GetService(typeof(Srv_DisplaySettings)) as Srv_DisplaySettings;
+            G_Srv_DisplaySettings.OnLogMessage += G_Srv_DisplaySettings_OnLogMessage;
 
             G_TimerManager = new Srv_TimerManager();
             //G_TimerDeviceManager = new Srv_TimerManager();
@@ -52,6 +53,11 @@ namespace Services
             //G_Srv_AudioCore.OnVolumeHasChanged += G_Srv_AudioCore_OnVolumeChanged;
             //G_Srv_AudioCore.OnDefaultDeviceSet += G_Srv_AudioCore_OnDefaultDeviceSet;
             //G_Srv_AudioCore.OnDeviceStateChange += G_Srv_AudioCore_OnDeviceStateChange;
+        }
+
+        private void G_Srv_DisplaySettings_OnLogMessage(List<string> P_MessageList)
+        {
+            G_Srv_Logger._LogMessage(P_MessageList);
         }
 
         private void G_Srv_AudioCore_OnDeviceStateChange(string P_DeviceId, NAudio.CoreAudioApi.DeviceState P_NewState)

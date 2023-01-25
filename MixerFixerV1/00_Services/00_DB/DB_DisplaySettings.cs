@@ -10,14 +10,12 @@ namespace Services
     public class DB_DisplaySettings
     {
         public Guid Id { get; set; } = Guid.Empty;
-        public string Name { get; set; } = "NA";
+        public string DevicePath_Base64 { get; set; } = "NA";
         public string DisplayName { get; set; } = "NA";
+        public string FriendlyName { get; set; } = "NA";
+        public string PathInfo_JSON { get; set; }
         public bool IsManaged { get; set; } = false;
-        public bool IsAttached { get; set; } = false;
-        public int Screen_Pos_Y { get; set; }
-        public int Screen_Pos_X { get; set; }
-        public int Screen_Res_Y { get; set; }
-        public int Screen_Res_X { get; set; }
+        public bool IsPowered { get; set; } = false;
     }
 
     public partial class Srv_DB
@@ -28,9 +26,9 @@ namespace Services
         }
 
 
-        public DB_DisplaySettings DisplaySettings_GetOne(string P_Name)
+        public DB_DisplaySettings DisplaySettings_GetOne(string P_DevicePath_Base64)
         {
-            return this.G_DB_DisplaySettings.FindOne(a => a.Name == P_Name);
+            return this.G_DB_DisplaySettings.FindOne(a => a.DevicePath_Base64 == P_DevicePath_Base64);
         }
 
         public DB_DisplaySettings DisplaySettings_GetOne_ById(Guid P_Id)

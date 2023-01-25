@@ -35,6 +35,8 @@ namespace Services
 
         private void _Modal_DisplaySettings_Show(Web_InterCommMessage P_Web_InterCommMessage)
         {
+            G_Srv_DisplaySettings._Save_DB_MonitorInfo_All();
+
             P_Web_InterCommMessage.ModalInfo = new Web_InterCommMessage_Modal
             {
                 Id = G_HTML_Templates._Template_DisplaySettingsModal_Id(),
@@ -69,7 +71,7 @@ namespace Services
 
         private void _Modal_DisplaySettings_MonitorPower(Web_InterCommMessage P_Web_InterCommMessage)
         {
-            bool? L_IsAttached = G_Srv_DisplaySettings._Monitor_OnOff(P_Web_InterCommMessage.Data[0].Value);
+            bool? L_IsAttached = G_Srv_DisplaySettings._Manage_Monitor_Power(P_Web_InterCommMessage.Data[0].Value);
             if (L_IsAttached != null)
             {
                 string P_Id = P_Web_InterCommMessage.Data[0].Id;

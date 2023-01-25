@@ -32,8 +32,9 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background-color: var(--MF_Theme_Background_HL);
-    opacity: 0.5;
+    
+    background-color: rgba(var(--MF_BG_Theme_Red_HL),var(--MF_BG_Theme_Green_HL),var(--MF_BG_Theme_Blue_HL),0.4);
+    backdrop-filter: blur(0.15rem);
     z-index: -1;
 }
 

@@ -36,7 +36,7 @@ namespace Web
                                         );
 
 
-            L_HTML_Object.Add_Attribute("onclick", "_App_DisplaySettings_ManagedChange('" + Web_InterCommMessage_Type.DisplaySettings_ManagedChange.ToString() + "', '" + P_DB_DisplaySettings.Id.ToString() + "', '" + P_DB_DisplaySettings.Name + "');");
+            L_HTML_Object.Add_Attribute("onclick", "_App_DisplaySettings_ManagedChange('" + Web_InterCommMessage_Type.DisplaySettings_ManagedChange.ToString() + "', '" + P_DB_DisplaySettings.Id.ToString() + "', '" + P_DB_DisplaySettings.DevicePath_Base64 + "');");
 
 
             return L_HTML_Object;
@@ -56,7 +56,7 @@ namespace Web
             L_HTML_Object.Add_Child(new HTML_Object
             {
                 Type = HTML_Object_Type.IsRaw,
-                RawValue = new StringBuilder(P_DB_DisplaySettings.DisplayName)
+                RawValue = new StringBuilder(P_DB_DisplaySettings.FriendlyName)
             });
 
             return L_HTML_Object;
@@ -68,11 +68,11 @@ namespace Web
             HTML_Object L_HTML_Object = _Template_Toggle(
                                             P_Id: _Template_DisplaySettingsModal_Body_Panel_DisplayItem_IsAttached_Id(P_DB_DisplaySettings.Id.ToString()),
                                             P_Title: "Change monitor power state",
-                                            P_IsChecked: P_DB_DisplaySettings.IsAttached
+                                            P_IsChecked: P_DB_DisplaySettings.IsPowered
                                         );
 
             L_HTML_Object.Add_Attribute("IsRotate", "270");
-            L_HTML_Object.Add_Attribute("onclick", "_App_DisplaySettings_PowerChange('" + Web_InterCommMessage_Type.DisplaySettings_MonitorPower.ToString() + "', '" + P_DB_DisplaySettings.Id.ToString() + "', '" + P_DB_DisplaySettings.Name + "');");
+            L_HTML_Object.Add_Attribute("onclick", "_App_DisplaySettings_PowerChange('" + Web_InterCommMessage_Type.DisplaySettings_MonitorPower.ToString() + "', '" + P_DB_DisplaySettings.Id.ToString() + "', '" + P_DB_DisplaySettings.DevicePath_Base64 + "');");
 
 
             return L_HTML_Object;

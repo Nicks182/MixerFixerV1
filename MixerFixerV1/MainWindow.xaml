@@ -12,7 +12,7 @@
         Title="MixerFixer" 
         Height="450" 
         Width="800" 
-        BorderThickness="2" 
+        BorderThickness="5,5,5,5" 
         WindowStartupLocation="CenterScreen" 
         SizeToContent="Manual" 
         WindowStyle="None" 

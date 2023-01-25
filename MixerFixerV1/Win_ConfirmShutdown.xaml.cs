@@ -19,6 +19,8 @@ namespace MixerFixerV1
     /// </summary>
     public partial class Win_ConfirmShutdown : Window
     {
+        public int G_DialogResult = 0; // Default, do nothing
+
         public Win_ConfirmShutdown()
         {
             InitializeComponent();
@@ -26,12 +28,15 @@ namespace MixerFixerV1
 
         private void Btn_Shutdown_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            G_DialogResult = 1;
+            Close();
         }
 
         private void Btn_Minimize_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
+            G_DialogResult = 2;
+            Close();
         }
+
     }
 }

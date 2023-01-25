@@ -49,6 +49,36 @@ namespace Services
             _Log(L_CommMessage);
         }
 
+        public void _LogMessage(List<string> P_MessageLines)
+        {
+            Web_InterCommMessage L_CommMessage = new Web_InterCommMessage { CommType = Web_InterCommMessage_Type._Log };
+
+            StringBuilder L_Message = new StringBuilder();
+            for(int i = 0; i < P_MessageLines.Count; i++)
+            {
+                if(i > 0)
+                {
+                    L_Message.Append("<br />");
+                }
+                if (string.IsNullOrEmpty(P_MessageLines[i].Trim()) == true)
+                {
+                    L_Message.Append("<br />");
+                }
+                else
+                {
+                    L_Message.Append(P_MessageLines[i]);
+                }
+            }
+
+            L_CommMessage.Data.Add(new Web_InterCommMessage_Data
+            {
+                Id = "Message",
+                Value = L_Message.ToString()
+            });
+
+            _Log(L_CommMessage);
+        }
+
         private void _Log(Web_InterCommMessage P_CommMessage)
         {
             
