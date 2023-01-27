@@ -15,12 +15,16 @@ namespace Services
             // Only load device if none is set.
             //if (G_Device == null)
             //{
-                MMDevice L_DefaultDevice = G_MMDeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+            MMDevice L_DefaultDevice = G_MMDeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+            if (L_DefaultDevice != null)
+            {
                 _SetDevice(L_DefaultDevice);
-
-                MMDevice L_DefaultDevice_Mic = G_MMDeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Capture, Role.Communications);
-            _SetDevice_Mic(L_DefaultDevice_Mic);
-
+            }
+            MMDevice L_DefaultDevice_Mic = G_MMDeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Capture, Role.Communications);
+            if (L_DefaultDevice_Mic != null)
+            {
+                _SetDevice_Mic(L_DefaultDevice_Mic);
+            }
             //}
         }
 

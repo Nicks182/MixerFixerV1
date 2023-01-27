@@ -38,7 +38,21 @@ namespace Services
                             {
                                 G_Image = Srv_Utils_NativeMethods.GetIconFromFile(G_MMDevice.IconPath).ToBitmap();
                             }
-                            G_DisplayName = G_MMDevice.FriendlyName;
+                            try
+                            {
+                                G_DisplayName = G_MMDevice.FriendlyName;
+                            }
+                            catch
+                            {
+                                try
+                                {
+                                    G_DisplayName = G_MMDevice.DeviceFriendlyName;
+                                }
+                                catch
+                                {
+                                    G_DisplayName = "Uknown Device";
+                                }
+                            }
                             G_SessionId_Base64 = G_MMDevice.ID.EncodeBase64();
                         }
                     }
