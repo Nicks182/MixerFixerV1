@@ -80,12 +80,14 @@ namespace Services
 
         public void LoadPriorityList()
         {
-            foreach (var L_Device in G_MMDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.All).OrderBy(d => d.DeviceFriendlyName))
+            //MMDeviceCollection L_Devices = G_MMDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.All);
+
+            foreach (var L_Device in G_MMDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.All).Where(d => d.DeviceFriendlyName != null).OrderBy(d => d.DeviceFriendlyName))
             {
                 G_Srv_DB.DevicePriority_GetOneOrAdd(L_Device.FriendlyName, LoadPriorityList_Get_DisplayText(L_Device), L_Device.DeviceFriendlyName, false);
             }
 
-            foreach (var L_Device in G_MMDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Capture, DeviceState.All).OrderBy(d => d.DeviceFriendlyName))
+            foreach (var L_Device in G_MMDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Capture, DeviceState.All).Where(d => d.DeviceFriendlyName != null).OrderBy(d => d.DeviceFriendlyName))
             {
                 G_Srv_DB.DevicePriority_GetOneOrAdd(L_Device.FriendlyName, LoadPriorityList_Get_DisplayText(L_Device), L_Device.DeviceFriendlyName, true);
             }
