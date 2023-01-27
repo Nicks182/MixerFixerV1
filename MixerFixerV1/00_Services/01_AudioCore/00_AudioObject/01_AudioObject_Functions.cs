@@ -53,14 +53,15 @@ namespace Services
                                     G_DisplayName = "Uknown Device";
                                 }
                             }
-                            G_SessionId_Base64 = G_MMDevice.ID.EncodeBase64();
+                            //G_SessionId_Base64 = G_MMDevice.ID.EncodeBase64();
+                            G_SessionId_Base64 = G_DisplayName.EncodeBase64();
                         }
                     }
                     break;
 
                 case Arc_AudioObject_Type.IsSession:
                     {
-                        G_SessionId_Base64 = G_AudioSessionControl.GetSessionIdentifier.EncodeBase64();
+                        //G_SessionId_Base64 = G_AudioSessionControl.GetSessionIdentifier.EncodeBase64();
                         Process process = Process.GetProcessById((int)G_AudioSessionControl.GetProcessID);
 
                         
@@ -100,6 +101,8 @@ namespace Services
                                 G_DisplayName = process.MainWindowTitle;
                             }
                         }
+
+                        G_SessionId_Base64 = G_DisplayName.EncodeBase64();
 
                         G_AudioSessionControl.UnRegisterEventClient(this);
                         G_AudioSessionControl.RegisterEventClient(this);
