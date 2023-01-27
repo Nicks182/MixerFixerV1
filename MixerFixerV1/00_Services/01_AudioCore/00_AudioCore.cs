@@ -80,17 +80,49 @@ namespace Services
 
         public void LoadPriorityList()
         {
-            //MMDeviceCollection L_Devices = G_MMDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.All);
+            // Sometimes the 'DeviceFriendlyName' property result in a error in the NAudio library.
+            // This can happen depending on the devices used/stored in Windows where it might not have some kind of Device Friendly Name.
+            // While working on this I did not run into this issue, but other people have and so now the code below will basically ignore any device where that property results in an Exception.
+            // Not what I want to do, but as I can't replicate the issue I don't know what else to do...
 
-            foreach (var L_Device in G_MMDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.All).Where(d => d.DeviceFriendlyName != null).OrderBy(d => d.DeviceFriendlyName))
+            // Playback
+            MMDeviceCollection L_Devices = G_MMDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.All);
+            for(int i = 0; i < L_Devices.Count; i++)
             {
-                G_Srv_DB.DevicePriority_GetOneOrAdd(L_Device.FriendlyName, LoadPriorityList_Get_DisplayText(L_Device), L_Device.DeviceFriendlyName, false);
+                try
+                {
+                    G_Srv_DB.DevicePriority_GetOneOrAdd(L_Devices[i].FriendlyName, LoadPriorityList_Get_DisplayText(L_Devices[i]), L_Devices[i].DeviceFriendlyName, false);
+                }
+                catch
+                {
+
+                }
             }
 
-            foreach (var L_Device in G_MMDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Capture, DeviceState.All).Where(d => d.DeviceFriendlyName != null).OrderBy(d => d.DeviceFriendlyName))
+
+            // Recording
+            L_Devices = G_MMDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Capture, DeviceState.All);
+            for (int i = 0; i < L_Devices.Count; i++)
             {
-                G_Srv_DB.DevicePriority_GetOneOrAdd(L_Device.FriendlyName, LoadPriorityList_Get_DisplayText(L_Device), L_Device.DeviceFriendlyName, true);
+                try
+                {
+                    G_Srv_DB.DevicePriority_GetOneOrAdd(L_Devices[i].FriendlyName, LoadPriorityList_Get_DisplayText(L_Devices[i]), L_Devices[i].DeviceFriendlyName, false);
+                }
+                catch
+                {
+
+                }
             }
+
+            //foreach (var L_Device in G_MMDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.All).Where(d => d.DeviceFriendlyName != null).OrderBy(d => d.DeviceFriendlyName))
+            //{
+            //    G_Srv_DB.DevicePriority_GetOneOrAdd(L_Device.FriendlyName, LoadPriorityList_Get_DisplayText(L_Device), L_Device.DeviceFriendlyName, false);
+            //}
+
+            //foreach (var L_Device in G_MMDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Capture, DeviceState.All).Where(d => d.DeviceFriendlyName != null).OrderBy(d => d.DeviceFriendlyName))
+            //{
+            //    G_Srv_DB.DevicePriority_GetOneOrAdd(L_Device.FriendlyName, LoadPriorityList_Get_DisplayText(L_Device), L_Device.DeviceFriendlyName, true);
+            //}
         }
 
 
