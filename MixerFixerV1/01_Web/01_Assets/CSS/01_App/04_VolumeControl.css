@@ -16,7 +16,7 @@
     -webkit-box-shadow: 0px 0px 10px 6px rgba(var(--MF_BG_Theme_Red),var(--MF_BG_Theme_Green),var(--MF_BG_Theme_Blue),1) inset;
     -moz-box-shadow: 0px 0px 10px 6px rgba(var(--MF_BG_Theme_Red),var(--MF_BG_Theme_Green),var(--MF_BG_Theme_Blue),1) inset;*/
     /*background-color: rgb(40, 44, 50);*/
-    background-color: rgba(var(--MF_BG_Theme_Red_HL),var(--MF_BG_Theme_Green_HL),var(--MF_BG_Theme_Blue_HL),1);
+    background-color: var(--MF_Theme_Background_HL);
     /*filter: brightness(120%);*/
 }
 
@@ -28,10 +28,19 @@
     width: 42px;
 }
 
+.MF_AppControl_ImageIcon
+{
+    grid-area: image;
+    font-size: 42px !important;
+    filter: brightness(var(--MF_Hover));
+    /*color: white !important;
+    background-color: var(--MF_Theme_Accent);*/
+}
+
 .MF_AppControl_Label
 {
     grid-area: label;
-    filter: brightness(var(--MF_Hover));
+    
 }
 
 .MF_AppControl_IsManaged
@@ -57,19 +66,33 @@
 {
     grid-area: volume;
     position: relative;
-    display: flex;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: min-content;
+    grid-template-areas:"volumecontrol";
     align-items: center;
-    height: 30px;
+    align-content: center;
+    height: 28px;
+    border-radius: var(--MF_Border_Radius_MD);
+    box-sizing: border-box;
 }
+
+    .MF_AppControl_Volume:hover
+    {
+        background-color: var(--MF_Theme_Background_HL);
+        filter: brightness(var(--MF_Hover));
+    }
 
 .MF_AppControl_Slider
 {
+    grid-area: volumecontrol;
     position: absolute;
-    padding-left: 5px;
+    padding-left: 12px;
 }
 
 .MF_AppControl_VolumeMeter
 {
+    grid-area: volumecontrol;
     position: absolute;
     display: grid;
     grid-template-columns: min-content auto;
@@ -80,6 +103,7 @@
     column-gap: 5px;
     width: 100%;
     font-size: 10px;
+    padding: 3px;
 }
 
 .MF_AppControl_VolumeMeterText_Left

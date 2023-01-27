@@ -13,6 +13,7 @@ namespace Services
     {
         private void _Modal_DisplaySettings(Web_InterCommMessage P_Web_InterCommMessage)
         {
+            int bla = Convert.ToInt32("a");
             switch (P_Web_InterCommMessage.CommType)
             {
                 case Web_InterCommMessage_Type.DisplaySettings_Show:
@@ -25,6 +26,10 @@ namespace Services
 
                 case Web_InterCommMessage_Type.DisplaySettings_MonitorPower:
                     _Modal_DisplaySettings_MonitorPower(P_Web_InterCommMessage);
+                    break;
+
+                case Web_InterCommMessage_Type.DisplaySettings_Reload:
+                    _Modal_DisplaySettings_Reload(P_Web_InterCommMessage);
                     break;
 
             }
@@ -93,5 +98,16 @@ namespace Services
             }
         }
 
+        private void _Modal_DisplaySettings_Reload(Web_InterCommMessage P_Web_InterCommMessage)
+        {
+            G_Srv_DisplaySettings._Save_DB_MonitorInfo_All();
+
+            P_Web_InterCommMessage.HTMLs.Clear();
+            P_Web_InterCommMessage.HTMLs.Add(new Web_InterCommMessage_HTML
+            {
+                ContainerId = "#DisplaySettingsPanel_Items",
+                HTML = G_HTML_Templates._Template_DisplaySettingsModal_Body_Panel_Children_HTML().ToString()
+            });
+        }
     }
 }

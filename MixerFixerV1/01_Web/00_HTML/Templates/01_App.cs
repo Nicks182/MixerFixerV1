@@ -59,7 +59,7 @@ namespace Web
             //{
             //    return _Template_SettingsPanel();
             //}
-            return _Template_Device(G_Srv_AudioCore.Device);
+            return _Template_Device(G_Srv_AudioCore);
             
         }
 

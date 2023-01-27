@@ -34,4 +34,16 @@ function _Modal_Hide(P_ModalId)
 }
 
 
+function _Modal_Close(P_ModalId, P_MessageType)
+{
+    var L_Comm =
+    {
+        CommType: P_MessageType,
+        Data: [{ Id: "ModalId", Value: P_ModalId }]
+    }
+    _Comm_Send(L_Comm);
+
+}
+
+
 

@@ -84,7 +84,7 @@ namespace Web
         {
             List<HTML_Object> L_Items = new List<HTML_Object>();
 
-            List<DB_Theme> L_ThemeColors = G_Srv_DB.Theme_GetAll().FindAll().ToList();
+            List<DB_Theme> L_ThemeColors = G_Srv_DB.Theme_GetAll().FindAll().OrderBy(t => t.Description).ToList();
 
             for (int i = 0; i < L_ThemeColors.Count; i++)
             {

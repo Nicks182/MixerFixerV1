@@ -13,12 +13,16 @@ namespace Services
     {
         MMDeviceEnumerator G_MMDeviceEnumerator = new MMDeviceEnumerator();
         Srv_DB G_Srv_DB;
+        private Srv_MessageBus G_Srv_MessageBus;
         Srv_TimerManager G_TimerDeviceManager;
 
         //NotificationClientImplementation G_NotificationClientImplementation;
         
         Arc_Device G_Device { get; set; }
         public Arc_Device Device { get { return G_Device; } }
+
+        Arc_Device G_Device_Mic { get; set; }
+        public Arc_Device Device_Mic { get { return G_Device_Mic; } }
 
         public bool G_ShowSettings = false;
 
@@ -37,6 +41,7 @@ namespace Services
         public Srv_AudioCore()
         {
             G_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
+            G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
             G_TimerDeviceManager = new Srv_TimerManager();
             
             //G_NotificationClientImplementation = new NotificationClientImplementation();
@@ -48,12 +53,19 @@ namespace Services
 
         public void Init()
         {
-            G_TimerDeviceManager.StopTimer();
+            try
+            {
+                G_TimerDeviceManager.StopTimer();
 
-            LoadPriorityList();
-            _LoadDevice();
+                LoadPriorityList();
+                _LoadDevice();
 
-            _StartDeviceTimer();
+                _StartDeviceTimer();
+            }
+            catch (Exception ex)
+            {
+                G_Srv_MessageBus.Emit("exception", ex);
+            }
         }
 
         private void _StartDeviceTimer()

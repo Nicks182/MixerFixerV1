@@ -1,5 +1,6 @@
 ﻿using MixerFixerV1;
 using Services.PathHelper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,6 +9,7 @@ namespace Services
     public partial class Srv_DisplaySettings
     {
         Srv_DB G_Srv_DB;
+        private Srv_MessageBus G_Srv_MessageBus;
         Srv_TimerManager G_TimerDeviceManager;
 
         public delegate void OnLogMessageDelegate(List<string> P_MessageList);
@@ -16,16 +18,23 @@ namespace Services
         public Srv_DisplaySettings()
         {
             G_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
+            G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
             G_TimerDeviceManager = new Srv_TimerManager();
         }
 
         public void Init()
         {
-            //_Save_DB_MonitorInfo_All();
+            try
+            {
+                //_Save_DB_MonitorInfo_All();
 
-            _StartDeviceTimer();
+                _StartDeviceTimer();
 
-
+            }
+            catch (Exception ex)
+            {
+                G_Srv_MessageBus.Emit("exception", ex);
+            }
         }
 
         private bool? _Monitor_Turn_On(WindowsDisplayAPI.DisplayConfig.PathInfo P_PathInfo)

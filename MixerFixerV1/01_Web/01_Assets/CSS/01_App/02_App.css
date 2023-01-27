@@ -49,11 +49,11 @@ body
     flex-direction: row;*/
 
     display: grid;
-    grid-template-columns: auto min-content min-content min-content;
+    grid-template-columns: auto min-content min-content min-content min-content;
     grid-template-rows: min-content;
     column-gap: 5px;
     grid-template-areas:
-        "device settings theme display";
+        "device settings theme display qrcode";
 }
 
 .MF_MixerAppMenu_Settings
@@ -74,6 +74,11 @@ body
 .MF_MixerAppMenu_Device
 {
     grid-area: device;
+}
+
+.MF_MixerAppMenu_QRCode
+{
+    grid-area: qrcode;
 }
 
 

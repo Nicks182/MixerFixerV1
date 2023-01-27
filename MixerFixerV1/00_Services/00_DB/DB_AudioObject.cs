@@ -10,6 +10,7 @@ namespace Services
     public class DB_AudioObject
     {
         public Guid Id { get; set; } = Guid.Empty;
+        public string SessionId_Base64 { get; set; } = "NA";
         public string Name { get; set; } = "NA";
         public bool IsManaged { get; set; } = false;
         public bool IsActive { get; set; } = false;
@@ -26,9 +27,9 @@ namespace Services
         }
 
 
-        public DB_AudioObject AudioObject_GetOne(string P_Name)
+        public DB_AudioObject AudioObject_GetOne(string P_SessionId_Base64)
         {
-            return this.G_DB_AudioObject.FindOne(a => a.Name == P_Name);
+            return this.G_DB_AudioObject.FindOne(a => a.SessionId_Base64 == P_SessionId_Base64);
         }
 
         public DB_AudioObject AudioObject_AddNew(string P_Name)

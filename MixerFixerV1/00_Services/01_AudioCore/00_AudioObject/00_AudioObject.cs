@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HtmlGenerator;
 using MixerFixerV1;
 using NAudio.CoreAudioApi;
 using NAudio.CoreAudioApi.Interfaces;
@@ -24,9 +25,12 @@ namespace Services
         private Guid G_UniqueId = Guid.NewGuid(); // used only during running of app. Only temporarily
         public Guid UniqueId{get { return G_UniqueId; }}
 
-        private string G_Name { get; set; }
-        public string Name{get { return G_Name; }}
-        
+        private string G_DisplayName { get; set; }
+        public string DisplayName { get { return G_DisplayName; }}
+
+        private string G_SessionId_Base64 { get; set; }
+        public string SessionId_Base64 { get { return G_SessionId_Base64; } }
+
         private Bitmap G_Image { get; set; }
         public Bitmap Image{get { return G_Image; }}
 
@@ -36,6 +40,10 @@ namespace Services
         private bool G_IsMute { get; set; }
         public bool IsMute { get { return G_IsMute; } }
 
+        private bool G_IsSystemSounds { get; set; } = false;
+        public bool IsSystemSounds { get { return G_IsSystemSounds; } }
+
+        public HTML_Object_Icon G_Icon { get; set; }
 
         //public Arc_AudioObject(Srv_DB P_Srv_DB, MMDevice P_MMDevice)
         public Arc_AudioObject(MMDevice P_MMDevice)
@@ -45,7 +53,18 @@ namespace Services
             G_ObjectType = Arc_AudioObject_Type.IsDevice;
             //G_Srv_DB = P_Srv_DB;
             G_MMDevice = P_MMDevice;
+            G_Icon = HTML_Object_Icon.speaker;
+            //_Init();
+        }
 
+        public Arc_AudioObject(MMDevice P_MMDevice, bool P_IsMic)
+        {
+            G_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
+
+            G_ObjectType = Arc_AudioObject_Type.IsMicrophone;
+            //G_Srv_DB = P_Srv_DB;
+            G_MMDevice = P_MMDevice;
+            G_Icon = HTML_Object_Icon.mic;
             //_Init();
         }
 
@@ -57,7 +76,7 @@ namespace Services
             G_ObjectType = Arc_AudioObject_Type.IsSession;
             //G_Srv_DB = P_Srv_DB;
             G_AudioSessionControl = P_AudioSessionControl;
-
+            G_Icon = HTML_Object_Icon.blur_circular;
             //_Init();
         }
 

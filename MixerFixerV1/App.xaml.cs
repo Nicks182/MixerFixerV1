@@ -17,6 +17,8 @@ using System.Windows.Forms;
 
 using Services;
 using System.Diagnostics;
+using System.Net;
+using System.Net.Sockets;
 
 namespace MixerFixerV1
 {
@@ -27,6 +29,8 @@ namespace MixerFixerV1
     {
         public static IntPtr G_hwnd = new IntPtr(0xFFFF);
         public static string G_BaseDir = Process.GetCurrentProcess().MainModule.FileName.Replace("\\MixerFixerV1.exe", "");
+        public static int G_Port = 0;
+        //public static string G_LocalIP = "NA";
 
         public static NotifyIcon G_NotifyIcon;
         private ContextMenuStrip G_NotifyIcon_Menu;
@@ -41,6 +45,8 @@ namespace MixerFixerV1
 
         public App()
         {
+            G_Port = _Get_port();
+            //G_LocalIP = _GetLocalIPAddress();
             LoadDepedencies();
         }
 
@@ -101,9 +107,23 @@ namespace MixerFixerV1
             App.ServiceProvider = Services.BuildServiceProvider();
 
 
+            _MessageBusRegisterEvents();
 
-            G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
+
             G_Srv_Server = App.ServiceProvider.GetService(typeof(Srv_Server)) as Srv_Server;
+
+            
+
+            Task.Run(() =>
+            {
+                G_Srv_Server.StartServer();
+                
+            });
+        }
+
+        private void _MessageBusRegisterEvents()
+        {
+            G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
 
             G_Srv_MessageBus.RegisterEvent("serverstatuschanged", (status) =>
             {
@@ -121,10 +141,20 @@ namespace MixerFixerV1
                 }
             });
 
-            Task.Run(() =>
+            G_Srv_MessageBus.RegisterEvent("exception", (P_Expection) =>
             {
-                G_Srv_Server.StartServer();
-                
+                Exception L_Ex = (P_Expection as Exception);
+                System.Windows.MessageBox.Show(L_Ex.Message 
+                    + Environment.NewLine
+                    + Environment.NewLine
+                    +L_Ex.StackTrace);
+
+                _DoShutdown();
+            });
+
+            G_Srv_MessageBus.RegisterEvent("showmessage", (P_MessageString) =>
+            {
+                System.Windows.MessageBox.Show(P_MessageString.ToString());
             });
         }
 
@@ -165,26 +195,6 @@ namespace MixerFixerV1
 
             _LoadTheme();
 
-            
-
-            string bla = "";
-            //int r = 33;
-            //int g = 33;
-            //int b = 33;
-            //int offset = 5;
-
-            //SolidColorBrush L_MainThemeBG = new SolidColorBrush(Color.FromArgb(255, (byte)(r - offset), (byte)(g - offset), (byte)(b - offset)));
-            //SolidColorBrush L_MainThemeFG = new SolidColorBrush(Color.FromArgb(255, (byte)77, (byte)100, (byte)111));
-
-            //var resourceDictionary = Application.Current.Resources.MergedDictionaries[0];
-            //resourceDictionary["BackgroundColour"] = L_MainThemeBG;
-            //resourceDictionary["WindowBorderColour"] = L_MainThemeBG;
-            //resourceDictionary["ControlDefaultForeground"] = L_MainThemeFG;
-            //resourceDictionary["ControlGlythColour"] = L_MainThemeFG;
-
-            // Orignal colors
-            //SolidColorBrush L_MainThemeBG = new SolidColorBrush(Color.FromArgb(255, (byte)30, (byte)30, (byte)30));
-            //SolidColorBrush L_MainThemeFG = new SolidColorBrush(Color.FromArgb(255, (byte)77, (byte)100, (byte)111));
 
 
         }
@@ -235,5 +245,39 @@ namespace MixerFixerV1
             App.G_NotifyIcon.Visible = false;
             App.G_NotifyIcon.Dispose();
         }
+
+        private int _Get_port()
+        {
+            string L_PortFile = Path.Combine(G_BaseDir, "port.txt");
+            if(File.Exists(L_PortFile) == true)
+            {
+                string[] lines = File.ReadAllLines(L_PortFile);
+                try
+                {
+                    return Convert.ToInt32(lines[0].Trim());
+                }
+                catch
+                {
+
+                }
+            }
+
+            return 5555;// Default
+        }
+
+        public static string _GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return "http://" + ip.ToString() + ":" + App.G_Port.ToString();
+                }
+            }
+
+            return "NA";
+        }
+
     }
 }

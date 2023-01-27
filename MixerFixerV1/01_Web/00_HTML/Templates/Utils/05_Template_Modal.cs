@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using HtmlGenerator;
+using Services;
 
 namespace Web
 {
@@ -149,7 +150,7 @@ namespace Web
 
         private string _Template_Modal_CloseEvent(string P_Id)
         {
-            return "_Modal_Hide('" + P_Id + "');";
+            return "_Modal_Close('" + P_Id + "', '" + Web_InterCommMessage_Type.Modal_Close + "');";
         }
     }
 }

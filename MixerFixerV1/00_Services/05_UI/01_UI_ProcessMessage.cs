@@ -65,21 +65,31 @@ namespace Services
                     case Web_InterCommMessage_Type.DisplaySettings_Show:
                     case Web_InterCommMessage_Type.DisplaySettings_ManagedChange:
                     case Web_InterCommMessage_Type.DisplaySettings_MonitorPower:
+                    case Web_InterCommMessage_Type.DisplaySettings_Reload:
                         _Modal_DisplaySettings(P_Web_InterCommMessage);
                         break;
 
-                    case Web_InterCommMessage_Type.SwitchPanel: // Device
+                    case Web_InterCommMessage_Type.SwitchPanel:
                         _SwitchPanel(P_Web_InterCommMessage);
+                        break;
+
+                    case Web_InterCommMessage_Type.QRCode_Show:
+                        _Modal_QRCode_Show(P_Web_InterCommMessage);
+                        break;
+
+                    case Web_InterCommMessage_Type.Modal_Close:
+                        _Modal_Close(P_Web_InterCommMessage);
                         break;
                 }
             }
             catch (Exception ex)
             {
-                P_Web_InterCommMessage.CommType = Web_InterCommMessage_Type.ShowMessage;
+                _Modal_Message_Show(P_Web_InterCommMessage, ex.Message);
+
                 P_Web_InterCommMessage.Data.Add(new Web_InterCommMessage_Data
                 {
                     DataType = Web_InterCommMessage_DataType.Text,
-                    Id = ex.Message,
+                    Id = "MsgStack",
                     Value = ex.StackTrace// + "\n" + ex.InnerException.ToString()
                 });
             }
@@ -87,7 +97,16 @@ namespace Services
 
 
         
+        private void _Modal_Close(Web_InterCommMessage P_Web_InterCommMessage)
+        {
+            P_Web_InterCommMessage.ModalInfo = new Web_InterCommMessage_Modal
+            {
+                Id = P_Web_InterCommMessage.Data[0].Value,
+                State = 0 // Hide
+            };
 
+            P_Web_InterCommMessage.CommType = Web_InterCommMessage_Type._DoNothing;
+        }
         
     }
 }

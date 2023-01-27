@@ -27,37 +27,48 @@ namespace Services
 
         public void StartServer()
         {
-            if (G_Enabled == true)
+            try
             {
-                return;
-            }
-
-            G_Server = WebHost.CreateDefaultBuilder()
-                .UseKestrel(x =>
+                if (G_Enabled == true)
                 {
-                    x.ListenAnyIP(5000);
-                    x.ListenLocalhost(5000);
+                    return;
+                }
 
-                })
-                .UseStartup<Startup>()
-                //.UseUrls("http://*:5000")
-                .Build();
+                G_Server = WebHost.CreateDefaultBuilder()
+                    .UseKestrel(x =>
+                    {
+                        x.ListenAnyIP(App.G_Port);
+                        x.ListenLocalhost(App.G_Port);
 
-            G_ServerStatus = "Starting";
+                    })
+                    .UseStartup<Startup>()
+                    .UseUrls("http://*:" + App.G_Port.ToString())
+                    .Build();
 
-            G_Srv_MessageBus.Emit("serverstatuschanged", G_ServerStatus);
+                G_ServerStatus = "Starting";
 
-            Task.Run(() =>
-            {
-                Thread.Sleep(1000);
-                G_Server.RunAsync();
-                G_ServerStatus = "Running...";
                 G_Srv_MessageBus.Emit("serverstatuschanged", G_ServerStatus);
 
-            });
+                Task.Run(() =>
+                {
+                    try
+                    {
+                        Thread.Sleep(1000);
+                        G_Server.RunAsync();
+                        G_ServerStatus = "Running...";
+                        G_Srv_MessageBus.Emit("serverstatuschanged", G_ServerStatus);
+                    }
+                    catch (Exception ex)
+                    {
+                        G_Srv_MessageBus.Emit("exception", ex);
+                    }
+                });
 
-
-
+            }
+            catch (Exception ex)
+            {
+                G_Srv_MessageBus.Emit("exception", ex);
+            }
         }
 
 

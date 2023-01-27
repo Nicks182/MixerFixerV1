@@ -72,6 +72,8 @@ namespace Services
         Device_Change,
         ShowMessage,
         SwitchPanel,
+
+        Modal_Close,
         Settings_Show,
         Settings_Priority_Enforce,
         Settings_Priority_MoveUp,
@@ -92,6 +94,8 @@ namespace Services
         DisplaySettings_Show,
         DisplaySettings_ManagedChange,
         DisplaySettings_MonitorPower,
+        DisplaySettings_Reload,
 
+        QRCode_Show
     }
 }

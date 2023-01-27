@@ -10,7 +10,7 @@
         
         Style="{DynamicResource CustomWindowStyle}"
         Title="MixerFixer" 
-        Height="450" 
+        Height="600" 
         Width="800" 
         BorderThickness="5,5,5,5" 
         WindowStartupLocation="CenterScreen" 

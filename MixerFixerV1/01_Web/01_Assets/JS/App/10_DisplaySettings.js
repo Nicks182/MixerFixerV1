@@ -28,3 +28,13 @@ function _App_DisplaySettings_PowerChange(P_MessageType, P_DisplayId, P_DisplayN
     _Comm_Send(L_Comm);
 }
 
+
+function _App_DisplaySettings_Reload(P_MessageType)
+{
+    var L_Comm =
+    {
+        CommType: P_MessageType
+    }
+    _Comm_Send(L_Comm);
+}
+

@@ -145,7 +145,7 @@ namespace Web
             return L_HTML_Object;
         }
 
-        public StringBuilder _Template_DisplaySettingsModal_Body_Panel_HTML()
+        public StringBuilder _Template_DisplaySettingsModal_Body_Panel_Children_HTML()
         {
             return G_HTML._BuildHtml(_Template_DisplaySettingsModal_Body_Panel_Children());
         }

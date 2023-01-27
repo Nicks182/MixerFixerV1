@@ -25,10 +25,6 @@ function _Message_Receive(P_CommObject)
                 _App_Theme_ColorChanged(P_CommObject)
                 break;
 
-            case "ShowMessage":
-                alert('bla');
-                break;
-
             case "_Log":
                 _LogToConsole(P_CommObject);
                 break;

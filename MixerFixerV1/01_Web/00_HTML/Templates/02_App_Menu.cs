@@ -25,6 +25,7 @@ namespace Web
             L_HTML_Object.Add_Child(_Template_App_Menu_SettingsBtn());
             L_HTML_Object.Add_Child(_Template_App_Menu_ThemeBtn());
             L_HTML_Object.Add_Child(_Template_App_Menu_DisplaySettingsBtn());
+            L_HTML_Object.Add_Child(_Template_App_Menu_QRCodeBtn());
 
             //for (int i = 0; i < G_Srv_AudioCore.Devices.Count; i++)
             //{

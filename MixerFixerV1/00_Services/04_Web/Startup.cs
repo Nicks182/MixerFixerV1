@@ -62,6 +62,7 @@ namespace Services
         {
             app.UseCors(builder => builder
                 //.WithOrigins("http://" + Srv_Utils._GetIp() + ":5000")
+                .WithOrigins("http://*:" + App.G_Port.ToString())
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials());

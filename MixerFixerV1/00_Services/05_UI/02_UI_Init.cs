@@ -40,7 +40,7 @@ namespace Services
             
             //G_Srv_AudioCore.Init();
 
-            G_Srv_Logger._LogMessage("Default Device: " + G_Srv_AudioCore.Device.Device.Name);
+            G_Srv_Logger._LogMessage("Default Device: " + G_Srv_AudioCore.Device.Device.DisplayName);
 
             //G_HTML_Templates = new HTML_Templates(G_Srv_AudioCore, G_Srv_DB);
             P_Web_InterCommMessage.HTMLs = new List<Web_InterCommMessage_HTML>

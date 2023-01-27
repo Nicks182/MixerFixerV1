@@ -18,6 +18,11 @@ namespace Services
             //Arc_AudioObject L_AudioCore_Object = L_Arc_Device.Sessions.Where(s => s.UniqueId.ToString() == P_CommObject.Data[0].Id).FirstOrDefault();
             Arc_AudioObject L_AudioCore_Object = G_Srv_AudioCore.Device._Get_Object(P_CommObject.Data[0].Id);
 
+            if (L_AudioCore_Object == null)
+            {
+                L_AudioCore_Object = G_Srv_AudioCore.Device_Mic._Get_Object(P_CommObject.Data[0].Id);
+            }
+
             if (L_AudioCore_Object != null)
             {
                 L_AudioCore_Object._Set_Volume(P_CommObject.Data[0].Value);
@@ -84,17 +89,24 @@ namespace Services
 
             Arc_AudioObject L_Arc_AudioObject = G_Srv_AudioCore.Device._Get_Object(P_Web_InterCommMessage.Data[0].Id);
 
-            L_Arc_AudioObject._Set_Volume(P_Web_InterCommMessage.Data[0].Value);
-
-            P_Web_InterCommMessage.ModalInfo = new Web_InterCommMessage_Modal
+            if (L_Arc_AudioObject == null)
             {
-                Id = G_HTML_Templates._Template_Modal_VolumeInput_Id(),
-                State = 0, // Show
-            };
+                L_Arc_AudioObject = G_Srv_AudioCore.Device_Mic._Get_Object(P_Web_InterCommMessage.Data[0].Id);
+            }
 
-            _GetUpdate(P_Web_InterCommMessage);
-            P_Web_InterCommMessage.CommType = Web_InterCommMessage_Type.DataUpdate;
-            
+            if (L_Arc_AudioObject != null)
+            {
+                L_Arc_AudioObject._Set_Volume(P_Web_InterCommMessage.Data[0].Value);
+
+                P_Web_InterCommMessage.ModalInfo = new Web_InterCommMessage_Modal
+                {
+                    Id = G_HTML_Templates._Template_Modal_VolumeInput_Id(),
+                    State = 0, // Show
+                };
+
+                _GetUpdate(P_Web_InterCommMessage);
+                P_Web_InterCommMessage.CommType = Web_InterCommMessage_Type.DataUpdate;
+            }
         }
 
     }

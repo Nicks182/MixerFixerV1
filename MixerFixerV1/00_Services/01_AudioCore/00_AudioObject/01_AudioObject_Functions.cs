@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using HtmlGenerator;
 using NAudio.CoreAudioApi;
 using NAudio.CoreAudioApi.Interfaces;
 
@@ -30,48 +30,60 @@ namespace Services
                             G_MMDevice.AudioEndpointVolume.OnVolumeNotification += AudioEndpointVolume_OnVolumeNotification;
                             G_MMDevice.AudioSessionManager.OnSessionCreated += AudioSessionManager_OnSessionCreated;
                             //G_Image = Icon.ExtractAssociatedIcon(G_MMDevice.IconPath).ToBitmap();
-                            G_Image = Srv_Utils_NativeMethods.GetIconFromFile(G_MMDevice.IconPath).ToBitmap();
-                            G_Name = G_MMDevice.FriendlyName;
+                            if (G_MMDevice.IconPath.Contains("mmres.dll") == true)
+                            {
+                                G_Image = null;
+                            }
+                            else
+                            {
+                                G_Image = Srv_Utils_NativeMethods.GetIconFromFile(G_MMDevice.IconPath).ToBitmap();
+                            }
+                            G_DisplayName = G_MMDevice.FriendlyName;
+                            G_SessionId_Base64 = G_MMDevice.ID.EncodeBase64();
                         }
                     }
                     break;
 
                 case Arc_AudioObject_Type.IsSession:
                     {
-                        
+                        G_SessionId_Base64 = G_AudioSessionControl.GetSessionIdentifier.EncodeBase64();
                         Process process = Process.GetProcessById((int)G_AudioSessionControl.GetProcessID);
 
-                        Icon L_Icon = Srv_Utils_NativeMethods.GetIconFromFile(G_AudioSessionControl.IconPath);
-                        if (L_Icon == null)
-                        {
-                            try
-                            {
-                                G_Image = Srv_Utils_NativeMethods.GetIconFromFile(process.MainModule.FileName).ToBitmap();
-                            }
-                            catch { }
-                        }
-                        else
-                        {
-                            G_Image = L_Icon.ToBitmap();
-                        }
+                        
 
                         if (G_AudioSessionControl.IsSystemSoundsSession)
                         {
-                            G_Name = "System Sounds";
+                            G_IsSystemSounds = true;
+                            G_DisplayName = "System Sounds";
+                            G_Icon = HTML_Object_Icon.music_video;
                         }
                         else
                         {
-                            //G_Name = G_AudioSessionControl.DisplayName == "" ? process.ProcessName : process.MainWindowTitle;
-                            G_Name = G_AudioSessionControl.DisplayName;
-
-                            if (string.IsNullOrEmpty(G_Name) == true)
+                            Icon L_Icon = Srv_Utils_NativeMethods.GetIconFromFile(G_AudioSessionControl.IconPath);
+                            if (L_Icon == null)
                             {
-                                G_Name = process.ProcessName;
+                                try
+                                {
+                                    G_Image = Srv_Utils_NativeMethods.GetIconFromFile(process.MainModule.FileName).ToBitmap();
+                                }
+                                catch { }
+                            }
+                            else
+                            {
+                                G_Image = L_Icon.ToBitmap();
                             }
 
-                            if (string.IsNullOrEmpty(G_Name) == true)
+                            //G_Name = G_AudioSessionControl.DisplayName == "" ? process.ProcessName : process.MainWindowTitle;
+                            G_DisplayName = G_AudioSessionControl.DisplayName;
+
+                            if (string.IsNullOrEmpty(G_DisplayName) == true)
                             {
-                                G_Name = process.MainWindowTitle;
+                                G_DisplayName = process.ProcessName;
+                            }
+
+                            if (string.IsNullOrEmpty(G_DisplayName) == true)
+                            {
+                                G_DisplayName = process.MainWindowTitle;
                             }
                         }
 
@@ -88,7 +100,7 @@ namespace Services
 
         private void _Init_DBObject()
         {
-            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
+            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_SessionId_Base64);
             if (L_DB_AudioObject == null)
             {
 
@@ -100,7 +112,8 @@ namespace Services
                     IsDevice = (G_ObjectType == Arc_AudioObject_Type.IsDevice || G_ObjectType == Arc_AudioObject_Type.IsMicrophone),
                     IsManaged = false,
                     IsMute = _Get_Mute(),
-                    Name = G_Name,
+                    Name = G_DisplayName,
+                    SessionId_Base64 = G_SessionId_Base64,
                     Volume = _Get_Volume()
                 };
 
@@ -252,7 +265,7 @@ namespace Services
 
         public void _Set_Mute(bool P_Mute)
         {
-            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
+            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_SessionId_Base64);
 
             switch (G_ObjectType)
             {
@@ -294,13 +307,13 @@ namespace Services
 
         public bool _Get_Managed()
         {
-            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
+            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_SessionId_Base64);
             return L_DB_AudioObject.IsManaged;
         }
 
         public bool _Set_Managed()
         {
-            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
+            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_SessionId_Base64);
 
             L_DB_AudioObject.IsManaged = !L_DB_AudioObject.IsManaged;
             G_Srv_DB.AudioObject_Save(L_DB_AudioObject);
@@ -372,7 +385,7 @@ namespace Services
 
         private void _Update_DB_Volume(int P_Volume)
         {
-            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
+            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_SessionId_Base64);
             L_DB_AudioObject.Volume = P_Volume;
 
             G_Srv_DB.AudioObject_Save(L_DB_AudioObject);
@@ -380,7 +393,7 @@ namespace Services
 
         public void _Update_DB_Object()
         {
-            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
+            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_SessionId_Base64);
 
             L_DB_AudioObject.Volume = _Get_Volume();
             L_DB_AudioObject.IsMute = _Get_Mute();

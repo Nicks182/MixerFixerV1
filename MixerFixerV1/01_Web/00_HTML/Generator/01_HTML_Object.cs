@@ -97,6 +97,12 @@ namespace HtmlGenerator
         computer,
         desktop_windows,
         personal_video,
+        border_clear,
+        speaker,
+        mic,
+        apps,
+        blur_circular,
+        music_video
     }
 
 }

@@ -22,8 +22,16 @@ namespace Web
             L_HTML_Object.Add_Attribute("class", "MF_AppControl");
             L_HTML_Object.Add_Attribute("oncontextmenu", _Template_VolumeControl_IsMute_Event(P_AudioCore_Object));
 
-
-            L_HTML_Object.Add_Child(_Template_VolumeControl_Image(P_AudioCore_Object));
+            if (P_AudioCore_Object.Image != null)
+            {
+                L_HTML_Object.Add_Child(_Template_VolumeControl_Image(P_AudioCore_Object));
+            }
+            else
+            {
+                HTML_Object L_HTML_Object_Icon = _Template_Icon(P_AudioCore_Object.G_Icon);
+                L_HTML_Object_Icon.Add_Attribute("class", "MF_AppControl_ImageIcon");
+                L_HTML_Object.Add_Child(L_HTML_Object_Icon);
+            }
             L_HTML_Object.Add_Child(_Template_VolumeControl_Label(P_AudioCore_Object));
             L_HTML_Object.Add_Child(_Template_VolumeControl_IsMute(P_AudioCore_Object));
             L_HTML_Object.Add_Child(_Template_VolumeControl_IsMananged(P_AudioCore_Object));
@@ -60,7 +68,7 @@ namespace Web
             L_HTML_Object.Add_Child(new HTML_Object
             {
                 Type = HTML_Object_Type.IsRaw,
-                RawValue = new StringBuilder(P_AudioCore_Object.Name)
+                RawValue = new StringBuilder(P_AudioCore_Object.DisplayName)
             });
 
             return L_HTML_Object;

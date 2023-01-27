@@ -30,7 +30,7 @@ namespace Services
 
         void AudioEndpointVolume_OnVolumeNotification(AudioVolumeNotificationData data)
         {
-            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
+            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_SessionId_Base64);
             if (L_DB_AudioObject.IsManaged == true)
             {
                 if (Convert.ToInt32(data.MasterVolume * 100) != L_DB_AudioObject.Volume)
@@ -52,7 +52,7 @@ namespace Services
 
         public void OnVolumeChanged(float volume, bool isMuted)
         {
-            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_Name);
+            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_SessionId_Base64);
 
             if (L_DB_AudioObject.IsManaged == true)
             {

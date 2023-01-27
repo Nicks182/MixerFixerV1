@@ -28,6 +28,8 @@ namespace MixerFixerV1
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string G_URL_Localhost = "http://localhost:" + App.G_Port.ToString();
+        private string G_URL_127 = "http://127.0.0.1:" + App.G_Port.ToString();
 
         private Srv_Server G_Srv_Server;
         private Srv_MessageBus G_Srv_MessageBus;
@@ -72,10 +74,10 @@ namespace MixerFixerV1
             App.G_hwnd = new WindowInteropHelper(this).Handle;
 
             G_ServerStatus = G_Srv_Server.GetServerStatus();
-            if (G_ServerStatus.Contains("Running") == true)
-            {
-                _InitUI();
-            }
+            //if (G_ServerStatus.Contains("Running") == true)
+            //{
+            //    _InitUI();
+            //}
             
             _Check_WV_Runtime();
 
@@ -134,6 +136,7 @@ namespace MixerFixerV1
             Grid_NoRuntime.Visibility = Visibility.Collapsed;
 
             WV2_Viewer = new WebView2();
+            WV2_Viewer.NavigationCompleted += WV2_Viewer_NavigationCompleted;
             WV2_Viewer.CreationProperties = new CoreWebView2CreationProperties 
             { 
                 AdditionalBrowserArguments = "--enable-smooth-scrolling" 
@@ -146,19 +149,35 @@ namespace MixerFixerV1
 
             Grid_Main.Children.Add(WV2_Viewer);
 
+            Txt_ServerOutput.Text = G_ServerStatus;
             if(G_ServerStatus.Contains("Running") == true && WV2_Viewer.Source == null)
             {
-                WV2_Viewer.Source = new Uri("http://127.0.0.1:5000");
+                WV2_Viewer.Source = new Uri(G_URL_Localhost);
             }
         }
-        
-        
-        private void _InitUI()
+
+        int G_Eventtriggercount = 0;
+        int G_RetryCount = 0;
+        private void WV2_Viewer_NavigationCompleted(object? sender, CoreWebView2NavigationCompletedEventArgs e)
         {
-            Txt_ServerOutput.Text = G_ServerStatus;
-            if (WV2_Viewer != null)
+            G_Eventtriggercount++;
+            if (e.IsSuccess == false && G_Eventtriggercount < 2 && G_RetryCount < 1)
             {
-                WV2_Viewer.Source = new Uri("http://127.0.0.1:5000");
+                G_RetryCount++;
+                G_Srv_MessageBus.Emit("showmessage", "Using '" + G_URL_Localhost + "' failed, trying '" + G_URL_127 + "'...");
+                WV2_Viewer.Source = new Uri(G_URL_127);
+            }
+
+            if (e.IsSuccess == false && G_Eventtriggercount < 2 && G_RetryCount < 2)
+            {
+                G_RetryCount++;
+                G_Srv_MessageBus.Emit("showmessage", "Using '" + G_URL_127 + "' failed, trying '" + App._GetLocalIPAddress() + "'...");
+                WV2_Viewer.Source = new Uri(App._GetLocalIPAddress());
+            }
+
+            if (G_Eventtriggercount > 1)
+            {
+                G_Eventtriggercount = 0;
             }
         }
 
