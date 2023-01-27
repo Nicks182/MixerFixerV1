@@ -13,7 +13,6 @@ namespace Services
     {
         private void _Modal_DisplaySettings(Web_InterCommMessage P_Web_InterCommMessage)
         {
-            int bla = Convert.ToInt32("a");
             switch (P_Web_InterCommMessage.CommType)
             {
                 case Web_InterCommMessage_Type.DisplaySettings_Show:

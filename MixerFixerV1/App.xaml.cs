@@ -19,6 +19,7 @@ using Services;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
+using System.Net.NetworkInformation;
 
 namespace MixerFixerV1
 {
@@ -267,17 +268,46 @@ namespace MixerFixerV1
 
         public static string _GetLocalIPAddress()
         {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
+            try
             {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                var ipV4s = GetIpAddress();
+
+                //string bla = "http://" + ipV4s.ToString() + ":" + App.G_Port.ToString();
+                if (ipV4s != null)
                 {
-                    return "http://" + ip.ToString() + ":" + App.G_Port.ToString();
+                    return "http://" + ipV4s.ToString() + ":" + App.G_Port.ToString();
                 }
             }
+            catch
+            {
+
+            }
+            //var host = Dns.GetHostEntry(Dns.GetHostName());
+            //foreach (var ip in host.AddressList)
+            //{
+            //    if (ip.AddressFamily == AddressFamily.InterNetwork)
+            //    {
+            //        return "http://" + ip.ToString() + ":" + App.G_Port.ToString();
+            //    }
+            //}
 
             return "NA";
         }
+
+        public static System.Net.IPAddress GetIpAddress()
+        {
+            return NetworkInterface
+                .GetAllNetworkInterfaces()
+                .Where(n => n.OperationalStatus == OperationalStatus.Up)
+                .Where(n => n.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || n.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                //.Where(n => n.Name == "Wi-Fi")
+                .SelectMany(n => n.GetIPProperties()?.UnicastAddresses)
+                .Where(n => n.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                .Select(g => g?.Address)
+                .Where(a => a != null)
+                .FirstOrDefault();
+        }
+
 
     }
 }
