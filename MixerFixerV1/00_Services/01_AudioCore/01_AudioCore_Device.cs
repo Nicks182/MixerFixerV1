@@ -99,6 +99,7 @@ namespace Services
 
         private void L_Arc_AudioObject_OnNewSession(Arc_AudioObject_SessionInfo P_AudioCore_Object_SessionInfo)
         {
+            Reload();
             DoUpdate?.Invoke();
         }
     }
