@@ -104,12 +104,12 @@ namespace Web
         private StringBuilder _Template_DisplaySettingsModal_Body_Panel_Help_Text()
         {
             StringBuilder L_Text = new StringBuilder();
-            L_Text.Append("When monitor is set to be Managed, MixerFixer will store the monitor settings as they currently are and try to restore those settings when monitor is active in Windows.");
+            L_Text.Append("When a Display is set to be Managed, MixerFixer will store the display settings as they currently are and try to restore those settings when a display is made active in Windows.");
             L_Text.Append("<br />");
             L_Text.Append("<br />");
-            L_Text.Append("1. Use Windows Display Settings to configure your monitor settings.");
+            L_Text.Append("1. Use Windows Display Settings to configure your Display settings.");
             L_Text.Append("<br />");
-            L_Text.Append("2. Mark which monitor's settings should MixerFixer store and try to restore by enabling the Is Managed switch.");
+            L_Text.Append("2. On the left of each Display item below you can enable which displays MixerFixer should manage.");
             L_Text.Append("<br />");
 
             return L_Text;

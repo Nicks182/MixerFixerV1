@@ -56,7 +56,7 @@ namespace Web
             L_HTML_Object.Add_Child(new HTML_Object
             {
                 Type = HTML_Object_Type.IsRaw,
-                RawValue = new StringBuilder(P_DB_DisplaySettings.FriendlyName)
+                RawValue = new StringBuilder(P_DB_DisplaySettings.DisplayName + ": " + P_DB_DisplaySettings.FriendlyName)
             });
 
             return L_HTML_Object;

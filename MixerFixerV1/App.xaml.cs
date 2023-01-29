@@ -20,6 +20,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Net.NetworkInformation;
+using Microsoft.Win32;
 
 namespace MixerFixerV1
 {
@@ -270,12 +271,12 @@ namespace MixerFixerV1
         {
             try
             {
-                var ipV4s = GetIpAddress();
+                var ipV4s = GetPhysicsNetworkCardIP();
 
                 //string bla = "http://" + ipV4s.ToString() + ":" + App.G_Port.ToString();
                 if (ipV4s != null)
                 {
-                    return "http://" + ipV4s.ToString() + ":" + App.G_Port.ToString();
+                    return "http://" + ipV4s.FirstOrDefault().ToString() + ":" + App.G_Port.ToString();
                 }
             }
             catch
@@ -308,6 +309,37 @@ namespace MixerFixerV1
                 .FirstOrDefault();
         }
 
+        public static IList<string> GetPhysicsNetworkCardIP()
+        {
+            var networkCardIPs = new List<string>();
+            NetworkInterface[] fNetworkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
+            foreach (NetworkInterface adapter in fNetworkInterfaces)
+            {
+                string fRegistryKey = "SYSTEM\\CurrentControlSet\\Control\\Network\\{4D36E972-E325-11CE-BFC1-08002BE10318}\\" + adapter.Id + "\\Connection";
+                RegistryKey rk = Registry.LocalMachine.OpenSubKey(fRegistryKey, false);
+                if (rk != null)
+                {
+                    // If there is PCI in front, it is the real network card of this machine.
+                    string fPnpInstanceID = rk.GetValue("PnpInstanceID", "").ToString();
+                    int fMediaSubType = Convert.ToInt32(rk.GetValue("MediaSubType", 0));
+                    if (fPnpInstanceID.Length > 3 && fPnpInstanceID.Substring(0, 3) == "PCI")
+                    {
+                        IPInterfaceProperties fIPInterfaceProperties = adapter.GetIPProperties();
+                        UnicastIPAddressInformationCollection UnicastIPAddressInformationCollection = fIPInterfaceProperties.UnicastAddresses;
+                        foreach (UnicastIPAddressInformation UnicastIPAddressInformation in UnicastIPAddressInformationCollection)
+                        {
+                            if (UnicastIPAddressInformation.Address.AddressFamily == AddressFamily.InterNetwork)
+                            {
+                                networkCardIPs.Add(UnicastIPAddressInformation.Address.ToString());
+                            }
 
+                        }
+                    }
+
+                }
+            }
+
+            return networkCardIPs;
+        }
     }
 }

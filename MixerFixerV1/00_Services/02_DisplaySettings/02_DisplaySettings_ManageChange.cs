@@ -28,7 +28,6 @@ namespace Services
                     L_DB_DisplaySettings.PathInfo_JSON = _Get_MonitorInfo_JSON(P_Name_Base64);
                     G_Srv_DB.DisplaySettings_Save(L_DB_DisplaySettings);
                 }
-                //_StartDeviceTimer();
 
                 return L_DB_DisplaySettings.IsManaged;
             }

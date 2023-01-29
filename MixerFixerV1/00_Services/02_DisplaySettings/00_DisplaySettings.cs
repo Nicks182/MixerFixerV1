@@ -95,7 +95,7 @@ namespace Services
                 return P_Path.TargetsInfo[0].DisplayTarget.FriendlyName;
             }
 
-            return P_Path.DisplaySource.DisplayName;
+            return P_Path.DisplaySource.DisplayName.Replace("\\\\.\\", "");
         }
 
         private string _Get_MonitorInfo_JSON(string P_Name_Base64)

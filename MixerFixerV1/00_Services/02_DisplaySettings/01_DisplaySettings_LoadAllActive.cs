@@ -9,12 +9,6 @@ namespace Services
 
         public void _Save_DB_MonitorInfo_All()
         {
-            List<DB_DisplaySettings> L_DB_DisplaySettings = G_Srv_DB.DisplaySettings_GetAll().FindAll().ToList();
-
-            for(int i = 0; i < L_DB_DisplaySettings.Count; i++)
-            {
-                G_Srv_DB.DisplaySettings_Delete(L_DB_DisplaySettings[i]);
-            }
 
             WindowsDisplayAPI.DisplayConfig.PathInfo[] L_ActivePaths = _GetAllActivePaths();
 
@@ -32,7 +26,7 @@ namespace Services
 
                 if (L_DB_DisplaySetting.IsManaged == false)
                 {
-                    L_DB_DisplaySetting.DisplayName = L_Path.DisplaySource.DisplayName;
+                    L_DB_DisplaySetting.DisplayName = L_Path.DisplaySource.DisplayName.Replace("\\\\.\\", "");
                     L_DB_DisplaySetting.FriendlyName = _GetFirendlyName(L_Path);
                     L_DB_DisplaySetting.IsPowered = true;
                     L_DB_DisplaySetting.PathInfo_JSON = _Get_MonitorInfo_JSON(L_Path);

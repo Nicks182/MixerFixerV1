@@ -99,6 +99,13 @@ namespace Services
 
         private void _Modal_DisplaySettings_Reload(Web_InterCommMessage P_Web_InterCommMessage)
         {
+            List<DB_DisplaySettings> L_DB_DisplaySettings = G_Srv_DB.DisplaySettings_GetAll().FindAll().ToList();
+
+            for (int i = 0; i < L_DB_DisplaySettings.Count; i++)
+            {
+                G_Srv_DB.DisplaySettings_Delete(L_DB_DisplaySettings[i]);
+            }
+
             G_Srv_DisplaySettings._Save_DB_MonitorInfo_All();
 
             P_Web_InterCommMessage.HTMLs.Clear();
