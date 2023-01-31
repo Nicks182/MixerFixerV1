@@ -1,7 +1,9 @@
 # MixerFixer
 A Mixer app for Windows to better control audio levels and overriding Windows depending on how it’s configured.
 
-![image](https://user-images.githubusercontent.com/13113785/215666471-b982e59b-7bad-426d-8db9-c3e6fbc1a771.png)
+### Youtueb Demo
+[![Youtube Demo](https://img.youtube.com/vi/rUBA_o1_Mrg/hqdefault.jpg)](https://www.youtube.com/watch?v=rUBA_o1_Mrg)
+
 
 ## Info about the app
 The app is built using WPF as our base, but 99% of the app and its functionality is done as a web app and the WPF part only acts as a host for the Web App. Using Microsoft’s new-ish WebView2 browser control we can browse to the app’s embedded webpage which is also hosted inside of the WPF app using Kestrel (web server).
