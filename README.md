@@ -1,7 +1,7 @@
 # MixerFixer
 A Mixer app for Windows to better control audio levels and overriding Windows depending on how it’s configured.
 
-### Youtueb Demo
+### Youtube Demo
 [![Youtube Demo](https://img.youtube.com/vi/rUBA_o1_Mrg/hqdefault.jpg)](https://www.youtube.com/watch?v=rUBA_o1_Mrg)
 
 
