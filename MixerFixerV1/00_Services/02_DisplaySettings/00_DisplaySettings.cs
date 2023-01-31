@@ -36,7 +36,7 @@ namespace Services
                 G_Srv_MessageBus.Emit("exception", ex);
             }
         }
-
+        
         private bool? _Monitor_Turn_On(WindowsDisplayAPI.DisplayConfig.PathInfo P_PathInfo)
         {
             if(P_PathInfo == null)

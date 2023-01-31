@@ -41,22 +41,6 @@ namespace Services
         private void _SetDevice(MMDevice P_MMDevice)
         {
             
-            //if (G_Device != null && G_Device.Device != null)
-            //{
-            //    G_Device.Device.OnNewSession -= L_Arc_AudioObject_OnNewSession;
-            //    G_Device.Device.OnVolumeHasChanged -= L_Arc_AudioObject_OnVolumeChange;
-            //    G_Device.Device.DeviceChanged -= Device_DeviceChanged;
-            //    G_Device.Device.Dispose();
-
-            //    for (int i = 0; i < G_Device.Sessions.Count; i++)
-            //    {
-            //        G_Device.Sessions[i].OnNewSession -= L_Arc_AudioObject_OnNewSession;
-            //        G_Device.Sessions[i].OnVolumeHasChanged -= L_Arc_AudioObject_OnVolumeChange;
-            //        G_Device.Sessions[i].Dispose();
-            //    }
-            //}
-
-
             G_Device = new Arc_Device();
             G_Device.Device = new Arc_AudioObject(P_MMDevice);
             G_Device.Device.OnNewSession += L_Arc_AudioObject_OnNewSession;

@@ -59,6 +59,40 @@ namespace MixerFixerV1
             base.OnStartup(e);
         }
 
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            _LoadTheme();
+            _MessageBusRegisterEvents();
+
+            G_Srv_Server = App.ServiceProvider.GetService(typeof(Srv_Server)) as Srv_Server;
+
+            Task.Run(() =>
+            {
+                G_Srv_Server.StartServer();
+
+            });
+
+        }
+
+
+
+        public static ServiceCollection Services { get; set; } = new ServiceCollection();
+
+        private void LoadDepedencies()
+        {
+            Services.AddSingleton<Srv_MessageBus>();
+            Services.AddSingleton<Srv_DB>();
+            Services.AddSingleton<Srv_Server>();
+            Services.AddSingleton<Srv_AudioCore>();
+            Services.AddSingleton<Srv_DisplaySettings>();
+            
+
+            App.ServiceProvider = Services.BuildServiceProvider();
+
+
+            
+        }
+
         private void _Init_TrayIcon()
         {
             Stream L_MenuIconStream = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/MixerFixerV1;component/Theme/Images/CloseIcon-16x16.png")).Stream;
@@ -96,36 +130,14 @@ namespace MixerFixerV1
         }
 
 
-        public static ServiceCollection Services { get; set; } = new ServiceCollection();
-        private void LoadDepedencies()
-        {
-            Services.AddSingleton<Srv_MessageBus>();
-            Services.AddSingleton<Srv_DB>();
-            Services.AddSingleton<Srv_Server>();
-            Services.AddSingleton<Srv_AudioCore>();
-            Services.AddSingleton<Srv_DisplaySettings>();
-            
-
-            App.ServiceProvider = Services.BuildServiceProvider();
-
-
-            _MessageBusRegisterEvents();
-
-
-            G_Srv_Server = App.ServiceProvider.GetService(typeof(Srv_Server)) as Srv_Server;
-
-            
-
-            Task.Run(() =>
-            {
-                G_Srv_Server.StartServer();
-                
-            });
-        }
-
         private void _MessageBusRegisterEvents()
         {
             G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
+
+            G_Srv_MessageBus.RegisterEvent("themechanged", (status) =>
+            {
+                _LoadTheme();
+            });
 
             G_Srv_MessageBus.RegisterEvent("serverstatuschanged", (status) =>
             {
@@ -182,25 +194,7 @@ namespace MixerFixerV1
             }
         }
 
-        private void Application_Startup(object sender, StartupEventArgs e)
-        {
-            G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
-            //G_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
-            
-            //G_Srv_AudioCore = new Srv_AudioCore(G_Srv_DB);
-
-
-            G_Srv_MessageBus.RegisterEvent("themechanged", (status) =>
-            {
-                _LoadTheme();
-            });
-
-            _LoadTheme();
-
-
-
-        }
-
+        
         private void _LoadTheme()
         {
             var resourceDictionary = System.Windows.Application.Current.Resources.MergedDictionaries[0];
@@ -295,19 +289,6 @@ namespace MixerFixerV1
             return "NA";
         }
 
-        public static System.Net.IPAddress GetIpAddress()
-        {
-            return NetworkInterface
-                .GetAllNetworkInterfaces()
-                .Where(n => n.OperationalStatus == OperationalStatus.Up)
-                .Where(n => n.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || n.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
-                //.Where(n => n.Name == "Wi-Fi")
-                .SelectMany(n => n.GetIPProperties()?.UnicastAddresses)
-                .Where(n => n.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                .Select(g => g?.Address)
-                .Where(a => a != null)
-                .FirstOrDefault();
-        }
 
         public static IList<string> GetPhysicsNetworkCardIP()
         {

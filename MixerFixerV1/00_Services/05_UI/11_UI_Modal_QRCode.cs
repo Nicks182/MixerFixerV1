@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.SignalR;
+using MixerFixerV1;
 using Web;
 
 namespace Services
@@ -13,7 +15,6 @@ namespace Services
     {
         private void _Modal_QRCode_Show(Web_InterCommMessage P_Web_InterCommMessage)
         {
-            G_Srv_DisplaySettings._Save_DB_MonitorInfo_All();
 
             P_Web_InterCommMessage.ModalInfo = new Web_InterCommMessage_Modal
             {
@@ -29,6 +30,21 @@ namespace Services
                 IsAppend = true
             });
         }
+
+
+        private void _Modal_QRCode_OpenInLocalBrowser(Web_InterCommMessage P_Web_InterCommMessage)
+        {
+            Process.Start(new ProcessStartInfo(App._GetLocalIPAddress()) { UseShellExecute = true });
+
+            P_Web_InterCommMessage.ModalInfo = new Web_InterCommMessage_Modal
+            {
+                Id = G_HTML_Templates._Template_QRCodeModal_Id(),
+                State = 0 // Hide
+            };
+
+            P_Web_InterCommMessage.CommType = Web_InterCommMessage_Type._DoNothing;
+        }
+
 
     }
 }

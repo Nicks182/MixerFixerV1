@@ -77,6 +77,10 @@ namespace Services
                         _Modal_QRCode_Show(P_Web_InterCommMessage);
                         break;
 
+                    case Web_InterCommMessage_Type.QRCode_OpenInLocalBrowser:
+                        _Modal_QRCode_OpenInLocalBrowser(P_Web_InterCommMessage);
+                        break;
+
                     case Web_InterCommMessage_Type.Modal_Close:
                         _Modal_Close(P_Web_InterCommMessage);
                         break;
@@ -90,7 +94,7 @@ namespace Services
                 {
                     DataType = Web_InterCommMessage_DataType.Text,
                     Id = "MsgStack",
-                    Value = ex.StackTrace// + "\n" + ex.InnerException.ToString()
+                    Value = ex.StackTrace
                 });
             }
         }

@@ -29,7 +29,7 @@ namespace HtmlGenerator
         private void _GenerateHtml(HTML_Object P_HTML_Object)
         {
             // Build object
-            // Get open tag?
+            // Get open tag
             _GetTag_Open(P_HTML_Object);
 
             // Build Children

@@ -19,8 +19,19 @@ namespace Web
             L_HTML_Object.Add_Attribute("id", "QRCodeFooter");
             L_HTML_Object.Add_Attribute("class", "MF_QRCode_Footer");
 
+            L_HTML_Object.Add_Child(_Template_QRCodeModal_Body_Footer_OpenInBrowserBTN());
             L_HTML_Object.Add_Child(_Template_QRCodeModal_Body_Footer_CloseBtn());
 
+
+            return L_HTML_Object;
+        }
+
+        private HTML_Object _Template_QRCodeModal_Body_Footer_OpenInBrowserBTN()
+        {
+            HTML_Object L_HTML_Object = _Template_Button("Btn_OpenInBrowser", "Open in local Browser");
+
+
+            L_HTML_Object.Add_Attribute("onclick", "_App_QRCode_OpenInLocalBrowser('" + Web_InterCommMessage_Type.QRCode_OpenInLocalBrowser.ToString() + "');");
 
             return L_HTML_Object;
         }

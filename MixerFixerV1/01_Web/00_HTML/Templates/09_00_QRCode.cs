@@ -40,7 +40,7 @@ namespace Web
 
         private HTML_Object _Template_QRCodeModal()
         {
-            HTML_Object L_HTML_Object = _Template_Modal(_Template_QRCodeModal_Id(), "QR Code", _Template_QRCodeModal_Body());
+            HTML_Object L_HTML_Object = _Template_Modal(_Template_QRCodeModal_Id(), "Remote Access", _Template_QRCodeModal_Body());
 
 
             return L_HTML_Object;
@@ -70,6 +70,7 @@ namespace Web
             L_HTML_Object.Add_Attribute("id", "QRCodePanel");
             L_HTML_Object.Add_Attribute("class", "MF_QRCodePanel");
 
+            
             L_HTML_Object.Add_Child(_Template_QRCodeModal_Body_Panel_QRCode());
 
             return L_HTML_Object;
@@ -92,7 +93,6 @@ namespace Web
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(L_IP, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
-            //Bitmap qrCodeImage = qrCode.GetGraphic(20, System.Drawing.Color.White, System.Drawing.Color.Black, true);
 
             string L_Base64String = "";
 

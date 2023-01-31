@@ -1,0 +1,17 @@
+
+
+.MF_QRCodePanel
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+.MF_QRCode_Footer
+{
+    display: grid;
+    grid-template-columns: auto min-content;
+    align-items: end;
+    padding: 5px 5px 5px 5px;
+}

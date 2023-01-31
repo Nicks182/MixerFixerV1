@@ -96,6 +96,7 @@ namespace Services
         DisplaySettings_MonitorPower,
         DisplaySettings_Reload,
 
-        QRCode_Show
+        QRCode_Show,
+        QRCode_OpenInLocalBrowser,
     }
 }
