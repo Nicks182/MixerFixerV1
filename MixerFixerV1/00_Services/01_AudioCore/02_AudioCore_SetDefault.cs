@@ -99,7 +99,20 @@ namespace Services
 
                     if (P_IsMic == false && G_Device != null && G_Device.Device != null && G_Device.Device._Get_ID().Equals(L_DefaultDevice.ID) == false)
                     {
+                        Init();
                         OnDefaultDeviceSet?.Invoke(L_MMDevice.ID);
+                    }
+                }
+            }
+            else
+            {
+                MMDevice L_DefaultDevice = G_MMDeviceEnumerator.GetDefaultAudioEndpoint(_GetDataFlowType(P_IsMic), _GetRoleType(P_IsMic));
+                if (L_DefaultDevice != null)
+                {
+                    if (_Get_Current_Device_ID(_GetDataFlowType(P_IsMic)).Equals(L_DefaultDevice.ID) == false)
+                    {
+                        Init();
+                        OnDefaultDeviceSet?.Invoke(null);
                     }
                 }
             }
@@ -111,6 +124,20 @@ namespace Services
             client.SetDefaultEndpoint(P_MMDevice.ID, ERole.eCommunications);
             client.SetDefaultEndpoint(P_MMDevice.ID, ERole.eMultimedia);
             
+        }
+
+        private string _Get_Current_Device_ID(DataFlow P_DeviceType)
+        {
+            if(P_DeviceType == DataFlow.Capture)
+            {
+                return G_Device_Mic.Device._Get_ID();
+            }
+            else
+            {
+                return G_Device.Device._Get_ID();
+            }
+            
+
         }
 
         private MMDevice _Get_Device(string P_Name, DataFlow P_DeviceType)

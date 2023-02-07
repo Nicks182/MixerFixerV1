@@ -205,6 +205,13 @@ namespace Services
                 switch (G_ObjectType)
                 {
                     case Arc_AudioObject_Type.IsDevice:
+                        return new Arc_AudioObject_PeakVolum
+                        {
+                            Master = Math.Floor(G_MMDevice.AudioMeterInformation.MasterPeakValue * 100),
+                            Left = _Get_PeakVolume_Left(G_MMDevice.AudioMeterInformation),
+                            Right = _Get_PeakVolume_Right(G_MMDevice.AudioMeterInformation),
+                        };
+
                     case Arc_AudioObject_Type.IsMicrophone:
                         return new Arc_AudioObject_PeakVolum
                         {

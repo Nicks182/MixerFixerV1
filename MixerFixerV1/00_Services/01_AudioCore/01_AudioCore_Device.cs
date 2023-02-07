@@ -53,6 +53,8 @@ namespace Services
 
         private void Device_DeviceChanged(object? sender, EventArgs e)
         {
+            //Init();
+            //OnDefaultDeviceSet?.Invoke(G_Device.Device._Get_ID());
             //SetDefault_Devices();
             //DoUpdate?.Invoke();
         }

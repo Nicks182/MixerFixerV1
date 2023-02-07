@@ -83,7 +83,7 @@ namespace Services
             // Sometimes the 'DeviceFriendlyName' property result in a error in the NAudio library.
             // This can happen depending on the devices used/stored in Windows where it might not have some kind of Device Friendly Name.
             // While working on this I did not run into this issue, but other people have and so now the code below will basically ignore any device where that property results in an Exception.
-            // Not what I want to do, but as I can't replicate the issue I don't know what else to do...
+            // Not what I want to do, but as I can't replicate the issue I don't know how else to handle...
 
             // Playback
             MMDeviceCollection L_Devices = G_MMDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.All);
@@ -106,7 +106,7 @@ namespace Services
             {
                 try
                 {
-                    G_Srv_DB.DevicePriority_GetOneOrAdd(L_Devices[i].FriendlyName, LoadPriorityList_Get_DisplayText(L_Devices[i]), L_Devices[i].DeviceFriendlyName, false);
+                    G_Srv_DB.DevicePriority_GetOneOrAdd(L_Devices[i].FriendlyName, LoadPriorityList_Get_DisplayText(L_Devices[i]), L_Devices[i].DeviceFriendlyName, true);
                 }
                 catch
                 {

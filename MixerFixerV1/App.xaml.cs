@@ -30,7 +30,7 @@ namespace MixerFixerV1
     public partial class App : System.Windows.Application
     {
         public static IntPtr G_hwnd = new IntPtr(0xFFFF);
-        public static string G_BaseDir = Process.GetCurrentProcess().MainModule.FileName.Replace("\\MixerFixerV1.exe", "");
+        public static string G_BaseDir = Process.GetCurrentProcess().MainModule.FileName.Replace("\\MixerFixerV1.exe", "").Replace("\\dotnet.exe", "");
         public static int G_Port = 0;
         //public static string G_LocalIP = "NA";
 

@@ -53,6 +53,7 @@ namespace Services
         public void OnVolumeChanged(float volume, bool isMuted)
         {
             DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_SessionId_Base64);
+            
 
             if (L_DB_AudioObject.IsManaged == true)
             {

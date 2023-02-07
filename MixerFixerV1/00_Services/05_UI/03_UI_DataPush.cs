@@ -34,6 +34,12 @@ namespace Services
                 }
             }
 
+            L_Arc_Device = G_Srv_AudioCore.Device_Mic;
+            if (L_Arc_Device != null)
+            {
+                _GetUpdate_Data(P_CommObject, L_Arc_Device.Device);
+            }
+
         }
 
         private void _GetUpdate_Data(Web_InterCommMessage P_CommObject, Arc_AudioObject P_Arc_AudioObject)

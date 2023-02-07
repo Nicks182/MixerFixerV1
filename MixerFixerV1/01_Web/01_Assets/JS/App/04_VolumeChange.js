@@ -1,14 +1,38 @@
 
 
+var G_VolumeChangeTimeOut = null;
+
 function _App_VolumeChange(P_UniqueId, P_Value)
 {
-    var L_Comm =
-    {
-        CommType: "Volume_Change",
-        Data: [{ Id: P_UniqueId, Value: P_Value }]
-    }
-    _Comm_Send(L_Comm);
+    clearTimeout(G_VolumeChangeTimeOut);
+
+    G_VolumeChangeTimeOut = setTimeout(_App_VolumeChange_Handler(P_UniqueId, P_Value), 15);
 }
+
+function _App_VolumeChange_Handler(P_UniqueId, P_Value)
+{
+    return function()
+    {
+        var L_Comm =
+        {
+            CommType: "Volume_Change",
+            Data: [{ Id: P_UniqueId, Value: P_Value }]
+        }
+        _Comm_Send(L_Comm);
+    }
+}
+
+
+//function _App_VolumeChange(P_UniqueId, P_Value)
+//{
+//    var L_Comm =
+//    {
+//        CommType: "Volume_Change",
+//        Data: [{ Id: P_UniqueId, Value: P_Value }]
+//    }
+//    //_Comm_Send(L_Comm);
+//}
+
 
 function _App_MouseVolumeChange(P_Event, P_Control, P_UniqueId)
 {
