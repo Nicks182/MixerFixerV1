@@ -11,19 +11,20 @@ The app is built using WPF as our base, but 99% of the app and its functionality
 This means we can also access the app from a local browser or even over the local network. The app also uses SignalR (web sockets) for a very responsive UI with live updates to the UI as changes are detected.
 
 ## What can it do
--Control Master, Application/Game, and Microphone Volume
--Able to store volume levels of all Applications in local settings file and restore volume levels automatically.
--Set a default Application volume which the app will use to set the volume level of any application/game starting up.
--Easy way to set mute of Master or Application audio by just using Right Click on a volume control.
--Set device priority. MixerFixer can set the Default Audio device automatically when devices become active or inactive based on the priority set by the user.
--Basic management of Displays. Store and restore the state of a Display. Enable or disable a Display.
--Easily change colour scheme live using RGB sliders.
--Can access controls over a local network using a browser with the built in QR Code (Other PC, tablet, phone, anything with a browser)
--Tray Icon. Run without a UI.
--Auto startup with Windows.
+1. Control Master, Application/Game, and Microphone Volume
+2. Able to store volume levels of all Applications in local settings file and restore volume levels automatically.
+3. Set a default Application volume which the app will use to set the volume level of any application/game starting up.
+4. Easy way to set mute of Master or Application audio by just using Right Click on a volume control.
+5. Set device priority. MixerFixer can set the Default Audio device automatically when devices become active or inactive based on the priority set by the user.
+6. Basic management of Displays. Store and restore the state of a Display. Enable or disable a Display.
+7. Easily change colour scheme live using RGB sliders.
+8. Can access controls over a local network using a browser with the built in QR Code (Other PC, tablet, phone, anything with a browser)
+9. Tray Icon. Run without a UI.
+10. Auto startup with Windows.
 
 ## Control Volume
 Use the sliders to control the volume level of the current Default Device and any applications that may be producing sound.
+
 With mouse cursor over slider, hold left CTRL and use scroll wheel on mouse to change volume.
 ![image](https://user-images.githubusercontent.com/13113785/215668162-4d1b96b5-caab-43f2-8043-7bce24d43468.png)
 
