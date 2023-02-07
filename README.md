@@ -23,19 +23,19 @@ This means we can also access the app from a local browser or even over the loca
 -Auto startup with Windows.
 
 ## Control Volume
--Use the sliders to control the volume level of the current Default Device and any applications that may be producing sound.
--With mouse cursor over slider, hold left CTRL and use scroll wheel on mouse to change volume.
+Use the sliders to control the volume level of the current Default Device and any applications that may be producing sound.
+With mouse cursor over slider, hold left CTRL and use scroll wheel on mouse to change volume.
 ![image](https://user-images.githubusercontent.com/13113785/215668162-4d1b96b5-caab-43f2-8043-7bce24d43468.png)
 
 
--Right Click anywhere on volume control to switch Mute state of the device or application.
+Right Click anywhere on volume control to switch Mute state of the device or application.
 ![image](https://user-images.githubusercontent.com/13113785/215668032-5923fa8d-a79a-40db-ba32-898ade14529c.png)
 
 
--Left click Is Managed switch which will make MixerFixer keep the current volume of the device or application. While MF is running and a device or app is marked as Is Managed, the volume or mute state cannot be changed in Windows. Can only change in MF when using Is Managed.
+Left click Is Managed switch which will make MixerFixer keep the current volume of the device or application. While MF is running and a device or app is marked as Is Managed, the volume or mute state cannot be changed in Windows. Can only change in MF when using Is Managed.
 ![image](https://user-images.githubusercontent.com/13113785/215668659-f2e2c98a-adbf-4451-b811-0a3d99bae701.png)
 
--Under Settings Window you can enable ‘Use Default Volume’ which will apply a default volume level to any app that starts up. If the app is marked as Is Managed, then this default will not apply. Click on the button to change what the default app volume should be.
+Under Settings Window you can enable ‘Use Default Volume’ which will apply a default volume level to any app that starts up. If the app is marked as Is Managed, then this default will not apply. Click on the button to change what the default app volume should be.
 ![image](https://user-images.githubusercontent.com/13113785/215672396-0de572be-0224-46b5-9fba-56c7d8316686.png)
 
 
