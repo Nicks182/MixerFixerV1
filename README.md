@@ -24,8 +24,7 @@ This means we can also access the app from a local browser or even over the loca
 
 ## Control Volume
 Use the sliders to control the volume level of the current Default Device and any applications that may be producing sound.
-
-With mouse cursor over slider, hold left CTRL and use scroll wheel on mouse to change volume.
+<br />With mouse cursor over slider, hold left CTRL and use scroll wheel on mouse to change volume.
 ![image](https://user-images.githubusercontent.com/13113785/215668162-4d1b96b5-caab-43f2-8043-7bce24d43468.png)
 
 
