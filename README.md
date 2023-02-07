@@ -24,7 +24,7 @@ This means we can also access the app from a local browser or even over the loca
 
 ## Control Volume
 Use the sliders to control the volume level of the current Default Device and any applications that may be producing sound.
-<br />With mouse cursor over slider, hold left CTRL and use scroll wheel on mouse to change volume.
+With mouse cursor over slider, hold left CTRL and use scroll wheel on mouse to change volume.
 ![image](https://user-images.githubusercontent.com/13113785/215668162-4d1b96b5-caab-43f2-8043-7bce24d43468.png)
 
 
@@ -41,7 +41,7 @@ Under Settings Window you can enable ‘Use Default Volume’ which will apply a
 
 ## Device priority
 When switching devices, like plugging in a USB headset, MixerFixer can ensure the correct device is made the Default based on a user configurable priority. Priority can be set for sound output as well as for sound capture (Mic).
-To set up, open the settings window.
+To set up, open the settings window.<br />
 ![image](https://user-images.githubusercontent.com/13113785/215669530-d641c424-9671-4694-b894-63787c295213.png)
 
 Then move the device in required priority and then toggle the switch on the devices you want MF to manage for you.
