@@ -11,37 +11,37 @@ The app is built using WPF as our base, but 99% of the app and its functionality
 This means we can also access the app from a local browser or even over the local network. The app also uses SignalR (web sockets) for a very responsive UI with live updates to the UI as changes are detected.
 
 ## What can it do
--Control Master, Application/Game, and Microphone Volume
--Able to store volume levels of all Applications in local settings file and restore volume levels automatically.
--Set a default Application volume which the app will use to set the volume level of any application/game starting up.
--Easy way to set mute of Master or Application audio by just using Right Click on a volume control.
--Set device priority. MixerFixer can set the Default Audio device automatically when devices become active or inactive based on the priority set by the user.
--Basic management of Displays. Store and restore the state of a Display. Enable or disable a Display.
--Easily change colour scheme live using RGB sliders.
--Can access controls over a local network using a browser with the built in QR Code (Other PC, tablet, phone, anything with a browser)
--Tray Icon. Run without a UI.
--Auto startup with Windows.
+1. Control Master, Application/Game, and Microphone Volume
+2. Able to store volume levels of all Applications in local settings file and restore volume levels automatically.
+3. Set a default Application volume which the app will use to set the volume level of any application/game starting up.
+4. Easy way to set mute of Master or Application audio by just using Right Click on a volume control.
+5. Set device priority. MixerFixer can set the Default Audio device automatically when devices become active or inactive based on the priority set by the user.
+6. Basic management of Displays. Store and restore the state of a Display. Enable or disable a Display.
+7. Easily change colour scheme live using RGB sliders.
+8. Can access controls over a local network using a browser with the built in QR Code (Other PC, tablet, phone, anything with a browser)
+9. Tray Icon. Run without a UI.
+10. Auto startup with Windows.
 
 ## Control Volume
--Use the sliders to control the volume level of the current Default Device and any applications that may be producing sound.
--With mouse cursor over slider, hold left CTRL and use scroll wheel on mouse to change volume.
+Use the sliders to control the volume level of the current Default Device and any applications that may be producing sound.
+With mouse cursor over slider, hold left CTRL and use scroll wheel on mouse to change volume.
 ![image](https://user-images.githubusercontent.com/13113785/215668162-4d1b96b5-caab-43f2-8043-7bce24d43468.png)
 
 
--Right Click anywhere on volume control to switch Mute state of the device or application.
+Right Click anywhere on volume control to switch Mute state of the device or application.
 ![image](https://user-images.githubusercontent.com/13113785/215668032-5923fa8d-a79a-40db-ba32-898ade14529c.png)
 
 
--Left click Is Managed switch which will make MixerFixer keep the current volume of the device or application. While MF is running and a device or app is marked as Is Managed, the volume or mute state cannot be changed in Windows. Can only change in MF when using Is Managed.
+Left click Is Managed switch which will make MixerFixer keep the current volume of the device or application. While MF is running and a device or app is marked as Is Managed, the volume or mute state cannot be changed in Windows. Can only change in MF when using Is Managed.
 ![image](https://user-images.githubusercontent.com/13113785/215668659-f2e2c98a-adbf-4451-b811-0a3d99bae701.png)
 
--Under Settings Window you can enable ‘Use Default Volume’ which will apply a default volume level to any app that starts up. If the app is marked as Is Managed, then this default will not apply. Click on the button to change what the default app volume should be.
+Under Settings Window you can enable ‘Use Default Volume’ which will apply a default volume level to any app that starts up. If the app is marked as Is Managed, then this default will not apply. Click on the button to change what the default app volume should be.
 ![image](https://user-images.githubusercontent.com/13113785/215672396-0de572be-0224-46b5-9fba-56c7d8316686.png)
 
 
 ## Device priority
 When switching devices, like plugging in a USB headset, MixerFixer can ensure the correct device is made the Default based on a user configurable priority. Priority can be set for sound output as well as for sound capture (Mic).
-To set up, open the settings window.
+To set up, open the settings window.<br />
 ![image](https://user-images.githubusercontent.com/13113785/215669530-d641c424-9671-4694-b894-63787c295213.png)
 
 Then move the device in required priority and then toggle the switch on the devices you want MF to manage for you.
