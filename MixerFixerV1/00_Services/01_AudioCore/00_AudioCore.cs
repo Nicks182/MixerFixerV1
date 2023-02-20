@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 using MixerFixerV1;
 using NAudio.CoreAudioApi;
 
@@ -38,11 +40,16 @@ namespace Services
         public delegate void OnDefaultDeviceSetDelegate(string P_DeviceId);
         public event OnDefaultDeviceSetDelegate OnDefaultDeviceSet;
 
+        int G_InitRetryCount = 0;
+        Srv_TimerManager G_InitDelay = null;
+
         public Srv_AudioCore()
         {
             G_Srv_DB = App.ServiceProvider.GetService(typeof(Srv_DB)) as Srv_DB;
             G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
             G_TimerDeviceManager = new Srv_TimerManager();
+
+            G_InitDelay = new Srv_TimerManager();
             
             //G_NotificationClientImplementation = new NotificationClientImplementation();
             //G_NotificationClientImplementation.OnDefaultDeviceChange += G_NotificationClientImplementation_OnDefaultDeviceChange;
@@ -51,10 +58,13 @@ namespace Services
 
         }
 
+        
+
         public void Init()
         {
             try
             {
+                G_InitDelay.StopTimer();
                 G_TimerDeviceManager.StopTimer();
 
                 LoadPriorityList();
@@ -64,7 +74,49 @@ namespace Services
             }
             catch (Exception ex)
             {
-                G_Srv_MessageBus.Emit("exception", ex);
+                // Found that after using the bluetooth headset for 2 hours or so and then turning them off resulted in an exception where process info was being accessed, but that process was no longer available.
+                // This will check the message for that error and then retry 10 times.
+                if(ex.Message.Contains("Process has exited") == true && G_InitRetryCount < 10)
+                {
+                    G_InitRetryCount++;
+                    //_StartInitDelayTimer();
+                }
+                else
+                {
+                    G_InitRetryCount = 0;
+                    G_Srv_MessageBus.Emit("exception", ex);
+                }
+                
+            }
+        }
+
+        private void _StartInitDelayTimer()
+        {
+            G_TimerDeviceManager.PrepareTimer(() => _CoreUpdate(), 1000, 1000);
+        }
+
+        private void _CoreUpdate()
+        {
+            try
+            {
+                Init();
+                OnDefaultDeviceSet?.Invoke(null);
+            }
+            catch (Exception ex)
+            {
+                // Found that after using the bluetooth headset for 2 hours or so and then turning them off resulted in an exception where process info was being accessed, but that process was no longer available.
+                // This will check the message for that error and then retry 10 times.
+                if (ex.Message.Contains("Process has exited") == true && G_InitRetryCount < 10)
+                {
+                    //G_InitRetryCount++;
+                    _StartInitDelayTimer();
+                }
+                else
+                {
+                    G_InitRetryCount = 0;
+                    G_Srv_MessageBus.Emit("exception", ex);
+                }
+
             }
         }
 

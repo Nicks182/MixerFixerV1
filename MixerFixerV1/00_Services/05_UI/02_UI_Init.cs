@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.SignalR;
+using MixerFixerV1;
 using Web;
 
 namespace Services
@@ -12,11 +13,12 @@ namespace Services
     public partial class Srv_UI
     {
         
-        public void _Init(Srv_AudioCore P_Srv_AudioCore)
+        //public void _Init(Srv_AudioCore P_Srv_AudioCore)
+        public void _Init()
         {
             if (G_Srv_AudioCore == null)
             {
-                G_Srv_AudioCore = P_Srv_AudioCore;
+                G_Srv_AudioCore = App.ServiceProvider.GetService(typeof(Srv_AudioCore)) as Srv_AudioCore;
 
                 G_Srv_AudioCore.DoUpdate -= G_Srv_AudioCore_DoUpdate;
                 G_Srv_AudioCore.OnVolumeHasChanged -= G_Srv_AudioCore_OnVolumeChanged;
@@ -34,6 +36,7 @@ namespace Services
 
         public void _LoadUI(Web_InterCommMessage P_Web_InterCommMessage)
         {
+            _Init();
             G_TimerManager.StopTimer();
             //G_TimerDeviceManager.StopTimer();
             //G_TimerVolumeManager.StopTimer();

@@ -4,14 +4,14 @@
 {
     color: var(--MF_Theme_Accent);
     display: grid;
-    grid-template-columns: min-content auto 20px 20px;
+    grid-template-columns: min-content auto 10px 10px 10px;
     grid-template-rows: min-content min-content;
     align-items: center;
     gap: 10px;
     padding: 10px;
     grid-template-areas:
-        "image label managed mute"
-        "image volume text text";
+        "image label ignore managed mute"
+        "image volume text text text";
     /*box-shadow: 0px 0px 10px 6px rgba(var(--MF_BG_Theme_Red),var(--MF_BG_Theme_Green),var(--MF_BG_Theme_Blue),1) inset;
     -webkit-box-shadow: 0px 0px 10px 6px rgba(var(--MF_BG_Theme_Red),var(--MF_BG_Theme_Green),var(--MF_BG_Theme_Blue),1) inset;
     -moz-box-shadow: 0px 0px 10px 6px rgba(var(--MF_BG_Theme_Red),var(--MF_BG_Theme_Green),var(--MF_BG_Theme_Blue),1) inset;*/
@@ -41,6 +41,12 @@
 {
     grid-area: label;
     
+}
+
+.MF_AppControl_IsIgnore
+{
+    grid-area: ignore;
+    justify-self: center;
 }
 
 .MF_AppControl_IsManaged

@@ -65,6 +65,7 @@ namespace Services
         Volume_Change,
         Volume_ModalShow,
         Volume_ModalSet,
+        Ignore_Change,
         Mute_Change,
         Managed_Change,
         Device_On,

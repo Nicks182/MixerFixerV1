@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -81,7 +82,7 @@ namespace MixerFixerV1
             
             _Check_WV_Runtime();
 
-
+            
             if (G_HasWVRuntime == false)
             {
                 _ShowWebViewRuntimeDownload();
@@ -90,8 +91,8 @@ namespace MixerFixerV1
             {
                 _LoadWebView2();
             }
-            
-            
+
+            this.Focus();
         }
 
         private void _Check_WV_Runtime()
@@ -99,6 +100,7 @@ namespace MixerFixerV1
             try
             {
                 CoreWebView2Environment.GetAvailableBrowserVersionString();
+                
                 G_HasWVRuntime = true;
             }
             catch (WebView2RuntimeNotFoundException ex)
@@ -133,9 +135,11 @@ namespace MixerFixerV1
 
         private void _LoadWebView2()
         {
+            G_ServerStatus = G_Srv_Server.GetServerStatus();
             Grid_NoRuntime.Visibility = Visibility.Collapsed;
 
             WV2_Viewer = new WebView2();
+            
             WV2_Viewer.NavigationCompleted += WV2_Viewer_NavigationCompleted;
             WV2_Viewer.CreationProperties = new CoreWebView2CreationProperties 
             { 
@@ -154,6 +158,12 @@ namespace MixerFixerV1
             {
                 WV2_Viewer.Source = new Uri(G_URL_Localhost);
             }
+        }
+
+        private void CoreWebView2_ProcessFailed(object? sender, CoreWebView2ProcessFailedEventArgs e)
+        {
+            
+            MessageBox.Show(e.ProcessDescription + Environment.NewLine + e.Reason.ToString());
         }
 
         int G_Eventtriggercount = 0;
@@ -183,9 +193,10 @@ namespace MixerFixerV1
 
         private void WV2_Viewer_CoreWebView2InitializationCompleted(object? sender, Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs e)
         {
+            WV2_Viewer.CoreWebView2.ProcessFailed += CoreWebView2_ProcessFailed;
             //smooth-scrolling
 
-            
+
             //WV2_Viewer.CoreWebView2.OpenDevToolsWindow();
         }
 

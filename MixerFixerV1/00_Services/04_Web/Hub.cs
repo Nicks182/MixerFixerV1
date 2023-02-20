@@ -26,9 +26,10 @@ namespace Services
 
         public override Task OnConnectedAsync()
         {
-            G_Srv_AudioCore = App.ServiceProvider.GetService(typeof(Srv_AudioCore)) as Srv_AudioCore;
+            //G_Srv_AudioCore = App.ServiceProvider.GetService(typeof(Srv_AudioCore)) as Srv_AudioCore;
 
-            G_UIService._Init(G_Srv_AudioCore);
+            //G_UIService._Init(G_Srv_AudioCore);
+            //G_UIService._Init();
 
             Clients.Client(Context.ConnectionId).SendAsync("ReceiveConnID", Context.ConnectionId);
             HubUserHandler.ConnectedIds.Add(Context.ConnectionId);

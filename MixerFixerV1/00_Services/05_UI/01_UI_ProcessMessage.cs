@@ -26,6 +26,10 @@ namespace Services
                         _VolumeChange(P_Web_InterCommMessage);
                         break;
 
+                    case Web_InterCommMessage_Type.Ignore_Change:
+                        _IgnoreChange(P_Web_InterCommMessage);
+                        break;
+
                     case Web_InterCommMessage_Type.Mute_Change:
                         _MuteChange(P_Web_InterCommMessage);
                         break;

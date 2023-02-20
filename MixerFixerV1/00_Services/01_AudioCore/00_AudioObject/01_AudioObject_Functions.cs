@@ -62,7 +62,7 @@ namespace Services
                 case Arc_AudioObject_Type.IsSession:
                     {
                         //G_SessionId_Base64 = G_AudioSessionControl.GetSessionIdentifier.EncodeBase64();
-                        Process process = Process.GetProcessById((int)G_AudioSessionControl.GetProcessID);
+                        //Process process = Process.GetProcessById((int)G_AudioSessionControl.GetProcessID);
 
                         
 
@@ -74,31 +74,41 @@ namespace Services
                         }
                         else
                         {
-                            Icon L_Icon = Srv_Utils_NativeMethods.GetIconFromFile(G_AudioSessionControl.IconPath);
-                            if (L_Icon == null)
-                            {
-                                try
-                                {
-                                    G_Image = Srv_Utils_NativeMethods.GetIconFromFile(process.MainModule.FileName).ToBitmap();
-                                }
-                                catch { }
-                            }
-                            else
-                            {
-                                G_Image = L_Icon.ToBitmap();
-                            }
-
-                            //G_Name = G_AudioSessionControl.DisplayName == "" ? process.ProcessName : process.MainWindowTitle;
                             G_DisplayName = G_AudioSessionControl.DisplayName;
 
-                            if (string.IsNullOrEmpty(G_DisplayName) == true)
+                            try
                             {
-                                G_DisplayName = process.ProcessName;
-                            }
+                                Process process = Process.GetProcessById((int)G_AudioSessionControl.GetProcessID);
+                                Icon L_Icon = Srv_Utils_NativeMethods.GetIconFromFile(G_AudioSessionControl.IconPath);
+                                if (L_Icon == null)
+                                {
+                                    try
+                                    {
+                                        G_Image = Srv_Utils_NativeMethods.GetIconFromFile(process.MainModule.FileName).ToBitmap();
+                                    }
+                                    catch { }
+                                }
+                                else
+                                {
+                                    G_Image = L_Icon.ToBitmap();
+                                }
 
-                            if (string.IsNullOrEmpty(G_DisplayName) == true)
+                                //G_Name = G_AudioSessionControl.DisplayName == "" ? process.ProcessName : process.MainWindowTitle;
+                                //G_DisplayName = G_AudioSessionControl.DisplayName;
+
+                                if (string.IsNullOrEmpty(G_DisplayName) == true)
+                                {
+                                    G_DisplayName = process.ProcessName;
+                                }
+
+                                if (string.IsNullOrEmpty(G_DisplayName) == true)
+                                {
+                                    G_DisplayName = process.MainWindowTitle;
+                                }
+                            }
+                            catch
                             {
-                                G_DisplayName = process.MainWindowTitle;
+                                // If we can't talk to the process, we skip trying to get an icon for it and use a default.
                             }
                         }
 
@@ -127,6 +137,7 @@ namespace Services
                     Id = Guid.Empty, // New object
                     IsActive = false,
                     IsDevice = (G_ObjectType == Arc_AudioObject_Type.IsDevice || G_ObjectType == Arc_AudioObject_Type.IsMicrophone),
+                    IsIgnore = false,
                     IsManaged = false,
                     IsMute = _Get_Mute(),
                     Name = G_DisplayName,
@@ -138,6 +149,7 @@ namespace Services
             }
             else
             {
+                G_IsIgnore = L_DB_AudioObject.IsIgnore;
                 if (L_DB_AudioObject.IsManaged == true)
                 {
                     if (_Get_Volume() != L_DB_AudioObject.Volume)
@@ -158,7 +170,9 @@ namespace Services
 
         private void _Init_DBObject_SetAppDefaultVolume(DB_AudioObject G_DB_AudioObject)
         {
-            if (G_ObjectType == Arc_AudioObject_Type.IsSession && G_DB_AudioObject.IsManaged == false) // Only run when Session/Application
+            if (G_ObjectType == Arc_AudioObject_Type.IsSession  // Only run when Session/Application
+                && G_DB_AudioObject.IsManaged == false          // Only run when NOT managed
+                && G_DB_AudioObject.IsIgnore == false)          // Only run when NOT ignored
             {
                 DB_Settings L_DefaultVolumeEnable = G_Srv_DB.Settings_GetOne(G_Srv_DB.G_DefaultVolumeEnable);
                 if (L_DefaultVolumeEnable.Value == "1")
@@ -309,6 +323,13 @@ namespace Services
 
         }
 
+        public void _Change_Ignore()
+        {
+            G_IsIgnore = !G_IsIgnore;
+
+            _Update_DB_Object();
+        }
+
         public void _Change_Mute()
         {
             switch (G_ObjectType)
@@ -421,6 +442,7 @@ namespace Services
 
             L_DB_AudioObject.Volume = _Get_Volume();
             L_DB_AudioObject.IsMute = _Get_Mute();
+            L_DB_AudioObject.IsIgnore = IsIgnore;
 
             G_Srv_DB.AudioObject_Save(L_DB_AudioObject);
         }

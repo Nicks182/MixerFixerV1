@@ -33,6 +33,7 @@ namespace Web
                 L_HTML_Object.Add_Child(L_HTML_Object_Icon);
             }
             L_HTML_Object.Add_Child(_Template_VolumeControl_Label(P_AudioCore_Object));
+            L_HTML_Object.Add_Child(_Template_VolumeControl_IsIgnore(P_AudioCore_Object));
             L_HTML_Object.Add_Child(_Template_VolumeControl_IsMute(P_AudioCore_Object));
             L_HTML_Object.Add_Child(_Template_VolumeControl_IsMananged(P_AudioCore_Object));
             L_HTML_Object.Add_Child(_Template_VolumeControl_VolumeText(P_AudioCore_Object));
@@ -73,6 +74,35 @@ namespace Web
 
             return L_HTML_Object;
         }
+
+        #region IsIgnore
+        private HTML_Object _Template_VolumeControl_IsIgnore(Arc_AudioObject P_AudioCore_Object)
+        {
+            HTML_Object L_HTML_Object = _Template_Toggle(
+                                            P_Id: _Template_VolumeControl_IsIgnore_Id(P_AudioCore_Object),
+                                            P_Title: "Is Ignore: MixerFixer will ignore the app completely.",
+                                            P_IsChecked: P_AudioCore_Object.IsIgnore
+                                        );
+
+            L_HTML_Object.Add_Attribute("class", "MF_AppControl_IsIgnore");
+            L_HTML_Object.Add_Attribute("IsRotate", "270");
+            L_HTML_Object.Add_Attribute("onclick", _Template_VolumeControl_IsIgnore_Event(P_AudioCore_Object));
+
+            return L_HTML_Object;
+        }
+
+        public string _Template_VolumeControl_IsIgnore_Id(Arc_AudioObject P_AudioCore_Object)
+        {
+            return "IsIgnore_" + _GetHtmlId(P_AudioCore_Object.UniqueId);
+        }
+
+        public string _Template_VolumeControl_IsIgnore_Event(Arc_AudioObject P_AudioCore_Object)
+        {
+            return "_App_IgnoreChange(event, '" + P_AudioCore_Object.UniqueId.ToString() + "');";
+        }
+
+        #endregion IsIgnore
+
 
         #region IsMute
         private HTML_Object _Template_VolumeControl_IsMute(Arc_AudioObject P_AudioCore_Object)

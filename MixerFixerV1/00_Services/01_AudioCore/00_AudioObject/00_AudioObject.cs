@@ -37,6 +37,9 @@ namespace Services
         //private bool G_IsManaged { get; set; }
         //public bool IsManaged { get { return G_IsManaged; } }
 
+        private bool G_IsIgnore { get; set; }
+        public bool IsIgnore { get { return G_IsIgnore; } }
+
         private bool G_IsMute { get; set; }
         public bool IsMute { get { return G_IsMute; } }
 

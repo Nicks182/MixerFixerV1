@@ -53,7 +53,7 @@ namespace Services
                 {
                     try
                     {
-                        Thread.Sleep(1000);
+                        Thread.Sleep(500);
                         G_Server.RunAsync();
                         G_ServerStatus = "Running...";
                         G_Srv_MessageBus.Emit("serverstatuschanged", G_ServerStatus);

@@ -99,8 +99,10 @@ namespace Services
 
                     if (P_IsMic == false && G_Device != null && G_Device.Device != null && G_Device.Device._Get_ID().Equals(L_DefaultDevice.ID) == false)
                     {
-                        Init();
-                        OnDefaultDeviceSet?.Invoke(L_MMDevice.ID);
+
+                        //Init();
+                        _StartInitDelayTimer();
+                        //OnDefaultDeviceSet?.Invoke(L_MMDevice.ID);
                     }
                 }
             }
@@ -111,8 +113,9 @@ namespace Services
                 {
                     if (_Get_Current_Device_ID(_GetDataFlowType(P_IsMic)).Equals(L_DefaultDevice.ID) == false)
                     {
-                        Init();
-                        OnDefaultDeviceSet?.Invoke(null);
+                        //Init();
+                        _StartInitDelayTimer();
+                        //OnDefaultDeviceSet?.Invoke(null);
                     }
                 }
             }

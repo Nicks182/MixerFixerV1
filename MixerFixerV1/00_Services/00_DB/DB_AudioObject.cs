@@ -14,6 +14,7 @@ namespace Services
         public string Name { get; set; } = "NA";
         public bool IsManaged { get; set; } = false;
         public bool IsActive { get; set; } = false;
+        public bool IsIgnore { get; set; } = false;
         public bool IsMute { get; set; } = false;
         public bool IsDevice { get; set; } = false;
         public int Volume { get; set; }
