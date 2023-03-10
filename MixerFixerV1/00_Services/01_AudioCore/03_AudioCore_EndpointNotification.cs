@@ -20,8 +20,10 @@ namespace Services
 
         private void G_NotificationClientImplementation_OnDeviceStateChange(string P_DeviceId, DeviceState P_NewState)
         {
-            //OnDeviceStateChange?.Invoke(P_DeviceId, P_NewState);
+            SetDefault_Devices();
+            OnDeviceStateChange?.Invoke(P_DeviceId, P_NewState);
         }
+
     }
     
     class NotificationClientImplementation : NAudio.CoreAudioApi.Interfaces.IMMNotificationClient

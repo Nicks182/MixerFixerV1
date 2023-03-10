@@ -18,7 +18,7 @@ namespace Services
         private Srv_MessageBus G_Srv_MessageBus;
         Srv_TimerManager G_TimerDeviceManager;
 
-        //NotificationClientImplementation G_NotificationClientImplementation;
+        NotificationClientImplementation G_NotificationClientImplementation;
         
         Arc_Device G_Device { get; set; }
         public Arc_Device Device { get { return G_Device; } }
@@ -37,11 +37,10 @@ namespace Services
         public delegate void OnDeviceStateChangeDelegate(string P_DeviceId, DeviceState P_NewState);
         public event OnDeviceStateChangeDelegate OnDeviceStateChange;
 
-        public delegate void OnDefaultDeviceSetDelegate(string P_DeviceId);
+        public delegate void OnDefaultDeviceSetDelegate();
         public event OnDefaultDeviceSetDelegate OnDefaultDeviceSet;
 
         int G_InitRetryCount = 0;
-        Srv_TimerManager G_InitDelay = null;
 
         public Srv_AudioCore()
         {
@@ -49,12 +48,10 @@ namespace Services
             G_Srv_MessageBus = App.ServiceProvider.GetService(typeof(Srv_MessageBus)) as Srv_MessageBus;
             G_TimerDeviceManager = new Srv_TimerManager();
 
-            G_InitDelay = new Srv_TimerManager();
-            
-            //G_NotificationClientImplementation = new NotificationClientImplementation();
-            //G_NotificationClientImplementation.OnDefaultDeviceChange += G_NotificationClientImplementation_OnDefaultDeviceChange;
-            //G_NotificationClientImplementation.OnDeviceStateChange += G_NotificationClientImplementation_OnDeviceStateChange;
-            //G_MMDeviceEnumerator.RegisterEndpointNotificationCallback(G_NotificationClientImplementation);
+            G_NotificationClientImplementation = new NotificationClientImplementation();
+            G_NotificationClientImplementation.OnDefaultDeviceChange += G_NotificationClientImplementation_OnDefaultDeviceChange;
+            G_NotificationClientImplementation.OnDeviceStateChange += G_NotificationClientImplementation_OnDeviceStateChange;
+            G_MMDeviceEnumerator.RegisterEndpointNotificationCallback(G_NotificationClientImplementation);
 
         }
 
@@ -64,13 +61,11 @@ namespace Services
         {
             try
             {
-                G_InitDelay.StopTimer();
                 G_TimerDeviceManager.StopTimer();
 
                 LoadPriorityList();
                 _LoadDevice();
-
-                _StartDeviceTimer();
+                
             }
             catch (Exception ex)
             {
@@ -100,7 +95,7 @@ namespace Services
             try
             {
                 Init();
-                OnDefaultDeviceSet?.Invoke(null);
+                OnDefaultDeviceSet?.Invoke();
             }
             catch (Exception ex)
             {
@@ -120,10 +115,6 @@ namespace Services
             }
         }
 
-        private void _StartDeviceTimer()
-        {
-            G_TimerDeviceManager.PrepareTimer(() => SetDefault_Devices(), 500, 500);
-        }
 
         public void Reload()
         {

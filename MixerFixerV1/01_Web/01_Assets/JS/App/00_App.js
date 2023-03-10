@@ -33,4 +33,3 @@ function _Log(P_Data)
     console.log(P_Data);
     $("#Log").append(P_Data + "<br />");
 }
-

@@ -63,18 +63,20 @@ namespace Services
         private void G_Srv_AudioCore_OnDeviceStateChange(string P_DeviceId, NAudio.CoreAudioApi.DeviceState P_NewState)
         {
             G_Srv_Logger._LogMessage(P_NewState.ToString() + " :: " + G_Srv_AudioCore.Device.Device._Get_ID() + " == " + P_DeviceId);
-            
-            if (P_NewState == NAudio.CoreAudioApi.DeviceState.Unplugged
-                && G_Srv_AudioCore.Device != null 
-                && G_Srv_AudioCore.Device.Device != null
-                && G_Srv_AudioCore.Device.Device._Get_ID().Equals(P_DeviceId) == true
-                )
-            {
-                G_Srv_AudioCore_OnDefaultDeviceSet(P_DeviceId);
-            }
+
+            G_Srv_AudioCore_OnDefaultDeviceSet();
+
+            //if (P_NewState == NAudio.CoreAudioApi.DeviceState.Unplugged
+            //    && G_Srv_AudioCore.Device != null 
+            //    && G_Srv_AudioCore.Device.Device != null
+            //    && G_Srv_AudioCore.Device.Device._Get_ID().Equals(P_DeviceId) == true
+            //    )
+            //{
+            //    G_Srv_AudioCore_OnDefaultDeviceSet(P_DeviceId);
+            //}
         }
 
-        private void G_Srv_AudioCore_OnDefaultDeviceSet(string P_DeviceId)
+        private void G_Srv_AudioCore_OnDefaultDeviceSet()
         {
             //G_Srv_Logger._LogMessage(G_Srv_AudioCore.Device.Device._Get_ID() + " == " + P_DeviceId);
             Web_InterCommMessage L_CommMessage = new Web_InterCommMessage { CommType = Web_InterCommMessage_Type.Init };
