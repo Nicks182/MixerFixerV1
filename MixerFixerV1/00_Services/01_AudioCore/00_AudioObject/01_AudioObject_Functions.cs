@@ -269,7 +269,7 @@ namespace Services
 
         private double _Get_PeakVolume_Right(AudioMeterInformation P_Info)
         {
-            if (P_Info.PeakValues.Count > 0)
+            if (P_Info.PeakValues.Count > 1)
             {
                 return Math.Floor(P_Info.PeakValues[1] * 100);
             }
