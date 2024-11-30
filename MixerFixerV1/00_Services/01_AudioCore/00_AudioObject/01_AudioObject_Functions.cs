@@ -438,13 +438,16 @@ namespace Services
 
         public void _Update_DB_Object()
         {
-            DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_SessionId_Base64);
+            lock(G_Srv_DB)
+            {
+                DB_AudioObject L_DB_AudioObject = G_Srv_DB.AudioObject_GetOne(G_SessionId_Base64);
 
-            L_DB_AudioObject.Volume = _Get_Volume();
-            L_DB_AudioObject.IsMute = _Get_Mute();
-            L_DB_AudioObject.IsIgnore = IsIgnore;
+                L_DB_AudioObject.Volume = _Get_Volume();
+                L_DB_AudioObject.IsMute = _Get_Mute();
+                L_DB_AudioObject.IsIgnore = IsIgnore;
 
-            G_Srv_DB.AudioObject_Save(L_DB_AudioObject);
+                G_Srv_DB.AudioObject_Save(L_DB_AudioObject);
+            }
         }
 
         public void Dispose()
